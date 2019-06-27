@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import AceEditor from 'react-ace'
+import {VimConsole} from './vim-console'
+import axios from 'axios'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
@@ -7,7 +9,7 @@ import 'brace/keybinding/vim'
 export default class VimShell extends Component {
   constructor() {
     super()
-    this.state = {code: ''}
+    this.state = {code: '', result: ''}
     // this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -20,7 +22,18 @@ export default class VimShell extends Component {
   async onSubmit(event) {
     console.log('ON SUBMIT IS CALLED')
     await this.setState({code: this.refs.aceEditor.editor.getValue()})
-    console.log(this.state)
+    try {
+      console.log('INSIDE THE TRY CATCH')
+      const {data} = await axios.put('http://localhost:49160/eval', {
+        func: this.state.code
+      })
+      console.log('this is data:', data)
+      await this.setState({result: data})
+    } catch (error) {
+      console.log('error in vim-shell', error)
+    }
+
+    // console.log(this.state)
   }
   render() {
     return (
@@ -43,6 +56,7 @@ export default class VimShell extends Component {
         <button type="submit" onClick={this.onSubmit}>
           Run Code
         </button>
+        <VimConsole result={this.state.result} />
       </div>
     )
   }
