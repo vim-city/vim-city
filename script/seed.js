@@ -1,18 +1,35 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Challenge} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const user1 = await User.create({email: 'cody@email.com', password: '123'})
+  const user2 = await User.create({email: 'murphy@email.com', password: '123'})
 
-  console.log(`seeded ${users.length} users`)
+  console.log(`seeded users`)
+
+  const challenge1 = await Challenge.create({
+    vimCommand: 'l',
+    instructions: 'Use the "l" key to move right',
+    code: '() => {return true',
+    level: 0
+  })
+  const challenge2 = await Challenge.create({
+    vimCommand: 'k',
+    instructions: 'Use the "k" key to move up',
+    code: '() => return true}',
+    level: 0
+  })
+
+  console.log(`seeded challenges`)
+
+  await user1.setChallenge(challenge1)
+  console.log(`associated some data`)
+
   console.log(`seeded successfully`)
 }
 
