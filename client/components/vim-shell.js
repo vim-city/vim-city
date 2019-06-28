@@ -56,8 +56,11 @@ export default class VimShell extends Component {
         <button type="submit" onClick={this.onSubmit}>
           Run Code
         </button>
+
         <VimConsole result={this.state.result} />
       </div>
     )
   }
 }
+
+//integrate Vim Console with thunk
