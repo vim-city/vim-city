@@ -11,10 +11,6 @@ export default class GameWindow extends React.Component {
     return gameInstance
   }
   render() {
-    return (
-      <div id="phaser-game">
-        <p>This is phaser game component</p>
-      </div>
-    )
+    return <div id="phaser-game" />
   }
 }
