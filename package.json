@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "vimcity",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "A game that teaches users how to use vim commands",
   "engines": {
     "node": ">= 7.0.0"
   },
