@@ -12,6 +12,9 @@ const Challenge = db.define('challenge', {
   code: {
     type: Sequelize.TEXT
   },
+  points: {
+    type: Sequelize.INTEGER
+  },
   level: {
     type: Sequelize.INTEGER,
     default: 0
