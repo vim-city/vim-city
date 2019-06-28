@@ -13,13 +13,15 @@ async function seed() {
   console.log(`seeded users`)
 
   const challenge1 = await Challenge.create({
-    vimCommand: 'h',
-    content: 'Use the "h" key to move left',
+    vimCommand: 'l',
+    instructions: 'Use the "l" key to move right',
+    code: '() => {return true',
     level: 0
   })
   const challenge2 = await Challenge.create({
-    vimCommand: 'j',
-    content: 'Use the "j" key to move up',
+    vimCommand: 'k',
+    instructions: 'Use the "k" key to move up',
+    code: '() => return true}',
     level: 0
   })
 

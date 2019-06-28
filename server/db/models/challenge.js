@@ -6,7 +6,10 @@ const Challenge = db.define('challenge', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  content: {
+  instructions: {
+    type: Sequelize.TEXT
+  },
+  code: {
     type: Sequelize.TEXT
   },
   level: {
