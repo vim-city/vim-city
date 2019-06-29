@@ -1,5 +1,5 @@
 import React from 'react'
-import Phaser from 'phaser'
+// import Phaser from 'phaser'
 import Game from '../phaser-configs/index'
 
 export default class GameWindow extends React.Component {
