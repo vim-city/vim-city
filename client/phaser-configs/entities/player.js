@@ -3,8 +3,6 @@ import Phaser from 'phaser'
 export default class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, spriteKey) {
     super(scene, x, y, spriteKey)
-
-    // << INITIALIZE PLAYER ATTRIBUTES HERE >>
     this.scene = scene
     this.scene.add.existing(this)
     this.scene.physics.world.enable(this)
@@ -12,7 +10,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     this.updateMovement = this.updateMovement.bind(this)
   }
 
-  // Check which controller button is being pushed and execute movement & animation
   updateMovement(cursors) {
     this.body.setVelocity(0)
     // Move left
