@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
-import Player from '../phaser-configs/player'
-import Ground from '../phaser-configs/Ground'
+import Player from '../phaser-configs/entities/player'
+import Ground from '../phaser-configs/entities/ground'
 
 export default class FgScene extends Phaser.Scene {
   constructor() {
