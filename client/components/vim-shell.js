@@ -54,15 +54,16 @@ class VimShell extends Component {
           theme="monokai"
           keyboardHandler="vim"
           ref="aceEditor"
-          commands={[
-            {
-              name: 'disableUp',
-              bindKey: {win: 'Up', mac: 'Up'}, //key combination used for the command.
-              exec: () => {
-                console.log('This key is disabled.')
-              }
-            }
-          ]}
+          defaultValue={this.props.text}
+          // commands={[
+          //   {
+          //     name: 'disableUp',
+          //     bindKey: {win: 'Up', mac: 'Up'}, //key combination used for the command.
+          //     exec: () => {
+          //       console.log('This key is disabled.')
+          //     }
+          //   }
+          // ]}
         />
         <button type="submit" onClick={this.onSubmit}>
           Run Code
@@ -82,7 +83,8 @@ class VimShell extends Component {
 
 const mapState = state => {
   return {
-    result: state.result
+    result: state.result,
+    text: state.text
   }
 }
 

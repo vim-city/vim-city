@@ -19,7 +19,6 @@ export default class FgScene extends Phaser.Scene {
   }
   createGroups() {
     this.groundGroup = this.physics.add.staticGroup({classType: Ground})
-
     this.createGround(160, 540)
     this.createGround(600, 540)
   }
@@ -34,6 +33,7 @@ export default class FgScene extends Phaser.Scene {
       left: Phaser.Input.Keyboard.KeyCodes.H,
       right: Phaser.Input.Keyboard.KeyCodes.L
     })
+    this.input.keyboard.removeCapture('H,J,K,L')
   }
 
   update(time, delta) {
