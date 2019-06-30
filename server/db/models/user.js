@@ -25,7 +25,7 @@ const User = db.define('user', {
     }
   },
   gitHubId: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER
   },
   score: {
     type: Sequelize.INTEGER,

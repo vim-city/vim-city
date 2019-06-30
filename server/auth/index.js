@@ -14,7 +14,7 @@ router.post('/login', async (req, res, next) => {
         email: req.body.email,
         password: req.body.password
       })
-      res.sendStatus(200).json(newUser)
+      res.status(200).json(newUser)
     } else {
       if (!user.correctPassword(req.body.password)) {
         console.log('Incorrect password for user:', req.body.email)

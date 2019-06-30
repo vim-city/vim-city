@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout, auth} from '../store'
+import {auth} from '../store'
+import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
-class Probando extends React.Component {
+class SignIn extends React.Component {
   constructor() {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -50,6 +50,10 @@ class Probando extends React.Component {
                 id="password"
                 autoComplete="current-password"
               />
+              {this.props.error &&
+                this.props.error.response && (
+                  <div> {this.props.error.response.data} </div>
+                )}
               <Button
                 type="submit"
                 fullWidth={false}
@@ -75,8 +79,24 @@ class Probando extends React.Component {
   }
 }
 
+const mapLogin = state => {
+  return {
+    name: 'login',
+    displayName: 'Login',
+    error: state.user.error
+  }
+}
+
 const mapDispatch = dispatch => ({
   auth: (email, password, formName) => dispatch(auth(email, password, formName))
 })
 
-export default connect(null, mapDispatch)(Probando)
+export default connect(mapLogin, mapDispatch)(SignIn)
+
+/**
+ * PROP TYPES
+ */
+
+SignIn.propTypes = {
+  error: PropTypes.object
+}
