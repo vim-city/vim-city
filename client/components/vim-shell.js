@@ -13,33 +13,51 @@ class VimShell extends Component {
   constructor() {
     super()
     this.onSubmit = this.onSubmit.bind(this)
-    this.editor = this.refs.aceEditor.editor
   }
 
   async componentDidMount() {
     await this.props.getChallenge('l')
-    this.editor.addEventListener('click', () => {
-      this.editor.navigateFileStart()
+    let editor = this.refs.aceEditor.editor
+    editor.addEventListener('click', () => {
+      editor.navigateFileStart()
     })
+
+    editor.commands.addCommand({
+      name: 'remove right',
+      bindKey: {win: 'Right', mac: 'Right'},
+      exec: function(editor) {
+        console.log('Right')
+      },
+      readOnly: true
+    })
+
+    document.addEventListener('keydown', e => {
+      console.log(e.code)
+    })
+
     if (this.props.instructions) {
-      this.editor.setValue(this.props.instructions, -1)
-      this.editor.navigateFileStart()
+      editor.setValue(this.props.instructions, -1)
+      editor.navigateFileStart()
     }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.instructions !== this.props.instructions) {
-      this.editor.addEventListener('click', () => {
-        this.editor.navigateFileStart()
+      let editor = this.refs.aceEditor.editor
+      editor.addEventListener('click', () => {
+        editor.navigateFileStart()
       })
-      this.editor.setValue(this.props.instructions, -1)
+      editor.setValue(this.props.instructions, -1)
     }
   }
 
   onSubmit() {
-    console.log('ON SUBMIT IS CALLED, value:', this.editor.getValue())
+    console.log(
+      'ON SUBMIT IS CALLED, value:',
+      this.refs.aceEditor.editor.getValue()
+    )
 
-    this.props.getResult(this.editor.getValue())
+    this.props.getResult(this.refs.aceEditor.editor.getValue())
   }
   render() {
     console.log(
