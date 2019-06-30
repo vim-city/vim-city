@@ -4,53 +4,34 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Probando = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>VIM CITY</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+export default class Probando extends React.Component {
+  render() {
+    const {name, displayName, handleSubmit, error} = this.props
+    return (
+      <div>
+        <h1>HOLAAAAAA!!!!!</h1>
+        <div className="vim-form">
+          <form onSubmit={handleSubmit} name={name}>
+            <div>
+              <label htmlFor="email">
+                <small>Email</small>
+              </label>
+              <input name="email" type="text" />
+            </div>
+            <div>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <input name="password" type="password" />
+            </div>
+            <div>
+              <button type="submit">{displayName}</button>
+            </div>
+            {error && error.response && <div> {error.response.data} </div>}
+          </form>
         </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-)
-
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    isLoggedIn: !!state.user.id
+        <hr />
+      </div>
+    )
   }
-}
-
-const mapDispatch = dispatch => {
-  return {
-    handleClick() {
-      dispatch(logout())
-    }
-  }
-}
-
-export default connect(mapState, mapDispatch)(Probando)
-
-/**
- * PROP TYPES
- */
-Probando.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
 }
