@@ -1,37 +1,82 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import {logout, auth} from '../store'
+import Typography from '@material-ui/core/Typography'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 
-export default class Probando extends React.Component {
+class Probando extends React.Component {
+  constructor() {
+    super()
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  handleSubmit(evt) {
+    evt.preventDefault()
+    const formName = evt.target.name
+    const email = evt.target.email.value
+    const password = evt.target.password.value
+    this.props.auth(email, password, formName)
+  }
   render() {
-    const {name, displayName, handleSubmit, error} = this.props
     return (
-      <div>
-        <h1>HOLAAAAAA!!!!!</h1>
-        <div className="vim-form">
-          <form onSubmit={handleSubmit} name={name}>
-            <div>
-              <label htmlFor="email">
-                <small>Email</small>
-              </label>
-              <input name="email" type="text" />
-            </div>
-            <div>
-              <label htmlFor="password">
-                <small>Password</small>
-              </label>
-              <input name="password" type="password" />
-            </div>
-            <div>
-              <button type="submit">{displayName}</button>
-            </div>
-            {error && error.response && <div> {error.response.data} </div>}
-          </form>
+      <div className="login-container">
+        <div className="login-content">
+          <div className="vimcity-title">
+            <h1>VIM CITY</h1>
+          </div>
+          <div className="vim-form">
+            <form onSubmit={this.handleSubmit} name="login">
+              <Typography component="h1" variant="h5">
+                Sign in
+              </Typography>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <Button
+                type="submit"
+                fullWidth={false}
+                variant="contained"
+                color="primary"
+              >
+                Sign In
+              </Button>
+              <Button
+                type="submit"
+                fullWidth={false}
+                variant="contained"
+                color="primary"
+                href="auth/github"
+              >
+                Sign In with GitHub
+              </Button>
+            </form>
+          </div>
         </div>
-        <hr />
       </div>
     )
   }
 }
+
+const mapDispatch = dispatch => ({
+  auth: (email, password, formName) => dispatch(auth(email, password, formName))
+})
+
+export default connect(null, mapDispatch)(Probando)
