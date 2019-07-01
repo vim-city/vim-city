@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import Player from '../phaser-configs/entities/player'
 import Ground from '../phaser-configs/entities/ground'
 import Border from '../phaser-configs/entities/border'
+import Building from '../phaser-configs/entities/building'
 
 const dummyBorders = [
   [25, 575],
@@ -12,12 +13,7 @@ const dummyBorders = [
   [225, 525],
   [225, 475],
   [225, 425],
-  [225, 375],
-  [225, 325],
-  [175, 325],
-  [125, 325],
-  [75, 325],
-  [25, 325]
+  [225, 375]
 ]
 
 export default class FgScene extends Phaser.Scene {
@@ -32,6 +28,7 @@ export default class FgScene extends Phaser.Scene {
     })
     this.load.image('ground', 'assets/sprites/ground.png')
     this.load.image('border', 'assets/sprites/8bitGrass.png')
+    this.load.image('dummyTarget', 'assets/sprites/brandon.png')
   }
   createBorders(arr) {
     //takes an array of arrays to create the boundaries of the game
@@ -62,10 +59,14 @@ export default class FgScene extends Phaser.Scene {
 
   create() {
     this.createGroups()
-    this.player = new Player(this, 30, 400, 'josh').setScale(0.25)
+    this.player = new Player(this, 50, 400, 'josh').setScale(0.25)
     // this.physics.add.collider(this.player, this.groundGroup)
     this.physics.add.collider(this.player, this.borderGroup)
     this.physics.add.collider(this.borderGroup, this.player)
+
+    this.building = new Building(this, 50, 200, 'dummyTarget').setScale(0.25)
+
+    this.physics.add.collider(this.building, this.player)
 
     this.cursors = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.K,
