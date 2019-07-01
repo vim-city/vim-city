@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import AceEditor from 'react-ace'
 import {connect} from 'react-redux'
-import {getResult} from '../store/result'
+import {getResult, clearResult} from '../store/result'
 import {getChallenge} from '../store/challenge'
 // import {VimConsole} from './vim-console'
 // import axios from 'axios'
@@ -13,10 +13,11 @@ class VimShell extends Component {
   constructor() {
     super()
     this.onSubmit = this.onSubmit.bind(this)
+    this.onClick = this.onClick.bind(this)
   }
 
   async componentDidMount() {
-    await this.props.getChallenge('l')
+    await this.props.getChallenge(1)
     let editor = this.refs.aceEditor.editor
     editor.addEventListener('click', () => {
       editor.navigateFileStart()
@@ -54,10 +55,20 @@ class VimShell extends Component {
         editor.setValue(this.props.instructions, -1)
         editor.navigateFileStart()
       }
-    } else if (prevProps.code !== this.props.code) {
+    } else {
       editor.setValue(this.props.code, -1)
       editor.navigateFileStart()
     }
+    // if(this.props.result !== prevProps.result){
+    //   console.log("result!")
+    //   if(this.props.result === "You win!"){
+    //     console.log("getting challenge!",this.props.challengeId, typeof this.props.challengeId, Number(this.props.challengeId) + 1 )
+
+    //     this.props.getChallenge(Number(this.props.challengeId) + 1)
+    //   }
+    // }
+
+    //if (prevProps.displayInstructions !== this.props.displayInstructions)
   }
 
   onSubmit() {
@@ -65,9 +76,15 @@ class VimShell extends Component {
       'ON SUBMIT IS CALLED, value:',
       this.refs.aceEditor.editor.getValue()
     )
-
     this.props.getResult(this.refs.aceEditor.editor.getValue())
   }
+
+  onClick() {
+    //thunk for updating points need to map user to the store too - needs to happen before we get the new challenge
+    this.props.getChallenge(Number(this.props.challengeId) + 1)
+    this.props.clearResult()
+  }
+
   render() {
     console.log(
       're-rendering',
@@ -93,6 +110,12 @@ class VimShell extends Component {
         <div className="console">
           <h1>This is result:</h1>
           <p>{this.props.result}</p>
+          {this.props.result === 'You win!' ? (
+            <button type="button" onClick={this.onClick}>
+              {' '}
+              Collect your points and move onto the next challenge{' '}
+            </button>
+          ) : null}
         </div>
       </div>
     )
@@ -104,6 +127,7 @@ class VimShell extends Component {
 const mapState = state => {
   return {
     result: state.result,
+    challengeId: state.challenge.id,
     instructions: state.challenge.instructions,
     code: state.challenge.code,
     displayInstructions: state.challenge.displayInstructions
@@ -112,7 +136,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => ({
   getResult: codeStr => dispatch(getResult(codeStr)),
-  getChallenge: commandKey => dispatch(getChallenge(commandKey))
+  getChallenge: challengeId => dispatch(getChallenge(challengeId)),
+  clearResult: () => dispatch(clearResult())
 })
 
 export default connect(mapState, mapDispatch)(VimShell)

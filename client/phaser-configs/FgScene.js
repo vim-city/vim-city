@@ -3,6 +3,8 @@ import Player from '../phaser-configs/entities/player'
 import Ground from '../phaser-configs/entities/ground'
 import Border from '../phaser-configs/entities/border'
 import Building from '../phaser-configs/entities/building'
+import store from '../store'
+import {toggleDisplay} from '../store/challenge'
 
 const dummyBorders = [
   [25, 25],
@@ -69,9 +71,6 @@ const dummyBorders = [
   [375, 225],
   [375, 325],
   [375, 375],
-  [375, 475],
-  [375, 525],
-  [375, 575],
   [425, 25],
   [425, 75],
   [425, 175],
@@ -183,14 +182,14 @@ export default class FgScene extends Phaser.Scene {
     this.createBorders(dummyBorders)
 
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    this.createBuilding(50, 200)
+    this.createBuilding(375, 575)
   }
 
   create() {
     this.colliderActivated = true
     this.createGroups()
     // this.building = new Building(this, 50, 200, 'dummyTarget').setScale(0.25)
-    this.player = new Player(this, 50, 400, 'josh').setScale(0.25)
+    this.player = new Player(this, 25, 575, 'josh').setScale(0.1)
     // this.physics.add.collider(this.player, this.groundGroup)
     this.physics.add.collider(this.player, this.borderGroup)
     this.physics.add.collider(this.borderGroup, this.player)
@@ -199,7 +198,8 @@ export default class FgScene extends Phaser.Scene {
       this.buildingGroup,
       this.player,
       () => {
-        console.log('OVERLAP!')
+        console.log('collide!!')
+        store.dispatch(toggleDisplay())
         this.colliderActivated = false
       },
       () => this.colliderActivated
