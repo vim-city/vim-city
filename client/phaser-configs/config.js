@@ -10,7 +10,8 @@ export default {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: {y: 0} // Top down game, so no gravity
+      gravity: {y: 0}, // Top down game, so no gravity
+      debug: true
     }
   }
 }

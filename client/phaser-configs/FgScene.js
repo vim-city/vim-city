@@ -73,11 +73,22 @@ export default class FgScene extends Phaser.Scene {
       left: Phaser.Input.Keyboard.KeyCodes.H,
       right: Phaser.Input.Keyboard.KeyCodes.L
     })
+
+    //SSW: The line below tells Phaser not to prevent keystrokes from propagating to rest of browser (including vim shell)
+    this.input.keyboard.removeCapture('H,J,K,L')
   }
 
   update(time, delta) {
     this.player.update(this.cursors)
   }
 }
+
+//SSW: when the user hits a building, we should pause game play so user can type into vim shell with the following code, which will prevent the character from moving when HJKL are pressed:
+
+//this.scene.pause('FgScene')
+
+//then, when the user completes typing, use this code to resume gameplay:
+
+//this.scene.resume('FgScene')
 
 //http://www.html5gamedevs.com/topic/37935-collider-in-group-does-not-work/

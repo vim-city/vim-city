@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import AceEditor from 'react-ace'
 import {connect} from 'react-redux'
 import {getResult} from '../store/result'
+import {getChallenge} from '../store/challenge'
 // import {VimConsole} from './vim-console'
 // import axios from 'axios'
 import 'brace/mode/javascript'
@@ -11,33 +12,52 @@ import 'brace/keybinding/vim'
 class VimShell extends Component {
   constructor() {
     super()
-    // this.state = {code: ''}
-    // this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
-  // onChange(newValue, event) {
 
-  //   this.setState({code: newValue})
-  //   console.log('STATE:', this.state)
-  // }
+  async componentDidMount() {
+    await this.props.getChallenge('l')
+    let editor = this.refs.aceEditor.editor
+    editor.addEventListener('click', () => {
+      editor.navigateFileStart()
+    })
+
+    editor.commands.addCommand({
+      name: 'remove right',
+      bindKey: {win: 'Right', mac: 'Right'},
+      exec: function(editor) {
+        console.log('Right')
+      },
+      readOnly: true
+    })
+
+    document.addEventListener('keydown', e => {
+      console.log(e.code)
+    })
+
+    if (this.props.instructions) {
+      editor.setValue(this.props.instructions, -1)
+      editor.navigateFileStart()
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.instructions !== this.props.instructions) {
+      let editor = this.refs.aceEditor.editor
+      editor.addEventListener('click', () => {
+        editor.navigateFileStart()
+      })
+      editor.setValue(this.props.instructions, -1)
+    }
+  }
 
   onSubmit() {
-    console.log('ON SUBMIT IS CALLED')
-    // this.setState({code: this.refs.aceEditor.editor.getValue()})
-    this.props.getResult(this.refs.aceEditor.editor.getValue())
-    // try {
-    //   console.log('INSIDE THE TRY CATCH')
-    //   const {data} = await axios.put('http://localhost:49160/eval', {
-    //     func: this.state.code
-    //   })
-    //   console.log('this is data:', data)
-    //   await this.setState({result: data})
-    //   console.log('this is the state:', this.state)
-    // } catch (error) {
-    //   console.log('error in vim-shell', error)
-    // }
+    console.log(
+      'ON SUBMIT IS CALLED, value:',
+      this.refs.aceEditor.editor.getValue()
+    )
 
-    // console.log(this.state)
+    this.props.getResult(this.refs.aceEditor.editor.getValue())
   }
   render() {
     console.log(
@@ -54,15 +74,7 @@ class VimShell extends Component {
           theme="monokai"
           keyboardHandler="vim"
           ref="aceEditor"
-          commands={[
-            {
-              name: 'disableUp',
-              bindKey: {win: 'Up', mac: 'Up'}, //key combination used for the command.
-              exec: () => {
-                console.log('This key is disabled.')
-              }
-            }
-          ]}
+          // value={!this.props.instructions ? 'LOADING' : this.props.instructions}
         />
         <button type="submit" onClick={this.onSubmit}>
           Run Code
@@ -82,12 +94,15 @@ class VimShell extends Component {
 
 const mapState = state => {
   return {
-    result: state.result
+    result: state.result,
+    instructions: state.challenge.instructions,
+    code: state.challenge.code
   }
 }
 
 const mapDispatch = dispatch => ({
-  getResult: codeStr => dispatch(getResult(codeStr))
+  getResult: codeStr => dispatch(getResult(codeStr)),
+  getChallenge: commandKey => dispatch(getChallenge(commandKey))
 })
 
 export default connect(mapState, mapDispatch)(VimShell)
