@@ -11,7 +11,7 @@ export default {
     default: 'arcade',
     arcade: {
       gravity: {y: 0}, // Top down game, so no gravity
-      debug: true
+      debug: false
     }
   }
 }

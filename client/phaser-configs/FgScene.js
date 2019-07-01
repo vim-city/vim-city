@@ -43,9 +43,9 @@ export default class FgScene extends Phaser.Scene {
       this.borderGroup.create(x, y, 'border')
     }
     this.borderGroup.immovable = true
-    // this.borderGroup.allowGravity = false;
+    this.borderGroup.allowGravity = false
     this.borderGroup.moves = false
-    // this.borderGroup.enable = true;
+    this.borderGroup.enable = true
   }
   createGround(x, y) {
     this.groundGroup.create(x, y, 'ground')

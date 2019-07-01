@@ -35,19 +35,28 @@ class VimShell extends Component {
       console.log(e.code)
     })
 
-    if (this.props.instructions) {
+    if (this.props.instructions && this.props.displayInstructions) {
       editor.setValue(this.props.instructions, -1)
+      editor.navigateFileStart()
+    } else if (this.props.code && !this.props.displayInstructions) {
+      editor.setValue(this.props.code, -1)
       editor.navigateFileStart()
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.instructions !== this.props.instructions) {
-      let editor = this.refs.aceEditor.editor
-      editor.addEventListener('click', () => {
+    let editor = this.refs.aceEditor.editor
+    if (this.props.displayInstructions) {
+      if (prevProps.instructions !== this.props.instructions) {
+        // editor.addEventListener('click', () => {
+        //   editor.navigateFileStart()
+        // })
+        editor.setValue(this.props.instructions, -1)
         editor.navigateFileStart()
-      })
-      editor.setValue(this.props.instructions, -1)
+      }
+    } else if (prevProps.code !== this.props.code) {
+      editor.setValue(this.props.code, -1)
+      editor.navigateFileStart()
     }
   }
 
@@ -96,7 +105,8 @@ const mapState = state => {
   return {
     result: state.result,
     instructions: state.challenge.instructions,
-    code: state.challenge.code
+    code: state.challenge.code,
+    displayInstructions: state.challenge.displayInstructions
   }
 }
 

@@ -13,6 +13,7 @@ const gotChallenge = challenge => ({type: SET_CHALLENGE, challenge})
 export const getChallenge = commandKey => async dispatch => {
   try {
     const {data} = await axios.get(`/api/challenges/${commandKey}`)
+    data.displayInstructions = true
     dispatch(gotChallenge(data))
   } catch (error) {
     console.log('error in getChallenge thunk', error)
