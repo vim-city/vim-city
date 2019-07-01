@@ -182,49 +182,26 @@ export default class FgScene extends Phaser.Scene {
     // this.createGround(600, 540)
 
     this.borderGroup = this.physics.add.staticGroup({classType: Border})
-    // this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    // this.createBuilding(buildingArr, buildingType)
+    this.buildingGroup = this.physics.add.staticGroup({classType: Building})
+    this.createBuilding(625, 375, 'donut_shop')
+    this.createBuilding(175, 25, 'music_store')
+    this.createBuilding(375, 525, 'building1')
+    this.createBuilding(775, 400, 'pet_store')
     this.createBorders(dummyBorders)
   }
-  // createBuilding(arr, building){
-  //   for(let i = 0; i<arr.length; i++){
-  //     let x = arr[i][0]
-  //     let y = arr[i][1]
-  //     for(let j = 0; j < building.length; j++){
+  createBuilding(x, y, building) {
+    this.buildingGroup.create(x, y, building)
 
-  //       this.buildingGroup.create(x, y, building[j])
-  //     }
-
-  //   }
-
-  //   this.buildingGroup.immovable = true
-  //   this.buildingGroup.moves = false
-  // }
+    this.buildingGroup.immovable = true
+    this.buildingGroup.moves = false
+  }
 
   create() {
     this.createGroups()
     this.player = new Player(this, 25, 575, 'josh').setScale(0.25)
-    this.donutShop = new Building(this, 625, 375, 'donut_shop')
-    this.musicStore = new Building(this, 175, 25, 'music_store')
-    this.nightClub = new Building(this, 375, 525, 'building1')
-    this.petStore = new Building(this, 775, 400, 'pet_store')
     // this.physics.add.collider(this.player, this.groundGroup)
-    this.physics.add.collider(
-      this.player,
-      this.borderGroup,
-      this.donutShop,
-      this.musicStore,
-      this.nightClub,
-      this.petStore
-    )
-    this.physics.add.collider(
-      this.borderGroup,
-      this.player,
-      this.donutShop,
-      this.musicStore,
-      this.nightClub,
-      this.petStore
-    )
+    this.physics.add.collider(this.player, this.borderGroup)
+    this.physics.add.collider(this.borderGroup, this.player)
 
     this.cursors = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.K,
