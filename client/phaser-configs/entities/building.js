@@ -8,10 +8,6 @@ export default class Building extends Phaser.Physics.Arcade.Sprite {
     this.scene = scene
     // this.scene.physics.world.enable(this)
     this.scene.add.existing(this)
-    this.immovable = true
-    this.allowGravity = false
-    this.moves = false
-    this.enable = true
   }
 
   update() {}
