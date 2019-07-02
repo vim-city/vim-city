@@ -18,6 +18,9 @@ const Challenge = db.define('challenge', {
   level: {
     type: Sequelize.INTEGER,
     default: 0
+  },
+  startingCoordinates: {
+    type: Sequelize.ARRAY(Sequelize.INTEGER)
   }
 })
 

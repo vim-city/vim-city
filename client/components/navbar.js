@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import {logout} from '../store/user'
 import {connect} from 'react-redux'
 

@@ -12,7 +12,8 @@ router.get('/:challengeId', async (req, res, next) => {
         'instructions',
         'code',
         'points',
-        'level'
+        'level',
+        'startingCoordinates'
       ]
     })
     res.json(challenge)
