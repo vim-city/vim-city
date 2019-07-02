@@ -29,7 +29,7 @@ const User = db.define('user', {
   },
   score: {
     type: Sequelize.INTEGER,
-    default: 0
+    defaultValue: 0
   }
 })
 

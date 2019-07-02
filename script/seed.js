@@ -26,7 +26,8 @@ async function seed() {
     instructions: 'Use the "j" key to move up',
     points: 500,
     code: '() => return true} \n\n\n\n',
-    level: 0
+    level: 0,
+    startingCoordinates: [375, 525]
   })
 
   console.log(`seeded challenges`)

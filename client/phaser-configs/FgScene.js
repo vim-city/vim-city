@@ -5,6 +5,7 @@ import Border from '../phaser-configs/entities/border'
 import Building from '../phaser-configs/entities/building'
 import store from '../store'
 import {toggleDisplay} from '../store/challenge'
+import {yellow100} from 'material-ui/styles/colors'
 
 const dummyBorders = [
   [25, 25],
@@ -159,6 +160,7 @@ export default class FgScene extends Phaser.Scene {
       frameHeight: 460
     })
     this.load.image('ground', 'assets/sprites/ground.png')
+
     this.load.image('border', 'assets/sprites/grass3.png')
     this.load.image('building1', 'assets/sprites/building.png')
     this.load.image('donut_shop', 'assets/sprites/donutShop.png')
@@ -202,7 +204,7 @@ export default class FgScene extends Phaser.Scene {
     this.createBorders(dummyBorders)
 
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    this.createBuilding(375, 575)
+    this.createBuilding(350, 550)
   }
   enableKeys() {
     this.cursors = this.input.keyboard.addKeys({
@@ -218,9 +220,16 @@ export default class FgScene extends Phaser.Scene {
 
   create() {
     this.colliderActivated = true
+    console.log('THIS IS state', store.getState())
     this.createGroups()
     // this.building = new Building(this, 50, 200, 'dummyTarget').setScale(0.25)
-    this.player = new Player(this, 25, 575, 'josh').setScale(0.1)
+    // this.player = new Player(this, 25, 575, 'josh').setScale(0.1)
+    this.player = new Player(
+      this,
+      store.getState().challenge.startingCoordinates[0],
+      store.getState().challenge.startingCoordinates[1],
+      'josh'
+    ).setScale(0.1)
     // this.physics.add.collider(this.player, this.groundGroup)
     this.physics.add.collider(this.player, this.borderGroup)
     this.physics.add.collider(this.borderGroup, this.player)
