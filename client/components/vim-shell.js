@@ -3,11 +3,14 @@ import AceEditor from 'react-ace'
 import {connect} from 'react-redux'
 import {getResult, clearResult} from '../store/result'
 import {getChallenge} from '../store/challenge'
+import {updateUserThunk} from '../store/user'
+
 // import {VimConsole} from './vim-console'
 // import axios from 'axios'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
+import user from '../store/user'
 
 class VimShell extends Component {
   constructor() {
@@ -17,7 +20,8 @@ class VimShell extends Component {
   }
 
   async componentDidMount() {
-    await this.props.getChallenge(1)
+    let lastChallengeCompleted = this.props.lastChallengeCompleted || 0
+    await this.props.getChallenge(lastChallengeCompleted + 1)
     let editor = this.refs.aceEditor.editor
     editor.addEventListener('click', () => {
       editor.navigateFileStart()
@@ -80,7 +84,7 @@ class VimShell extends Component {
   }
 
   onClick() {
-    //thunk for updating points need to map user to the store too - needs to happen before we get the new challenge
+    this.props.updateUser(this.props.userId, this.props.challengePoints)
     this.props.getChallenge(Number(this.props.challengeId) + 1)
     this.props.clearResult()
   }
@@ -95,6 +99,9 @@ class VimShell extends Component {
     )
     return (
       <div>
+        <div>
+          <p>Money on your Metrocard: ${this.props.score}</p>
+        </div>
         <AceEditor
           mode="javascript"
           theme="monokai"
@@ -128,16 +135,21 @@ const mapState = state => {
   return {
     result: state.result,
     challengeId: state.challenge.id,
+    challengePoints: state.challenge.points,
     instructions: state.challenge.instructions,
     code: state.challenge.code,
-    displayInstructions: state.challenge.displayInstructions
+    displayInstructions: state.challenge.displayInstructions,
+    score: state.user.score,
+    lastChallengeCompleted: state.user.challengeId,
+    userId: state.user.id
   }
 }
 
 const mapDispatch = dispatch => ({
   getResult: codeStr => dispatch(getResult(codeStr)),
   getChallenge: challengeId => dispatch(getChallenge(challengeId)),
-  clearResult: () => dispatch(clearResult())
+  clearResult: () => dispatch(clearResult()),
+  updateUser: (userId, points) => dispatch(updateUserThunk(userId, points))
 })
 
 export default connect(mapState, mapDispatch)(VimShell)

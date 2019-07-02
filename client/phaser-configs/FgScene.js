@@ -150,7 +150,7 @@ export default class FgScene extends Phaser.Scene {
     })
     this.load.image('ground', 'assets/sprites/ground.png')
     this.load.image('border', 'assets/sprites/8bitGrass.png')
-    this.load.image('dummyTarget', 'assets/sprites/grass2.png')
+    this.load.image('dummyTarget', 'assets/sprites/coffee.gif')
   }
   createBorders(arr) {
     //takes an array of arrays to create the boundaries of the game
@@ -182,7 +182,7 @@ export default class FgScene extends Phaser.Scene {
     this.createBorders(dummyBorders)
 
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    this.createBuilding(375, 575)
+    this.createBuilding(350, 550)
   }
 
   create() {
