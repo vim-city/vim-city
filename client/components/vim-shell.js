@@ -20,7 +20,7 @@ class VimShell extends Component {
     await this.props.getChallenge(1)
     let editor = this.refs.aceEditor.editor
     editor.addEventListener('click', () => {
-      editor.navigateFileStart()
+      editor.navigateTo(1, 0)
     })
 
     editor.commands.addCommand({
@@ -38,10 +38,10 @@ class VimShell extends Component {
 
     if (this.props.instructions && this.props.displayInstructions) {
       editor.setValue(this.props.instructions, -1)
-      editor.navigateFileStart()
+      editor.navigateTo(1, 0)
     } else if (this.props.code && !this.props.displayInstructions) {
       editor.setValue(this.props.code, -1)
-      editor.navigateFileStart()
+      editor.navigateTo(1, 0)
     }
   }
 
@@ -50,14 +50,14 @@ class VimShell extends Component {
     if (this.props.displayInstructions) {
       if (prevProps.instructions !== this.props.instructions) {
         // editor.addEventListener('click', () => {
-        //   editor.navigateFileStart()
+        //   editor.navigateTo(2,0)
         // })
         editor.setValue(this.props.instructions, -1)
-        editor.navigateFileStart()
+        editor.navigateTo(1, 0)
       }
     } else {
       editor.setValue(this.props.code, -1)
-      editor.navigateFileStart()
+      editor.navigateTo(1, 0)
     }
     // if(this.props.result !== prevProps.result){
     //   console.log("result!")
@@ -100,6 +100,7 @@ class VimShell extends Component {
           theme="monokai"
           keyboardHandler="vim"
           ref="aceEditor"
+          wrapEnabled={true}
           // value={!this.props.instructions ? 'LOADING' : this.props.instructions}
         />
         <button type="submit" onClick={this.onSubmit}>

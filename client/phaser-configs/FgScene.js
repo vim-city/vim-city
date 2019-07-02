@@ -202,7 +202,7 @@ export default class FgScene extends Phaser.Scene {
     this.createBorders(dummyBorders)
 
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    // this.createBuilding(375, 575)
+    this.createBuilding(375, 575)
   }
   enableKeys() {
     this.cursors = this.input.keyboard.addKeys({

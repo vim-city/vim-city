@@ -12,7 +12,8 @@ export const getResult = codeStr => async dispatch => {
   try {
     console.log('THUNK - INSIDE THE TRY CATCH')
     const {data} = await axios.put('http://localhost:49160/eval', {
-      func: codeStr
+      userInputStr: codeStr,
+      challengeId: 1
     })
     console.log('this is data:', data)
     const result = String(data)
