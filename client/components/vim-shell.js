@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {getResult, clearResult} from '../store/result'
 import {getChallenge} from '../store/challenge'
 import {updateUserThunk} from '../store/user'
-
+import NavBar from './navbar'
 // import {VimConsole} from './vim-console'
 // import axios from 'axios'
 import 'brace/mode/javascript'
@@ -99,9 +99,7 @@ class VimShell extends Component {
     )
     return (
       <div>
-        <div>
-          <p>Money on your Metrocard: ${this.props.score}</p>
-        </div>
+        <NavBar score={this.props.score} />
         <AceEditor
           mode="javascript"
           theme="monokai"
