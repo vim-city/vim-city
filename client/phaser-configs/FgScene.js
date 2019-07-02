@@ -150,6 +150,7 @@ const dummyBorders = [
 export default class FgScene extends Phaser.Scene {
   constructor() {
     super('FgScene')
+    this.enableKeys = this.enableKeys.bind(this)
   }
 
   preload() {
@@ -203,6 +204,17 @@ export default class FgScene extends Phaser.Scene {
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
     // this.createBuilding(375, 575)
   }
+  enableKeys() {
+    this.cursors = this.input.keyboard.addKeys({
+      up: Phaser.Input.Keyboard.KeyCodes.K,
+      down: Phaser.Input.Keyboard.KeyCodes.J,
+      left: Phaser.Input.Keyboard.KeyCodes.H,
+      right: Phaser.Input.Keyboard.KeyCodes.L
+    })
+
+    //SSW: The line below tells Phaser not to prevent keystrokes from propagating to rest of browser (including vim shell)
+    this.input.keyboard.removeCapture('H,J,K,L')
+  }
 
   create() {
     this.colliderActivated = true
@@ -224,29 +236,19 @@ export default class FgScene extends Phaser.Scene {
       () => this.colliderActivated
     )
     this.physics.add.overlap(this.player, this.buildingGroup)
-
-    this.cursors = this.input.keyboard.addKeys({
-      up: Phaser.Input.Keyboard.KeyCodes.K,
-      down: Phaser.Input.Keyboard.KeyCodes.J,
-      left: Phaser.Input.Keyboard.KeyCodes.H,
-      right: Phaser.Input.Keyboard.KeyCodes.L
+    this.enableKeys()
+    store.subscribe(() => {
+      if (!store.getState().challenge.displayInstructions) {
+        this.cursors = {}
+      } else if (store.getState().challenge.displayInstructions) {
+        this.enableKeys()
+      }
     })
-
-    //SSW: The line below tells Phaser not to prevent keystrokes from propagating to rest of browser (including vim shell)
-    this.input.keyboard.removeCapture('H,J,K,L')
   }
 
   update(time, delta) {
     this.player.update(this.cursors)
   }
 }
-
-//SSW: when the user hits a building, we should pause game play so user can type into vim shell with the following code, which will prevent the character from moving when HJKL are pressed:
-
-//this.scene.pause('FgScene')
-
-//then, when the user completes typing, use this code to resume gameplay:
-
-//this.scene.resume('FgScene')
 
 //http://www.html5gamedevs.com/topic/37935-collider-in-group-does-not-work/
