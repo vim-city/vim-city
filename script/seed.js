@@ -16,14 +16,14 @@ async function seed() {
     vimCommand: 'l',
     instructions: 'Use the "l" key to move right',
     points: 500,
-    code: '() => {return true',
+    code: '() => {return true \n\n\n\n',
     level: 0
   })
   const challenge2 = await Challenge.create({
-    vimCommand: 'k',
-    instructions: 'Use the "k" key to move up',
+    vimCommand: 'j',
+    instructions: 'Use the "j" key to move up',
     points: 500,
-    code: '() => return true}',
+    code: '() => return true} \n\n\n\n',
     level: 0
   })
 

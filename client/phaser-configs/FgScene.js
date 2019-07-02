@@ -3,6 +3,8 @@ import Player from '../phaser-configs/entities/player'
 import Ground from '../phaser-configs/entities/ground'
 import Border from '../phaser-configs/entities/border'
 import Building from '../phaser-configs/entities/building'
+import store from '../store'
+import {toggleDisplay} from '../store/challenge'
 
 const dummyBorders = [
   [25, 25],
@@ -75,6 +77,9 @@ const dummyBorders = [
   [425, 225],
   [425, 325],
   [425, 375],
+  [425, 475],
+  [425, 525],
+  [425, 575],
   [475, 25],
   [475, 75],
   [475, 175],
@@ -159,21 +164,27 @@ export default class FgScene extends Phaser.Scene {
     this.load.image('music_store', 'assets/sprites/music.png')
     this.load.image('pet_store', 'assets/sprites/petStore.png')
   }
+
   createBorders(arr) {
     //takes an array of arrays to create the boundaries of the game
+
     for (let i = 0; i < arr.length; ++i) {
-      console.log(arr[i])
       let x = arr[i][0]
       let y = arr[i][1]
       this.borderGroup.create(x, y, 'border')
     }
     this.borderGroup.immovable = true
-    // this.borderGroup.allowGravity = false;
+    this.borderGroup.allowGravity = false
     this.borderGroup.moves = false
-    // this.borderGroup.enable = true;
+    this.borderGroup.enable = true
   }
-  createGround(x, y) {
-    this.groundGroup.create(x, y, 'ground')
+
+  createBuilding(x, y, building) {
+    this.buildingGroup.create(x, y, building)
+
+    this.buildingGroup.immovable = true
+    this.buildingGroup.moves = false
+    this.buildingGroup.enable = true
   }
   createGroups() {
     // this.groundGroup = this.physics.add.staticGroup({classType: Ground})
@@ -188,20 +199,32 @@ export default class FgScene extends Phaser.Scene {
     this.createBuilding(375, 525, 'building1')
     this.createBuilding(775, 400, 'pet_store')
     this.createBorders(dummyBorders)
-  }
-  createBuilding(x, y, building) {
-    this.buildingGroup.create(x, y, building)
 
-    this.buildingGroup.immovable = true
-    this.buildingGroup.moves = false
+    this.buildingGroup = this.physics.add.staticGroup({classType: Building})
+    this.createBuilding(375, 575)
   }
+
 
   create() {
+    this.colliderActivated = true
     this.createGroups()
-    this.player = new Player(this, 25, 575, 'josh').setScale(0.25)
+    // this.building = new Building(this, 50, 200, 'dummyTarget').setScale(0.25)
+    this.player = new Player(this, 25, 575, 'josh').setScale(0.1)
     // this.physics.add.collider(this.player, this.groundGroup)
     this.physics.add.collider(this.player, this.borderGroup)
     this.physics.add.collider(this.borderGroup, this.player)
+
+    this.physics.add.overlap(
+      this.buildingGroup,
+      this.player,
+      () => {
+        console.log('collide!!')
+        store.dispatch(toggleDisplay())
+        this.colliderActivated = false
+      },
+      () => this.colliderActivated
+    )
+    this.physics.add.overlap(this.player, this.buildingGroup)
 
     this.cursors = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.K,

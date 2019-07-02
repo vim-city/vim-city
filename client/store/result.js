@@ -6,7 +6,7 @@ const CLEAR_RESULT = 'CLEAR_RESULT'
 const defaultResult = 'answer will appear here'
 
 const displayResult = result => ({type: DISPLAY_RESULT, result})
-const clearResult = () => ({type: CLEAR_RESULT})
+export const clearResult = () => ({type: CLEAR_RESULT})
 
 export const getResult = codeStr => async dispatch => {
   try {
