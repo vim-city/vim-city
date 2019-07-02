@@ -24,8 +24,12 @@ const User = db.define('user', {
       return () => this.getDataValue('salt')
     }
   },
-  googleId: {
-    type: Sequelize.STRING
+  gitHubId: {
+    type: Sequelize.INTEGER
+  },
+  score: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 })
 

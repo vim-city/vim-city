@@ -19,3 +19,61 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.container {
+  display: flex;
+}
+
+/* Login Component */
+
+.login-container {
+  height: 100vh;
+  background-image: url(https://backgrounddownload.com/wp-content/uploads/2018/09/background-animasi-png-5.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.vimcity-title h1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 90px;
+  letter-spacing: 0.1em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  padding: 3em 2em 2em 2em;
+  background-color: rgba(250, 250, 250, 0.884);
+  border: 1px solid #ebebeb;
+  box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
+}
+
+.vim-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-parent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(205, 238, 155);
+}
