@@ -138,9 +138,19 @@ const dummyBorders = [
   [775, 575]
 ]
 
+// const buildingArr = [
+//   [375, 525],
+//   [625, 375],
+//   [175, 25],
+//   [775, 400]
+// ]
+
+// const buildingType = ['building1', 'donut_shop','music_store', 'pet_store']
+
 export default class FgScene extends Phaser.Scene {
   constructor() {
     super('FgScene')
+    this.enableKeys = this.enableKeys.bind(this)
   }
 
   preload() {
@@ -149,9 +159,15 @@ export default class FgScene extends Phaser.Scene {
       frameHeight: 460
     })
     this.load.image('ground', 'assets/sprites/ground.png')
-    this.load.image('border', 'assets/sprites/8bitGrass.png')
-    this.load.image('dummyTarget', 'assets/sprites/coffee.gif')
+
+    this.load.image('border', 'assets/sprites/grass3.png')
+    this.load.image('building1', 'assets/sprites/building.png')
+    this.load.image('donut_shop', 'assets/sprites/donutShop.png')
+    this.load.image('music_store', 'assets/sprites/music.png')
+    this.load.image('pet_store', 'assets/sprites/petStore.png')
+
   }
+
   createBorders(arr) {
     //takes an array of arrays to create the boundaries of the game
 
@@ -165,10 +181,11 @@ export default class FgScene extends Phaser.Scene {
     this.borderGroup.moves = false
     this.borderGroup.enable = true
   }
-  createBuilding(x, y) {
-    this.buildingGroup.create(x, y, 'dummyTarget')
+
+  createBuilding(x, y, building) {
+    this.buildingGroup.create(x, y, building)
+
     this.buildingGroup.immovable = true
-    // this.buildingGroup.allowGravity = false
     this.buildingGroup.moves = false
     this.buildingGroup.enable = true
   }
@@ -179,11 +196,28 @@ export default class FgScene extends Phaser.Scene {
     // this.createGround(600, 540)
 
     this.borderGroup = this.physics.add.staticGroup({classType: Border})
+    this.buildingGroup = this.physics.add.staticGroup({classType: Building})
+    this.createBuilding(625, 375, 'donut_shop')
+    this.createBuilding(175, 25, 'music_store')
+    this.createBuilding(375, 525, 'building1')
+    this.createBuilding(775, 400, 'pet_store')
     this.createBorders(dummyBorders)
 
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
     this.createBuilding(350, 550)
   }
+  enableKeys() {
+    this.cursors = this.input.keyboard.addKeys({
+      up: Phaser.Input.Keyboard.KeyCodes.K,
+      down: Phaser.Input.Keyboard.KeyCodes.J,
+      left: Phaser.Input.Keyboard.KeyCodes.H,
+      right: Phaser.Input.Keyboard.KeyCodes.L
+    })
+
+    //SSW: The line below tells Phaser not to prevent keystrokes from propagating to rest of browser (including vim shell)
+    this.input.keyboard.removeCapture('H,J,K,L')
+  }
+
 
   create() {
     this.colliderActivated = true
@@ -205,29 +239,19 @@ export default class FgScene extends Phaser.Scene {
       () => this.colliderActivated
     )
     this.physics.add.overlap(this.player, this.buildingGroup)
-
-    this.cursors = this.input.keyboard.addKeys({
-      up: Phaser.Input.Keyboard.KeyCodes.K,
-      down: Phaser.Input.Keyboard.KeyCodes.J,
-      left: Phaser.Input.Keyboard.KeyCodes.H,
-      right: Phaser.Input.Keyboard.KeyCodes.L
+    this.enableKeys()
+    store.subscribe(() => {
+      if (!store.getState().challenge.displayInstructions) {
+        this.cursors = {}
+      } else if (store.getState().challenge.displayInstructions) {
+        this.enableKeys()
+      }
     })
-
-    //SSW: The line below tells Phaser not to prevent keystrokes from propagating to rest of browser (including vim shell)
-    this.input.keyboard.removeCapture('H,J,K,L')
   }
 
   update(time, delta) {
     this.player.update(this.cursors)
   }
 }
-
-//SSW: when the user hits a building, we should pause game play so user can type into vim shell with the following code, which will prevent the character from moving when HJKL are pressed:
-
-//this.scene.pause('FgScene')
-
-//then, when the user completes typing, use this code to resume gameplay:
-
-//this.scene.resume('FgScene')
 
 //http://www.html5gamedevs.com/topic/37935-collider-in-group-does-not-work/
