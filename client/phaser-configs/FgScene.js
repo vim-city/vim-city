@@ -159,11 +159,13 @@ export default class FgScene extends Phaser.Scene {
       frameHeight: 460
     })
     this.load.image('ground', 'assets/sprites/ground.png')
+
     this.load.image('border', 'assets/sprites/grass3.png')
     this.load.image('building1', 'assets/sprites/building.png')
     this.load.image('donut_shop', 'assets/sprites/donutShop.png')
     this.load.image('music_store', 'assets/sprites/music.png')
     this.load.image('pet_store', 'assets/sprites/petStore.png')
+
   }
 
   createBorders(arr) {
@@ -202,7 +204,7 @@ export default class FgScene extends Phaser.Scene {
     this.createBorders(dummyBorders)
 
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    this.createBuilding(375, 575)
+    this.createBuilding(350, 550)
   }
   enableKeys() {
     this.cursors = this.input.keyboard.addKeys({
