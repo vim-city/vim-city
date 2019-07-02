@@ -201,9 +201,8 @@ export default class FgScene extends Phaser.Scene {
     this.createBorders(dummyBorders)
 
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    this.createBuilding(375, 575)
+    // this.createBuilding(375, 575)
   }
-
 
   create() {
     this.colliderActivated = true
