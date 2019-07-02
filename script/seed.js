@@ -17,14 +17,16 @@ async function seed() {
     instructions: 'Use the "l" key to move right',
     points: 500,
     code: '() => {return true \n\n\n\n',
-    level: 0
+    level: 0,
+    startingCoordinates: [25, 575]
   })
   const challenge2 = await Challenge.create({
     vimCommand: 'j',
     instructions: 'Use the "j" key to move up',
     points: 500,
     code: '() => return true} \n\n\n\n',
-    level: 0
+    level: 0,
+    startingCoordinates: [375, 525]
   })
 
   console.log(`seeded challenges`)
