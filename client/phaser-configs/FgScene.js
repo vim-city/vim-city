@@ -138,6 +138,15 @@ const dummyBorders = [
   [775, 575]
 ]
 
+// const buildingArr = [
+//   [375, 525],
+//   [625, 375],
+//   [175, 25],
+//   [775, 400]
+// ]
+
+// const buildingType = ['building1', 'donut_shop','music_store', 'pet_store']
+
 export default class FgScene extends Phaser.Scene {
   constructor() {
     super('FgScene')
@@ -149,9 +158,13 @@ export default class FgScene extends Phaser.Scene {
       frameHeight: 460
     })
     this.load.image('ground', 'assets/sprites/ground.png')
-    this.load.image('border', 'assets/sprites/8bitGrass.png')
-    this.load.image('dummyTarget', 'assets/sprites/grass2.png')
+    this.load.image('border', 'assets/sprites/grass3.png')
+    this.load.image('building1', 'assets/sprites/building.png')
+    this.load.image('donut_shop', 'assets/sprites/donutShop.png')
+    this.load.image('music_store', 'assets/sprites/music.png')
+    this.load.image('pet_store', 'assets/sprites/petStore.png')
   }
+
   createBorders(arr) {
     //takes an array of arrays to create the boundaries of the game
 
@@ -165,10 +178,11 @@ export default class FgScene extends Phaser.Scene {
     this.borderGroup.moves = false
     this.borderGroup.enable = true
   }
-  createBuilding(x, y) {
-    this.buildingGroup.create(x, y, 'dummyTarget')
+
+  createBuilding(x, y, building) {
+    this.buildingGroup.create(x, y, building)
+
     this.buildingGroup.immovable = true
-    // this.buildingGroup.allowGravity = false
     this.buildingGroup.moves = false
     this.buildingGroup.enable = true
   }
@@ -179,11 +193,17 @@ export default class FgScene extends Phaser.Scene {
     // this.createGround(600, 540)
 
     this.borderGroup = this.physics.add.staticGroup({classType: Border})
+    this.buildingGroup = this.physics.add.staticGroup({classType: Building})
+    this.createBuilding(625, 375, 'donut_shop')
+    this.createBuilding(175, 25, 'music_store')
+    this.createBuilding(375, 525, 'building1')
+    this.createBuilding(775, 400, 'pet_store')
     this.createBorders(dummyBorders)
 
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
     this.createBuilding(375, 575)
   }
+
 
   create() {
     this.colliderActivated = true
