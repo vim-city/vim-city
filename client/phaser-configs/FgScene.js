@@ -182,13 +182,13 @@ export default class FgScene extends Phaser.Scene {
     this.borderGroup.enable = true
   }
 
-  createBuilding(x, y, building) {
-    this.buildingGroup.create(x, y, building)
+  // createBuilding(x, y, building) {
+  //   this.buildingGroup.create(x, y, building)
 
-    this.buildingGroup.immovable = true
-    this.buildingGroup.moves = false
-    this.buildingGroup.enable = true
-  }
+  //   this.buildingGroup.immovable = true
+  //   this.buildingGroup.moves = false
+  //   this.buildingGroup.enable = true
+  // }
   createGroups() {
     // this.groundGroup = this.physics.add.staticGroup({classType: Ground})
 
@@ -196,15 +196,36 @@ export default class FgScene extends Phaser.Scene {
     // this.createGround(600, 540)
 
     this.borderGroup = this.physics.add.staticGroup({classType: Border})
-    this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    this.createBuilding(625, 375, 'donut_shop')
-    this.createBuilding(175, 25, 'music_store')
-    this.createBuilding(375, 525, 'building1')
-    this.createBuilding(775, 400, 'pet_store')
-    this.createBorders(dummyBorders)
 
+    //building1
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    this.createBuilding(350, 550)
+    this.buildingGroup.create(375, 525, 'building1').setScale(0.5)
+    this.buildingGroup.immovable = true
+    this.buildingGroup.moves = false
+    this.buildingGroup.enable = true
+
+    //building2
+    this.secondBuilding = this.physics.add.staticGroup({classType: Building})
+    this.secondBuilding.create(625, 375, 'donut_shop')
+    this.secondBuilding.immovable = true
+    this.secondBuilding.moves = false
+    this.secondBuilding.enable = true
+
+    //building3
+    this.thirdBuilding = this.physics.add.staticGroup({classType: Building})
+    this.thirdBuilding.create(175, 25, 'music_store')
+    this.thirdBuilding.immovable = true
+    this.thirdBuilding.moves = false
+    this.thirdBuilding.enable = true
+
+    //building4
+    this.fourthBuilding = this.physics.add.staticGroup({classType: Building})
+    this.fourthBuilding.create(775, 400, 'pet_store')
+    this.fourthBuilding.immovable = true
+    this.fourthBuilding.moves = false
+    this.fourthBuilding.enable = true
+
+    this.createBorders(dummyBorders)
   }
   enableKeys() {
     this.cursors = this.input.keyboard.addKeys({
@@ -219,7 +240,6 @@ export default class FgScene extends Phaser.Scene {
   }
 
   create() {
-    this.colliderActivated = true
     console.log('THIS IS state', store.getState())
     this.createGroups()
     // this.building = new Building(this, 50, 200, 'dummyTarget').setScale(0.25)
@@ -234,17 +254,85 @@ export default class FgScene extends Phaser.Scene {
     this.physics.add.collider(this.player, this.borderGroup)
     this.physics.add.collider(this.borderGroup, this.player)
 
+    //building1
+    this.colliderActivated1 = true
     this.physics.add.overlap(
       this.buildingGroup,
       this.player,
       () => {
         console.log('collide!!')
         store.dispatch(toggleDisplay())
-        this.colliderActivated = false
+        this.colliderActivated1 = false
       },
-      () => this.colliderActivated
+      () => this.colliderActivated1
     )
     this.physics.add.overlap(this.player, this.buildingGroup)
+    this.enableKeys()
+    store.subscribe(() => {
+      if (!store.getState().challenge.displayInstructions) {
+        this.cursors = {}
+      } else if (store.getState().challenge.displayInstructions) {
+        this.enableKeys()
+      }
+    })
+
+    //building2
+    this.colliderActivated2 = true
+    this.physics.add.overlap(
+      this.secondBuilding,
+      this.player,
+      () => {
+        console.log('collide!!')
+        store.dispatch(toggleDisplay())
+        this.colliderActivated2 = false
+      },
+      () => this.colliderActivated2
+    )
+    this.physics.add.overlap(this.player, this.secondBuilding)
+    this.enableKeys()
+    store.subscribe(() => {
+      if (!store.getState().challenge.displayInstructions) {
+        this.cursors = {}
+      } else if (store.getState().challenge.displayInstructions) {
+        this.enableKeys()
+      }
+    })
+
+    //building3
+    this.colliderActivated3 = true
+    this.physics.add.overlap(
+      this.thirdBuilding,
+      this.player,
+      () => {
+        console.log('collide!!')
+        store.dispatch(toggleDisplay())
+        this.colliderActivated3 = false
+      },
+      () => this.colliderActivated3
+    )
+    this.physics.add.overlap(this.player, this.thirdBuilding)
+    this.enableKeys()
+    store.subscribe(() => {
+      if (!store.getState().challenge.displayInstructions) {
+        this.cursors = {}
+      } else if (store.getState().challenge.displayInstructions) {
+        this.enableKeys()
+      }
+    })
+
+    //building4
+    this.colliderActivated4 = true
+    this.physics.add.overlap(
+      this.fourthBuilding,
+      this.player,
+      () => {
+        console.log('collide!!')
+        store.dispatch(toggleDisplay())
+        this.colliderActivated4 = false
+      },
+      () => this.colliderActivated4
+    )
+    this.physics.add.overlap(this.player, this.fourthBuilding)
     this.enableKeys()
     store.subscribe(() => {
       if (!store.getState().challenge.displayInstructions) {
