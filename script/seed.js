@@ -19,6 +19,7 @@ async function seed() {
     points: 500,
     code:
       '//YAY! Vin made it to Lex’s Lounge and is ready to order a drink. Vin is not the best at ordering drinks and has seemed to make an error in his order. Can you help Vin fix his bad code? This function should add ice and an umbrella to Vin’s drink order \n function drinksOrder(drink) {return `${drink} with ice and an umbrella`  \n\n\n\n',
+    startingCoordinates: [25, 575],
     level: 0
   })
   const challenge2 = await Challenge.create({
@@ -27,7 +28,7 @@ async function seed() {
     points: 500,
     code: '() => return true} \n\n\n\n',
     level: 0,
-    startingCoordinates: [375, 525]
+    startingCoordinates: [375, 475]
   })
 
   console.log(`seeded challenges`)

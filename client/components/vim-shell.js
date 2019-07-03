@@ -52,13 +52,17 @@ class VimShell extends Component {
   componentDidUpdate(prevProps) {
     let editor = this.refs.aceEditor.editor
     if (this.props.displayInstructions) {
-      if (prevProps.instructions !== this.props.instructions) {
-        // editor.addEventListener('click', () => {
-        //   editor.navigateTo(2,0)
-        // })
-        editor.setValue(this.props.instructions, -1)
-        editor.navigateTo(1, 0)
-      }
+      // if (prevProps.instructions !== this.props.instructions) {
+      //   // editor.addEventListener('click', () => {
+      //   //   editor.navigateTo(2,0)
+      //   // })
+      //   console.log('this.props.instructions', this.props.instructions)
+      //   editor.setValue(this.props.instructions, -1)
+      //   editor.navigateTo(1, 0)
+      // }
+      console.log('this.props.instructions', this.props.instructions)
+      editor.setValue(this.props.instructions, -1)
+      editor.navigateTo(1, 0)
     } else {
       editor.setValue(this.props.code, -1)
       editor.navigateTo(1, 0)
@@ -80,7 +84,10 @@ class VimShell extends Component {
       'ON SUBMIT IS CALLED, value:',
       this.refs.aceEditor.editor.getValue()
     )
-    this.props.getResult(this.refs.aceEditor.editor.getValue())
+    this.props.getResult(
+      this.refs.aceEditor.editor.getValue(),
+      this.props.challengeId
+    )
   }
 
   onClick() {
@@ -90,13 +97,13 @@ class VimShell extends Component {
   }
 
   render() {
-    console.log(
-      're-rendering',
-      'results',
-      this.props.result,
-      'props',
-      this.props
-    )
+    // console.log(
+    //   're-rendering',
+    //   'results',
+    //   this.props.result,
+    //   'props',
+    //   this.props
+    // )
     return (
       <div>
         <NavBar score={this.props.score} />
@@ -115,8 +122,8 @@ class VimShell extends Component {
         {/* {this.state.result.length ? <VimConsole result={this.state.result}/> : null} */}
         <div className="console">
           <h1>This is result:</h1>
-          <p>{this.props.result}</p>
-          {this.props.result === 'You win!' ? (
+          <p>{this.props.result.message}</p>
+          {this.props.result.passed ? (
             <button type="button" onClick={this.onClick}>
               {' '}
               Collect your points and move onto the next challenge{' '}
@@ -145,7 +152,8 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => ({
-  getResult: codeStr => dispatch(getResult(codeStr)),
+  getResult: (codeStr, challengeId) =>
+    dispatch(getResult(codeStr, challengeId)),
   getChallenge: challengeId => dispatch(getChallenge(challengeId)),
   clearResult: () => dispatch(clearResult()),
   updateUser: (userId, points) => dispatch(updateUserThunk(userId, points))
