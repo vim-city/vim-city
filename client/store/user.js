@@ -42,7 +42,7 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
@@ -58,9 +58,9 @@ export const logout = () => async dispatch => {
   }
 }
 
-export const updateUserThunk = (id, points) => async dispatch => {
+export const updateUserThunk = points => async dispatch => {
   try {
-    const {data} = await axios.put(`/api/users/${id}`, {points})
+    const {data} = await axios.put(`/api/users`, {points})
     dispatch(updateUser(data))
   } catch (err) {
     console.error(err)
