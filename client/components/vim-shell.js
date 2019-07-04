@@ -91,7 +91,7 @@ class VimShell extends Component {
   }
 
   onClick() {
-    this.props.updateUser(this.props.userId, this.props.challengePoints)
+    this.props.updateUser(this.props.challengePoints)
     this.props.getChallenge(Number(this.props.challengeId) + 1)
     this.props.clearResult()
   }
@@ -156,7 +156,7 @@ const mapDispatch = dispatch => ({
     dispatch(getResult(codeStr, challengeId)),
   getChallenge: challengeId => dispatch(getChallenge(challengeId)),
   clearResult: () => dispatch(clearResult()),
-  updateUser: (userId, points) => dispatch(updateUserThunk(userId, points))
+  updateUser: points => dispatch(updateUserThunk(points))
 })
 
 export default connect(mapState, mapDispatch)(VimShell)
