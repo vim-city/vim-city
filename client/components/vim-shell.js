@@ -135,7 +135,8 @@ class VimShell extends Component {
     )
     this.props.getResult(
       this.refs.aceEditor.editor.getValue(),
-      this.props.challengeId
+      this.props.challengeId,
+      this.props.maxAnswerLength
     )
   }
 
@@ -181,6 +182,7 @@ const mapState = state => {
     challengePoints: state.challenge.points,
     instructions: state.challenge.instructions,
     code: state.challenge.code,
+    maxAnswerLength: state.challenge.maxAnswerLength,
     displayInstructions: state.challenge.displayInstructions,
     score: state.user.score,
     lastChallengeCompleted: state.user.challengeId,
@@ -189,8 +191,8 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => ({
-  getResult: (codeStr, challengeId) =>
-    dispatch(getResult(codeStr, challengeId)),
+  getResult: (codeStr, challengeId, maxAnswerLength) =>
+    dispatch(getResult(codeStr, challengeId, maxAnswerLength)),
   getChallenge: challengeId => dispatch(getChallenge(challengeId)),
   clearResult: () => dispatch(clearResult()),
   updateUser: points => dispatch(updateUserThunk(points))
