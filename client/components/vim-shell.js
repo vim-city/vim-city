@@ -93,16 +93,6 @@ class VimShell extends Component {
       editor.setValue(this.props.code, -1)
       editor.navigateTo(1, 0)
     }
-    // if(this.props.result !== prevProps.result){
-    //   console.log("result!")
-    //   if(this.props.result === "You win!"){
-    //     console.log("getting challenge!",this.props.challengeId, typeof this.props.challengeId, Number(this.props.challengeId) + 1 )
-
-    //     this.props.getChallenge(Number(this.props.challengeId) + 1)
-    //   }
-    // }
-
-    //if (prevProps.displayInstructions !== this.props.displayInstructions)
   }
 
   onSubmit() {
@@ -123,13 +113,6 @@ class VimShell extends Component {
   }
 
   render() {
-    // console.log(
-    //   're-rendering',
-    //   'results',
-    //   this.props.result,
-    //   'props',
-    //   this.props
-    // )
     return (
       <div>
         <NavBar score={this.props.score} />
@@ -139,13 +122,10 @@ class VimShell extends Component {
           keyboardHandler="vim"
           ref="aceEditor"
           wrapEnabled={true}
-          // value={!this.props.instructions ? 'LOADING' : this.props.instructions}
         />
         <button type="submit" onClick={this.onSubmit}>
           Run Code
         </button>
-
-        {/* {this.state.result.length ? <VimConsole result={this.state.result}/> : null} */}
         <div className="console">
           <h1>This is result:</h1>
           <p>{this.props.result.message}</p>
@@ -160,8 +140,6 @@ class VimShell extends Component {
     )
   }
 }
-
-//integrate Vim Console with thunk
 
 const mapState = state => {
   return {
