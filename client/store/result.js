@@ -13,7 +13,7 @@ export const clearResult = () => ({type: CLEAR_RESULT})
 
 export const getResult = (codeStr, challengeId) => async dispatch => {
   try {
-    const {data} = await axios.put('http://0.0.0.0:49160/eval', {
+    const {data} = await axios.put('http://localhost:49160/eval', {
       userInputStr: codeStr,
       challengeId: challengeId
     })

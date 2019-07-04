@@ -23,16 +23,51 @@ class VimShell extends Component {
     let lastChallengeCompleted = this.props.lastChallengeCompleted || 0
     await this.props.getChallenge(lastChallengeCompleted + 1)
     let editor = this.refs.aceEditor.editor
-    editor.addEventListener('click', () => {
-      editor.navigateTo(1, 0)
+    editor.getSession().selection.on('changeSelection', function(e) {
+      editor.getSession().selection.clearSelection()
+    })
+
+    editor.addEventListener('mousedown', e => {
+      e.stop()
+    })
+    editor.addEventListener('click', e => {
+      e.stop()
+    })
+    editor.addEventListener('mouseup', e => {
+      e.stop()
+    })
+    editor.addEventListener('dblclick', e => {
+      e.stop()
+    })
+    editor.addEventListener('tripleclick', e => {
+      e.stop()
+    })
+    editor.addEventListener('quadclick', e => {
+      e.stop()
+    })
+    editor.on('guttermousedown', e => {
+      e.stop()
     })
 
     editor.commands.addCommand({
       name: 'remove right',
       bindKey: {win: 'Right', mac: 'Right'},
-      exec: function(editor) {
-        console.log('Right')
-      },
+      exec: editor => 1
+    })
+    editor.commands.addCommand({
+      name: 'remove left',
+      bindKey: {win: 'Left', mac: 'Left'},
+      exec: editor => 1
+    })
+    editor.commands.addCommand({
+      name: 'remove up',
+      bindKey: {win: 'Up', mac: 'Up'},
+      exec: editor => 1
+    })
+    editor.commands.addCommand({
+      name: 'remove down',
+      bindKey: {win: 'Down', mac: 'Down'},
+      exec: editor => 1,
       readOnly: true
     })
 
@@ -52,15 +87,6 @@ class VimShell extends Component {
   componentDidUpdate(prevProps) {
     let editor = this.refs.aceEditor.editor
     if (this.props.displayInstructions) {
-      // if (prevProps.instructions !== this.props.instructions) {
-      //   // editor.addEventListener('click', () => {
-      //   //   editor.navigateTo(2,0)
-      //   // })
-      //   console.log('this.props.instructions', this.props.instructions)
-      //   editor.setValue(this.props.instructions, -1)
-      //   editor.navigateTo(1, 0)
-      // }
-      console.log('this.props.instructions', this.props.instructions)
       editor.setValue(this.props.instructions, -1)
       editor.navigateTo(1, 0)
     } else {
