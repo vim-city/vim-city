@@ -19,13 +19,11 @@ class VimShell extends Component {
     this.onClick = this.onClick.bind(this)
   }
 
+  // eslint-disable-next-line complexity
   async componentDidMount() {
     let lastChallengeCompleted = this.props.lastChallengeCompleted || 0
     await this.props.getChallenge(lastChallengeCompleted + 1)
     let editor = this.refs.aceEditor.editor
-    editor.getSession().selection.on('changeSelection', function(e) {
-      editor.getSession().selection.clearSelection()
-    })
 
     editor.addEventListener('mousedown', e => {
       e.stop()
@@ -43,9 +41,6 @@ class VimShell extends Component {
       e.stop()
     })
     editor.addEventListener('quadclick', e => {
-      e.stop()
-    })
-    editor.on('guttermousedown', e => {
       e.stop()
     })
 
@@ -71,16 +66,33 @@ class VimShell extends Component {
       readOnly: true
     })
 
-    document.addEventListener('keydown', e => {
-      console.log(e.code)
-    })
-
     if (this.props.instructions && this.props.displayInstructions) {
       editor.setValue(this.props.instructions, -1)
       editor.navigateTo(1, 0)
     } else if (this.props.code && !this.props.displayInstructions) {
-      editor.setValue(this.props.code, -1)
-      editor.navigateTo(1, 0)
+      switch (this.props.challengeId) {
+        case 1:
+          console.log('Case 1 switch')
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+          break
+        case 2:
+          console.log('Case 2 switch')
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(16, 0)
+          break
+        case 3:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(16, 0)
+          break
+        case 4:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+          break
+        default:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+      }
     }
   }
 
@@ -90,8 +102,29 @@ class VimShell extends Component {
       editor.setValue(this.props.instructions, -1)
       editor.navigateTo(1, 0)
     } else {
-      editor.setValue(this.props.code, -1)
-      editor.navigateTo(1, 0)
+      switch (this.props.challengeId) {
+        case 1:
+          console.log('Case 1 switch')
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+          break
+        case 2:
+          console.log('Case 2 switch')
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(16, 0)
+          break
+        case 3:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(16, 0)
+          break
+        case 4:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+          break
+        default:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+      }
     }
   }
 
