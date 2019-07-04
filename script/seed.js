@@ -24,9 +24,10 @@ async function seed() {
   })
   const challenge2 = await Challenge.create({
     vimCommand: 'j',
-    instructions: 'Use the "j" key to move up',
+    instructions:
+      'Now that Vin has had a few drinks he’s ready to do some sightseeing. The Kaleidoscope Observatory offers panoramic views of Vim City.  Help Vin walk to the Kaleidoscope by using the “k” key, which will move Vin up.',
     points: 500,
-    code: '() => return true} \n\n\n\n',
+    code: `//Vin is overwhelmed by Vim City’s beauty, and has written a poem to express his feelings.  Vin swaps "i" with "y" so often that he carries around a spellchecker function that takes a string, replaces all "y"s with "i"s and vice versa, and returns the string in lowercase.\n//On the elevator ride up to the Kaleidoscope, Vin dropped his spellchecker and broke it. If you can help Vin fix his spellchecker function, he will let you read his poem. \n function spellChecker(poem) { \n poem.toLowerCase() \n let fixedPoem = ''\nfor (let i = 0; i < poem.length; i++) {\nlet letter = poem[i] \nif (letter === 'i') { \nfixedPoem += 'y'\n} else if (letter = 'y') {\nfixedPoem = 'i' \n} else {\nfixedPoem = letter \n}\n} \nreturn fixedPoem \n}\n\n\n\n`,
     level: 0,
     startingCoordinates: [375, 475]
   })
