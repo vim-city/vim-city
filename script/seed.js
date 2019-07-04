@@ -41,18 +41,19 @@ async function seed() {
       "Oh no! It's getting late, and Vin has tickets to see his favorite band, Hannah and the Hacks.  Help rush Vin to Harmonixx Music Hall so he can catch the show.  The h key will move Vin left.",
     points: 500,
     code:
-      "//What a terrific performance! Vin was lucky enough to get Hannah's handwritten setlist after the show.  Vin wants to tweet about the third song, but he forgot its name.  Can you help Vin finish his tweet?  The function below takes a setlist as an array and returns a tweet. \nfunction greatestHit(setlist) {\n  let favoriteSong = setList[0]\n  let tweet = `siiiickkk performance by @HannahAndTheHacks in #vimcity. {favoriteSong} = my anthem`\n  return tweet}\n",
+      "//What a terrific performance! Vin was lucky enough to get Hannah's handwritten setlist after the show.  Vin wants to tweet about the third song, but he forgot its name.  Can you help Vin finish his tweet?  The function below takes a setlist as an array and returns a tweet. \nfunction greatestHit(setList) {\n  let favoriteSong = setList[0]\n  let tweet = `siiiicckk performance by @HannahAndTheHacks in #vimcity. {favoriteSong} = my anthem`\n  return tweet}\n",
     level: 0,
     startingCoordinates: [375, 475],
     numEdits: 1
   })
 
   const challenge4 = await Challenge.create({
-    vimCommand: 'h',
+    vimCommand: 'j',
     instructions:
       "Wow, what a day! Vin hasn't eaten yet and he's starting to get lonely, too. Thankfully, Jess's Bunny Cafe has an all-you-can-eat jello bar and affable jackrabbits to keep guests company.  Help Vin navigate to Jess's Bunny Cafe by using the j key to move down.",
     points: 500,
-    code: `Mmmm! Vin filled his stomach with jello and his heart with jackrabbits. He loved Jess's carrot-flavored jello and wants to bring some home as a souvenir.  The jello costs 89 cents an ounce. Can you fix the function below, so that it tells Vin how much his take-out box will cost in dollars, rounded to up to the nearest integer?\n'function jelloCalculator(ouncesOfJello) {\n  let dollars = ath.ceil(ouncesOfJello * 89 / 100)\n return doll}'`,
+    code:
+      '//Mmmm! Vin filled his stomach with jello and his heart with jackrabbits. He loved the carrot-flavored jello and wants to bring some home as a souvenir.  The jello costs 89 cents an ounce. Can you fix the function below so that it tells Vin how much his take-out box will cost in dollars, rounded to up to the nearest integer? \nfunction jelloCalculator(ouncesOfJello) {\n  let dollars = ath.ceil(ouncesOfJello * 89 / 100)\n return doll}\n',
     level: 0,
     startingCoordinates: [375, 475],
     numEdits: 4
