@@ -4,22 +4,34 @@ import {connect} from 'react-redux'
 
 const NavBar = props => {
   return (
-    <div>
-      <p>Money on your Metrocard: ${props.score}</p>
-      <button
-        type="button"
-        onClick={() => {
-          props.handleClick()
-        }}
-      >
-        Logout
-      </button>
+    <div className="vim-header">
+      <img src="logo.png" />
+      <div className="vim-header-right">
+        <div className="vim-header-child">
+          <p>Money on your Metrocard: ${props.score}</p>
+        </div>
+        <div className="vim-header-child">
+          <a
+            onClick={() => {
+              props.handleClick()
+            }}
+          >
+            Logout
+          </a>
+        </div>
+      </div>
     </div>
   )
+}
+
+const mapState = state => {
+  return {
+    score: state.user.score
+  }
 }
 
 const mapDispatch = dispatch => ({
   handleClick: () => dispatch(logout())
 })
 
-export default connect(null, mapDispatch)(NavBar)
+export default connect(mapState, mapDispatch)(NavBar)

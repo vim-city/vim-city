@@ -4,13 +4,10 @@ import {connect} from 'react-redux'
 import {getResult, clearResult} from '../store/result'
 import {getChallenge} from '../store/challenge'
 import {updateUserThunk} from '../store/user'
-import NavBar from './navbar'
-// import {VimConsole} from './vim-console'
-// import axios from 'axios'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
-import user from '../store/user'
+import Fab from '@material-ui/core/Fab'
 
 class VimShell extends Component {
   constructor() {
@@ -97,30 +94,33 @@ class VimShell extends Component {
   }
 
   render() {
-    // console.log(
-    //   're-rendering',
-    //   'results',
-    //   this.props.result,
-    //   'props',
-    //   this.props
-    // )
     return (
       <div>
-        <NavBar score={this.props.score} />
         <AceEditor
           mode="javascript"
-          theme="monokai"
+          theme="kuroir"
           keyboardHandler="vim"
           ref="aceEditor"
           wrapEnabled={true}
-          // value={!this.props.instructions ? 'LOADING' : this.props.instructions}
+          height="450px"
+          width="450px"
+          fontSize="20"
         />
-        <button type="submit" onClick={this.onSubmit}>
+        <Fab
+          variant="extended"
+          size="medium"
+          color="primary"
+          aria-label="Add"
+          onClick={this.onSubmit}
+        >
           Run Code
-        </button>
+        </Fab>
+        {/* <button type="submit" onClick={this.onSubmit}>
+          Run Code
+        </button> */}
 
         {/* {this.state.result.length ? <VimConsole result={this.state.result}/> : null} */}
-        <div className="console">
+        {/* <div className="console">
           <h1>This is result:</h1>
           <p>{this.props.result.message}</p>
           {this.props.result.passed ? (
@@ -129,7 +129,7 @@ class VimShell extends Component {
               Collect your points and move onto the next challenge{' '}
             </button>
           ) : null}
-        </div>
+        </div> */}
       </div>
     )
   }
