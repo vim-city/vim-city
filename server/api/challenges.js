@@ -14,7 +14,8 @@ router.get('/:challengeId', async (req, res, next) => {
         'points',
         'level',
         'startingCoordinates',
-        'activeColliders'
+        'activeColliders',
+        'maxAnswerLength'
       ]
     })
     res.json(challenge)

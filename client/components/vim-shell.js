@@ -19,64 +19,113 @@ class VimShell extends Component {
     this.onClick = this.onClick.bind(this)
   }
 
+  // eslint-disable-next-line complexity
   async componentDidMount() {
     let lastChallengeCompleted = this.props.lastChallengeCompleted || 0
     await this.props.getChallenge(lastChallengeCompleted + 1)
     let editor = this.refs.aceEditor.editor
-    editor.addEventListener('click', () => {
-      editor.navigateTo(1, 0)
+
+    editor.addEventListener('mousedown', e => {
+      e.stop()
+    })
+    editor.addEventListener('click', e => {
+      e.stop()
+    })
+    editor.addEventListener('mouseup', e => {
+      e.stop()
+    })
+    editor.addEventListener('dblclick', e => {
+      e.stop()
+    })
+    editor.addEventListener('tripleclick', e => {
+      e.stop()
+    })
+    editor.addEventListener('quadclick', e => {
+      e.stop()
     })
 
     editor.commands.addCommand({
       name: 'remove right',
       bindKey: {win: 'Right', mac: 'Right'},
-      exec: function(editor) {
-        console.log('Right')
-      },
-      readOnly: true
+      exec: editor => 1
     })
-
-    document.addEventListener('keydown', e => {
-      console.log(e.code)
+    editor.commands.addCommand({
+      name: 'remove left',
+      bindKey: {win: 'Left', mac: 'Left'},
+      exec: editor => 1
+    })
+    editor.commands.addCommand({
+      name: 'remove up',
+      bindKey: {win: 'Up', mac: 'Up'},
+      exec: editor => 1
+    })
+    editor.commands.addCommand({
+      name: 'remove down',
+      bindKey: {win: 'Down', mac: 'Down'},
+      exec: editor => 1,
+      readOnly: true
     })
 
     if (this.props.instructions && this.props.displayInstructions) {
       editor.setValue(this.props.instructions, -1)
       editor.navigateTo(1, 0)
     } else if (this.props.code && !this.props.displayInstructions) {
-      editor.setValue(this.props.code, -1)
-      editor.navigateTo(1, 0)
+      switch (this.props.challengeId) {
+        case 1:
+          console.log('Case 1 switch')
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+          break
+        case 2:
+          console.log('Case 2 switch')
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(16, 0)
+          break
+        case 3:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(16, 0)
+          break
+        case 4:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+          break
+        default:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+      }
     }
   }
 
   componentDidUpdate(prevProps) {
     let editor = this.refs.aceEditor.editor
     if (this.props.displayInstructions) {
-      // if (prevProps.instructions !== this.props.instructions) {
-      //   // editor.addEventListener('click', () => {
-      //   //   editor.navigateTo(2,0)
-      //   // })
-      //   console.log('this.props.instructions', this.props.instructions)
-      //   editor.setValue(this.props.instructions, -1)
-      //   editor.navigateTo(1, 0)
-      // }
-      console.log('this.props.instructions', this.props.instructions)
       editor.setValue(this.props.instructions, -1)
       editor.navigateTo(1, 0)
     } else {
-      editor.setValue(this.props.code, -1)
-      editor.navigateTo(1, 0)
+      switch (this.props.challengeId) {
+        case 1:
+          console.log('Case 1 switch')
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+          break
+        case 2:
+          console.log('Case 2 switch')
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(16, 0)
+          break
+        case 3:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(16, 0)
+          break
+        case 4:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+          break
+        default:
+          editor.setValue(this.props.code, -1)
+          editor.navigateTo(1, 0)
+      }
     }
-    // if(this.props.result !== prevProps.result){
-    //   console.log("result!")
-    //   if(this.props.result === "You win!"){
-    //     console.log("getting challenge!",this.props.challengeId, typeof this.props.challengeId, Number(this.props.challengeId) + 1 )
-
-    //     this.props.getChallenge(Number(this.props.challengeId) + 1)
-    //   }
-    // }
-
-    //if (prevProps.displayInstructions !== this.props.displayInstructions)
   }
 
   onSubmit() {
@@ -86,24 +135,18 @@ class VimShell extends Component {
     )
     this.props.getResult(
       this.refs.aceEditor.editor.getValue(),
-      this.props.challengeId
+      this.props.challengeId,
+      this.props.maxAnswerLength
     )
   }
 
   onClick() {
-    this.props.updateUser(this.props.userId, this.props.challengePoints)
+    this.props.updateUser(this.props.challengePoints)
     this.props.getChallenge(Number(this.props.challengeId) + 1)
     this.props.clearResult()
   }
 
   render() {
-    // console.log(
-    //   're-rendering',
-    //   'results',
-    //   this.props.result,
-    //   'props',
-    //   this.props
-    // )
     return (
       <div>
         <NavBar score={this.props.score} />
@@ -113,13 +156,10 @@ class VimShell extends Component {
           keyboardHandler="vim"
           ref="aceEditor"
           wrapEnabled={true}
-          // value={!this.props.instructions ? 'LOADING' : this.props.instructions}
         />
         <button type="submit" onClick={this.onSubmit}>
           Run Code
         </button>
-
-        {/* {this.state.result.length ? <VimConsole result={this.state.result}/> : null} */}
         <div className="console">
           <h1>This is result:</h1>
           <p>{this.props.result.message}</p>
@@ -135,8 +175,6 @@ class VimShell extends Component {
   }
 }
 
-//integrate Vim Console with thunk
-
 const mapState = state => {
   return {
     result: state.result,
@@ -144,6 +182,7 @@ const mapState = state => {
     challengePoints: state.challenge.points,
     instructions: state.challenge.instructions,
     code: state.challenge.code,
+    maxAnswerLength: state.challenge.maxAnswerLength,
     displayInstructions: state.challenge.displayInstructions,
     score: state.user.score,
     lastChallengeCompleted: state.user.challengeId,
@@ -152,11 +191,11 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => ({
-  getResult: (codeStr, challengeId) =>
-    dispatch(getResult(codeStr, challengeId)),
+  getResult: (codeStr, challengeId, maxAnswerLength) =>
+    dispatch(getResult(codeStr, challengeId, maxAnswerLength)),
   getChallenge: challengeId => dispatch(getChallenge(challengeId)),
   clearResult: () => dispatch(clearResult()),
-  updateUser: (userId, points) => dispatch(updateUserThunk(userId, points))
+  updateUser: points => dispatch(updateUserThunk(points))
 })
 
 export default connect(mapState, mapDispatch)(VimShell)
