@@ -13,7 +13,6 @@ class VimShell extends Component {
   constructor() {
     super()
     this.onSubmit = this.onSubmit.bind(this)
-    this.onClick = this.onClick.bind(this)
   }
 
   // eslint-disable-next-line complexity
@@ -65,10 +64,7 @@ class VimShell extends Component {
       readOnly: true
     })
 
-    if (this.props.instructions && this.props.displayInstructions) {
-      editor.setValue(this.props.instructions, -1)
-      editor.navigateTo(1, 0)
-    } else if (this.props.code && !this.props.displayInstructions) {
+    if (this.props.code && !this.props.displayInstructions) {
       switch (this.props.challengeId) {
         case 1:
           console.log('Case 1 switch')
@@ -97,10 +93,7 @@ class VimShell extends Component {
 
   componentDidUpdate(prevProps) {
     let editor = this.refs.aceEditor.editor
-    if (this.props.displayInstructions) {
-      editor.setValue(this.props.instructions, -1)
-      editor.navigateTo(1, 0)
-    } else {
+    if (!this.props.displayInstructions) {
       switch (this.props.challengeId) {
         case 1:
           console.log('Case 1 switch')
@@ -139,12 +132,6 @@ class VimShell extends Component {
     )
   }
 
-  onClick() {
-    this.props.updateUser(this.props.challengePoints)
-    this.props.getChallenge(Number(this.props.challengeId) + 1)
-    this.props.clearResult()
-  }
-
   render() {
     return (
       <div>
@@ -154,9 +141,9 @@ class VimShell extends Component {
           keyboardHandler="vim"
           ref="aceEditor"
           wrapEnabled={true}
-          height="450px"
-          width="450px"
-          fontSize="20"
+          height="544px"
+          width="500px"
+          fontSize={15}
         />
         <Fab
           variant="extended"
@@ -167,21 +154,6 @@ class VimShell extends Component {
         >
           Run Code
         </Fab>
-        {/* <button type="submit" onClick={this.onSubmit}>
-          Run Code
-        </button> */}
-
-        {/* {this.state.result.length ? <VimConsole result={this.state.result}/> : null} */}
-        {/* <div className="console">
-          <h1>This is result:</h1>
-          <p>{this.props.result.message}</p>
-          {this.props.result.passed ? (
-            <button type="button" onClick={this.onClick}>
-              {' '}
-              Collect your points and move onto the next challenge{' '}
-            </button>
-          ) : null}
-        </div> */}
       </div>
     )
   }

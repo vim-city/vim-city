@@ -15,7 +15,7 @@ async function seed() {
   const challenge1 = await Challenge.create({
     vimCommand: 'l',
     instructions:
-      '//Welcome to Vim City! Vin is visiting for vacation and is having a very hard time getting around. Help Vin out by following these Vim commands. \n //Vin is a little parched and would like a nice cocktail and some good music before Vin continues their adventures in Vim City. Lex’s Lounge serves up the city’s best cocktails and music. Navigate Vin to Lex’s lounge by using the ‘l’ (lower case L) key which will move Vin to the right!',
+      'Vin is a little parched and would like a nice cocktail and some good music before Vin continues their adventures in Vim City. Lex’s Lounge serves up the city’s best cocktails and music. Navigate Vin to Lex’s lounge by using the ‘l’ (lower case L) key which will move Vin to the right!',
     points: 500,
     code:
       '//YAY! Vin made it to Lex’s Lounge and is ready to order a drink. Vin is not the best at ordering drinks and has seemed to make an error in their order. Can you help Vin fix their bad code? This function should add ice and an umbrella to Vin’s drink order \n function drinksOrder(drink) {return `${drink} with ice and an umbrella`\n',
