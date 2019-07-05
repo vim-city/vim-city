@@ -27,7 +27,7 @@ export default class FgScene extends Phaser.Scene {
     this.load.image('music_store', 'assets/sprites/transparentBLD.png')
     this.load.image('pet_store', 'assets/sprites/transparentBLD.png')
 
-    this.load.image('pause', 'assets/sprites/codingIcon.png')
+    this.load.image('pause', 'assets/sprites/codingIcon-small.png')
   }
 
   createBorders(arr) {
@@ -159,14 +159,17 @@ export default class FgScene extends Phaser.Scene {
       () => this.colliderActivated4
     )
 
+    this.pause = new Pause(this, 400, 300, 'pause').setScale(0.75)
+    this.pause.setVisible(false)
+
     this.enableKeys()
     store.subscribe(() => {
       if (!store.getState().challenge.displayInstructions) {
         this.cursors = {}
-        this.pause = new Pause(this, 400, 300, 'pause')
+        this.pause.setVisible(true)
       } else if (store.getState().challenge.displayInstructions) {
+        this.pause.setVisible(false)
         this.enableKeys()
-        this.pause.visible(false)
       }
     })
   }
