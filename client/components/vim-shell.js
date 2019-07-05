@@ -8,6 +8,16 @@ import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
 import Fab from '@material-ui/core/Fab'
+// import { makeStyles } from '@material-ui/core';
+
+// const useStyles = makeStyles(theme => ({
+//  Fab: {
+//    margin: theme.spacing(1),
+//  },
+//  input: {
+//    display: 'none',
+//  },
+// }));
 
 class VimShell extends Component {
   constructor() {
@@ -133,6 +143,7 @@ class VimShell extends Component {
   }
 
   render() {
+    // const classes = useStyles();
     return (
       <div>
         <AceEditor
@@ -146,9 +157,11 @@ class VimShell extends Component {
           fontSize={15}
         />
         <Fab
+          // className={classes.Fab}
           variant="extended"
           size="medium"
           color="primary"
+          //"#00ffff"
           aria-label="Add"
           onClick={this.onSubmit}
         >

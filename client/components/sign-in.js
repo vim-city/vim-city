@@ -23,7 +23,7 @@ class SignIn extends React.Component {
       <div className="login-container">
         <div className="login-content">
           <div className="vimcity-title">
-            <h1>VIM CITY</h1>
+            <img src="logo-login.png" />
           </div>
           <div className="vim-form">
             <form onSubmit={this.handleSubmit} name="login">
