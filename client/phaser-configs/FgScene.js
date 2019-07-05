@@ -6,147 +6,7 @@ import Building from '../phaser-configs/entities/building'
 import store from '../store'
 import {toggleDisplay} from '../store/challenge'
 import {yellow100} from 'material-ui/styles/colors'
-
-const dummyBorders = [
-  [25, 25],
-  [25, 75],
-  [25, 125],
-  [25, 175],
-  [25, 225],
-  [25, 275],
-  [25, 325],
-  [25, 375],
-  [25, 425],
-  [25, 475],
-  [25, 525],
-  [75, 25],
-  [75, 75],
-  [75, 125],
-  [75, 175],
-  [75, 225],
-  [75, 275],
-  [75, 325],
-  [75, 375],
-  [75, 425],
-  [75, 475],
-  [75, 525],
-  [125, 25],
-  [125, 75],
-  [125, 325],
-  [125, 375],
-  [125, 425],
-  [125, 475],
-  [125, 525],
-  [175, 175],
-  [175, 225],
-  [175, 325],
-  [175, 375],
-  [175, 425],
-  [175, 475],
-  [175, 525],
-  [225, 175],
-  [225, 225],
-  [225, 325],
-  [225, 375],
-  [225, 425],
-  [225, 475],
-  [225, 525],
-  [275, 25],
-  [275, 75],
-  [275, 175],
-  [275, 225],
-  [275, 325],
-  [275, 375],
-  [275, 425],
-  [275, 475],
-  [275, 525],
-  [325, 25],
-  [325, 75],
-  [325, 175],
-  [325, 225],
-  [325, 325],
-  [325, 375],
-  [375, 25],
-  [375, 75],
-  [375, 175],
-  [375, 225],
-  [375, 325],
-  [375, 375],
-  [425, 25],
-  [425, 75],
-  [425, 175],
-  [425, 225],
-  [425, 325],
-  [425, 375],
-  [425, 475],
-  [425, 525],
-  [425, 575],
-  [475, 25],
-  [475, 75],
-  [475, 175],
-  [475, 225],
-  [475, 325],
-  [475, 375],
-  [475, 475],
-  [475, 525],
-  [475, 575],
-  [525, 25],
-  [525, 75],
-  [525, 175],
-  [525, 225],
-  [525, 475],
-  [525, 525],
-  [525, 575],
-  [575, 25],
-  [575, 75],
-  [575, 175],
-  [575, 225],
-  [575, 275],
-  [575, 475],
-  [575, 525],
-  [575, 575],
-  [625, 25],
-  [625, 75],
-  [625, 175],
-  [625, 225],
-  [625, 275],
-  [625, 475],
-  [625, 525],
-  [625, 575],
-  [675, 25],
-  [675, 75],
-  [675, 175],
-  [675, 225],
-  [675, 275],
-  [675, 325],
-  [675, 375],
-  [675, 425],
-  [675, 475],
-  [675, 525],
-  [675, 575],
-  [725, 25],
-  [725, 75],
-  [725, 175],
-  [725, 225],
-  [725, 275],
-  [725, 475],
-  [725, 525],
-  [725, 575],
-  [775, 25],
-  [775, 75],
-  [775, 475],
-  [775, 525],
-  [775, 575]
-]
-
-// const buildingArr = [
-//   [375, 525],
-//   [625, 375],
-//   [175, 25],
-//   [775, 400]
-// ]
-
-// const buildingType = ['building1', 'donut_shop','music_store', 'pet_store']
+import {dummyBorders} from './level0vars'
 
 export default class FgScene extends Phaser.Scene {
   constructor() {
@@ -159,13 +19,12 @@ export default class FgScene extends Phaser.Scene {
       frameWidth: 340,
       frameHeight: 460
     })
-    this.load.image('ground', 'assets/sprites/ground.png')
 
-    this.load.image('border', 'assets/sprites/grass3.png')
-    this.load.image('building1', 'assets/sprites/building.png')
-    this.load.image('donut_shop', 'assets/sprites/donutShop.png')
-    this.load.image('music_store', 'assets/sprites/music.png')
-    this.load.image('pet_store', 'assets/sprites/petStore.png')
+    this.load.image('border', 'assets/sprites/transparent.png')
+    this.load.image('building1', 'assets/sprites/transparentBLD.png')
+    this.load.image('donut_shop', 'assets/sprites/transparentBLD.png')
+    this.load.image('music_store', 'assets/sprites/transparentBLD.png')
+    this.load.image('pet_store', 'assets/sprites/transparentBLD.png')
   }
 
   createBorders(arr) {
@@ -182,45 +41,33 @@ export default class FgScene extends Phaser.Scene {
     this.borderGroup.enable = true
   }
 
-  // createBuilding(x, y, building) {
-  //   this.buildingGroup.create(x, y, building)
-
-  //   this.buildingGroup.immovable = true
-  //   this.buildingGroup.moves = false
-  //   this.buildingGroup.enable = true
-  // }
   createGroups() {
-    // this.groundGroup = this.physics.add.staticGroup({classType: Ground})
-
-    // this.createGround(160, 540)
-    // this.createGround(600, 540)
-
     this.borderGroup = this.physics.add.staticGroup({classType: Border})
 
     //building1
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    this.buildingGroup.create(375, 525, 'building1').setScale(0.5)
+    this.buildingGroup.create(280, 520, 'building1')
     this.buildingGroup.immovable = true
     this.buildingGroup.moves = false
     this.buildingGroup.enable = true
 
     //building2
     this.secondBuilding = this.physics.add.staticGroup({classType: Building})
-    this.secondBuilding.create(625, 375, 'donut_shop')
+    this.secondBuilding.create(460, 380, 'donut_shop')
     this.secondBuilding.immovable = true
     this.secondBuilding.moves = false
     this.secondBuilding.enable = true
 
     //building3
     this.thirdBuilding = this.physics.add.staticGroup({classType: Building})
-    this.thirdBuilding.create(175, 25, 'music_store')
+    this.thirdBuilding.create(140, 160, 'music_store')
     this.thirdBuilding.immovable = true
     this.thirdBuilding.moves = false
     this.thirdBuilding.enable = true
 
     //building4
     this.fourthBuilding = this.physics.add.staticGroup({classType: Building})
-    this.fourthBuilding.create(775, 400, 'pet_store')
+    this.fourthBuilding.create(700, 220, 'pet_store')
     this.fourthBuilding.immovable = true
     this.fourthBuilding.moves = false
     this.fourthBuilding.enable = true
@@ -240,22 +87,25 @@ export default class FgScene extends Phaser.Scene {
   }
 
   create() {
-    console.log('THIS IS state', store.getState())
     this.createGroups()
     // this.building = new Building(this, 50, 200, 'dummyTarget').setScale(0.25)
     // this.player = new Player(this, 25, 575, 'josh').setScale(0.1)
     this.player = new Player(
       this,
-      store.getState().challenge.startingCoordinates[0],
-      store.getState().challenge.startingCoordinates[1],
+      (store.getState().challenge.startingCoordinates[0] = 20),
+      (store.getState().challenge.startingCoordinates[1] = 520),
       'josh'
-    ).setScale(0.1)
-    // this.physics.add.collider(this.player, this.groundGroup)
+    ).setScale(0.05)
     this.physics.add.collider(this.player, this.borderGroup)
     this.physics.add.collider(this.borderGroup, this.player)
 
+    this.colliderActivated1 = store.getState().challenge.activeColliders[0]
+    this.colliderActivated2 = store.getState().challenge.activeColliders[1]
+    this.colliderActivated3 = store.getState().challenge.activeColliders[2]
+    this.colliderActivated4 = store.getState().challenge.activeColliders[3]
+
     //building1
-    this.colliderActivated1 = true
+
     this.physics.add.overlap(
       this.buildingGroup,
       this.player,
@@ -266,18 +116,9 @@ export default class FgScene extends Phaser.Scene {
       },
       () => this.colliderActivated1
     )
-    this.physics.add.overlap(this.player, this.buildingGroup)
-    this.enableKeys()
-    store.subscribe(() => {
-      if (!store.getState().challenge.displayInstructions) {
-        this.cursors = {}
-      } else if (store.getState().challenge.displayInstructions) {
-        this.enableKeys()
-      }
-    })
 
     //building2
-    this.colliderActivated2 = true
+
     this.physics.add.overlap(
       this.secondBuilding,
       this.player,
@@ -288,18 +129,9 @@ export default class FgScene extends Phaser.Scene {
       },
       () => this.colliderActivated2
     )
-    this.physics.add.overlap(this.player, this.secondBuilding)
-    this.enableKeys()
-    store.subscribe(() => {
-      if (!store.getState().challenge.displayInstructions) {
-        this.cursors = {}
-      } else if (store.getState().challenge.displayInstructions) {
-        this.enableKeys()
-      }
-    })
 
     //building3
-    this.colliderActivated3 = true
+
     this.physics.add.overlap(
       this.thirdBuilding,
       this.player,
@@ -310,18 +142,9 @@ export default class FgScene extends Phaser.Scene {
       },
       () => this.colliderActivated3
     )
-    this.physics.add.overlap(this.player, this.thirdBuilding)
-    this.enableKeys()
-    store.subscribe(() => {
-      if (!store.getState().challenge.displayInstructions) {
-        this.cursors = {}
-      } else if (store.getState().challenge.displayInstructions) {
-        this.enableKeys()
-      }
-    })
 
     //building4
-    this.colliderActivated4 = true
+
     this.physics.add.overlap(
       this.fourthBuilding,
       this.player,
@@ -332,7 +155,7 @@ export default class FgScene extends Phaser.Scene {
       },
       () => this.colliderActivated4
     )
-    this.physics.add.overlap(this.player, this.fourthBuilding)
+
     this.enableKeys()
     store.subscribe(() => {
       if (!store.getState().challenge.displayInstructions) {
