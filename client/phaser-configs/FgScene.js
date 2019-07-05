@@ -1,6 +1,5 @@
 import Phaser from 'phaser'
 import Player from '../phaser-configs/entities/player'
-import Ground from '../phaser-configs/entities/ground'
 import Border from '../phaser-configs/entities/border'
 import Building from '../phaser-configs/entities/building'
 import Pause from '../phaser-configs/entities/pause'
@@ -16,10 +15,7 @@ export default class FgScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.spritesheet('josh', 'assets/spriteSheets/josh.png', {
-      frameWidth: 340,
-      frameHeight: 460
-    })
+    this.load.image('josh', 'assets/sprites/redPanda.png')
 
     this.load.image('border', 'assets/sprites/transparent.png')
     this.load.image('building1', 'assets/sprites/transparentBLD.png')
@@ -98,7 +94,7 @@ export default class FgScene extends Phaser.Scene {
       store.getState().challenge.startingCoordinates[0],
       store.getState().challenge.startingCoordinates[1],
       'josh'
-    ).setScale(0.05)
+    ).setScale(0.1)
     this.physics.add.collider(this.player, this.borderGroup)
     this.physics.add.collider(this.borderGroup, this.player)
 

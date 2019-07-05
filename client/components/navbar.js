@@ -8,7 +8,7 @@ const NavBar = props => {
       <img src="logo.png" />
       <div className="vim-header-right">
         <div className="vim-header-child">
-          <p>Money on your Metrocard: ${props.score}</p>
+          <p>Score: {props.score}</p>
         </div>
         <div className="vim-header-child">
           <a
