@@ -11,15 +11,28 @@ const initialState = {
 const displayResult = result => ({type: DISPLAY_RESULT, result})
 export const clearResult = () => ({type: CLEAR_RESULT})
 
-export const getResult = (codeStr, challengeId) => async dispatch => {
+export const getResult = (
+  codeStr,
+  challengeId,
+  maxAnswerLength
+) => async dispatch => {
   try {
-    const {data} = await axios.put('http://0.0.0.0:49160/eval', {
-      userInputStr: codeStr,
-      challengeId: challengeId
-    })
-    // const result = String(data.message)
-    // console.log('this is result as string:', result)
-    dispatch(displayResult(data))
+    if (codeStr.length > maxAnswerLength) {
+      dispatch(
+        displayResult({
+          passed: false,
+          message: 'Sorry, but your answer was much longer than the solution.'
+        })
+      )
+    } else {
+      const {data} = await axios.put('http://localhost:49160/eval', {
+        userInputStr: codeStr,
+        challengeId: challengeId
+      })
+      // const result = String(data.message)
+      // console.log('this is result as string:', result)
+      dispatch(displayResult(data))
+    }
   } catch (error) {
     console.log('error in vim-shell', error)
   }
