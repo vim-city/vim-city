@@ -34,7 +34,7 @@ class Dialogue extends React.Component {
             ) : this.props.instructions && this.props.displayInstructions ? (
               <div>{this.props.instructions}</div>
             ) : (
-              'UH-OH! Vin ran into a problem. In order to continue his journey, Vin has to fix his bad code practices. Help him out in the text editor below.'
+              'UH-OH! Vin ran into a problem. In order to continue their journey, Vin has to fix their bad code practices. Help them out in the text editor below.'
             )}
           </div>
           <div className="triangle-dialogue" />
