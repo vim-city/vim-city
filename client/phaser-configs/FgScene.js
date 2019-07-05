@@ -113,8 +113,13 @@ export default class FgScene extends Phaser.Scene {
     this.physics.add.collider(this.player, this.borderGroup)
     this.physics.add.collider(this.borderGroup, this.player)
 
+    this.colliderActivated1 = store.getState().challenge.activeColliders[0]
+    this.colliderActivated2 = store.getState().challenge.activeColliders[1]
+    this.colliderActivated3 = store.getState().challenge.activeColliders[2]
+    this.colliderActivated4 = store.getState().challenge.activeColliders[3]
+
     //building1
-    this.colliderActivated1 = true
+
     this.physics.add.overlap(
       this.buildingGroup,
       this.player,
@@ -136,7 +141,7 @@ export default class FgScene extends Phaser.Scene {
     })
 
     //building2
-    this.colliderActivated2 = true
+
     this.physics.add.overlap(
       this.secondBuilding,
       this.player,
@@ -158,7 +163,7 @@ export default class FgScene extends Phaser.Scene {
     })
 
     //building3
-    this.colliderActivated3 = true
+
     this.physics.add.overlap(
       this.thirdBuilding,
       this.player,
@@ -180,7 +185,7 @@ export default class FgScene extends Phaser.Scene {
     })
 
     //building4
-    this.colliderActivated4 = true
+
     this.physics.add.overlap(
       this.fourthBuilding,
       this.player,
