@@ -41,19 +41,7 @@ export default class FgScene extends Phaser.Scene {
     this.borderGroup.enable = true
   }
 
-  // createBuilding(x, y, building) {
-  //   this.buildingGroup.create(x, y, building)
-
-  //   this.buildingGroup.immovable = true
-  //   this.buildingGroup.moves = false
-  //   this.buildingGroup.enable = true
-  // }
   createGroups() {
-    // this.groundGroup = this.physics.add.staticGroup({classType: Ground})
-
-    // this.createGround(160, 540)
-    // this.createGround(600, 540)
-
     this.borderGroup = this.physics.add.staticGroup({classType: Border})
 
     //building1
@@ -111,14 +99,10 @@ export default class FgScene extends Phaser.Scene {
     this.physics.add.collider(this.player, this.borderGroup)
     this.physics.add.collider(this.borderGroup, this.player)
 
-    this.colliderActivated1 =
-      store.getState().challenge.activeColliders[0] || true
-    this.colliderActivated2 =
-      store.getState().challenge.activeColliders[1] || true
-    this.colliderActivated3 =
-      store.getState().challenge.activeColliders[2] || true
-    this.colliderActivated4 =
-      store.getState().challenge.activeColliders[3] || true
+    this.colliderActivated1 = store.getState().challenge.activeColliders[0]
+    this.colliderActivated2 = store.getState().challenge.activeColliders[1]
+    this.colliderActivated3 = store.getState().challenge.activeColliders[2]
+    this.colliderActivated4 = store.getState().challenge.activeColliders[3]
 
     //building1
 
@@ -132,15 +116,6 @@ export default class FgScene extends Phaser.Scene {
       },
       () => this.colliderActivated1
     )
-    this.physics.add.overlap(this.player, this.buildingGroup)
-    this.enableKeys()
-    store.subscribe(() => {
-      if (!store.getState().challenge.displayInstructions) {
-        this.cursors = {}
-      } else if (store.getState().challenge.displayInstructions) {
-        this.enableKeys()
-      }
-    })
 
     //building2
 
@@ -154,15 +129,6 @@ export default class FgScene extends Phaser.Scene {
       },
       () => this.colliderActivated2
     )
-    this.physics.add.overlap(this.player, this.secondBuilding)
-    this.enableKeys()
-    store.subscribe(() => {
-      if (!store.getState().challenge.displayInstructions) {
-        this.cursors = {}
-      } else if (store.getState().challenge.displayInstructions) {
-        this.enableKeys()
-      }
-    })
 
     //building3
 
@@ -176,15 +142,6 @@ export default class FgScene extends Phaser.Scene {
       },
       () => this.colliderActivated3
     )
-    this.physics.add.overlap(this.player, this.thirdBuilding)
-    this.enableKeys()
-    store.subscribe(() => {
-      if (!store.getState().challenge.displayInstructions) {
-        this.cursors = {}
-      } else if (store.getState().challenge.displayInstructions) {
-        this.enableKeys()
-      }
-    })
 
     //building4
 
@@ -198,7 +155,7 @@ export default class FgScene extends Phaser.Scene {
       },
       () => this.colliderActivated4
     )
-    this.physics.add.overlap(this.player, this.fourthBuilding)
+
     this.enableKeys()
     store.subscribe(() => {
       if (!store.getState().challenge.displayInstructions) {

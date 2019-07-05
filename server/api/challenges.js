@@ -13,7 +13,8 @@ router.get('/:challengeId', async (req, res, next) => {
         'code',
         'points',
         'level',
-        'startingCoordinates'
+        'startingCoordinates',
+        'activeColliders'
       ]
     })
     res.json(challenge)

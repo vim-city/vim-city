@@ -23,7 +23,8 @@ const Challenge = db.define('challenge', {
     type: Sequelize.ARRAY(Sequelize.INTEGER)
   },
   activeColliders: {
-    type: Sequelize.ARRAY(Sequelize.BOOLEAN)
+    type: Sequelize.ARRAY(Sequelize.BOOLEAN),
+    defaultValue: [true, true, true, true]
   }
 })
 
