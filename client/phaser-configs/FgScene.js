@@ -99,24 +99,27 @@ export default class FgScene extends Phaser.Scene {
   }
 
   create() {
-    console.log('THIS IS state', store.getState())
     this.createGroups()
     // this.building = new Building(this, 50, 200, 'dummyTarget').setScale(0.25)
     // this.player = new Player(this, 25, 575, 'josh').setScale(0.1)
     this.player = new Player(
       this,
-      store.getState().challenge.startingCoordinates[0],
-      store.getState().challenge.startingCoordinates[1],
+      store.getState().challenge.startingCoordinates[0] || 20,
+      store.getState().challenge.startingCoordinates[1] || 520,
       'josh'
     ).setScale(0.1)
     // this.physics.add.collider(this.player, this.groundGroup)
     this.physics.add.collider(this.player, this.borderGroup)
     this.physics.add.collider(this.borderGroup, this.player)
 
-    this.colliderActivated1 = store.getState().challenge.activeColliders[0]
-    this.colliderActivated2 = store.getState().challenge.activeColliders[1]
-    this.colliderActivated3 = store.getState().challenge.activeColliders[2]
-    this.colliderActivated4 = store.getState().challenge.activeColliders[3]
+    this.colliderActivated1 =
+      store.getState().challenge.activeColliders[0] || true
+    this.colliderActivated2 =
+      store.getState().challenge.activeColliders[1] || true
+    this.colliderActivated3 =
+      store.getState().challenge.activeColliders[2] || true
+    this.colliderActivated4 =
+      store.getState().challenge.activeColliders[3] || true
 
     //building1
 

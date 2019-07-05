@@ -65,3 +65,20 @@ if (module === require.main) {
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed
+
+//starting Coordinates & active Colliders
+// 1
+// startingCoordinates: [280, 520],
+// activeColliders: [false, true, true, true]
+
+// 2
+// startingCoordinates: [460, 380],
+// activeColliders: [false, false, true, true]
+
+// 3
+// startingCoordinates: [140, 160],
+// activeColliders: [false, false, false, true]
+
+// 4
+// startingCoordinates: [700, 220],
+// activeColliders: [false, false, false, false]
