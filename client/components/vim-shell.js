@@ -25,6 +25,8 @@ class VimShell extends Component {
     await this.props.getChallenge(lastChallengeCompleted + 1)
     let editor = this.refs.aceEditor.editor
 
+    //move to mouse click helper
+
     editor.addEventListener('mousedown', e => {
       e.stop()
     })
@@ -83,7 +85,7 @@ class VimShell extends Component {
           break
         case 3:
           editor.setValue(this.props.code, -1)
-          editor.navigateTo(16, 0)
+          editor.navigateTo(3, 100)
           break
         case 4:
           editor.setValue(this.props.code, -1)
@@ -115,7 +117,7 @@ class VimShell extends Component {
           break
         case 3:
           editor.setValue(this.props.code, -1)
-          editor.navigateTo(16, 0)
+          editor.navigateTo(3, 100)
           break
         case 4:
           editor.setValue(this.props.code, -1)

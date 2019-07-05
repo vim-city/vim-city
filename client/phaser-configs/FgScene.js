@@ -92,8 +92,8 @@ export default class FgScene extends Phaser.Scene {
     // this.player = new Player(this, 25, 575, 'josh').setScale(0.1)
     this.player = new Player(
       this,
-      (store.getState().challenge.startingCoordinates[0] = 20),
-      (store.getState().challenge.startingCoordinates[1] = 520),
+      store.getState().challenge.startingCoordinates[0],
+      store.getState().challenge.startingCoordinates[1],
       'josh'
     ).setScale(0.05)
     this.physics.add.collider(this.player, this.borderGroup)
