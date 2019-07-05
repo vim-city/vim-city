@@ -199,3 +199,16 @@ form {
   transform: scaleX(-1);
   margin-left: 30px;
 }
+
+.buttonContainer {
+  background-color: lightblue;
+  position: fixed;
+  right: 15%;
+  left: 15%;
+  top: 40%;
+}
+
+.modal.modal--is-open {
+  display: block;
+  border: 1px solid green;
+}
