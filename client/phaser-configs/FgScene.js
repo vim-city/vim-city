@@ -3,6 +3,7 @@ import Player from '../phaser-configs/entities/player'
 import Ground from '../phaser-configs/entities/ground'
 import Border from '../phaser-configs/entities/border'
 import Building from '../phaser-configs/entities/building'
+import Pause from '../phaser-configs/entities/pause'
 import store from '../store'
 import {toggleDisplay} from '../store/challenge'
 import {yellow100} from 'material-ui/styles/colors'
@@ -25,6 +26,8 @@ export default class FgScene extends Phaser.Scene {
     this.load.image('donut_shop', 'assets/sprites/transparentBLD.png')
     this.load.image('music_store', 'assets/sprites/transparentBLD.png')
     this.load.image('pet_store', 'assets/sprites/transparentBLD.png')
+
+    this.load.image('pause', 'assets/sprites/codingIcon-small.png')
   }
 
   createBorders(arr) {
@@ -156,11 +159,16 @@ export default class FgScene extends Phaser.Scene {
       () => this.colliderActivated4
     )
 
+    this.pause = new Pause(this, 400, 300, 'pause').setScale(0.75)
+    this.pause.setVisible(false)
+
     this.enableKeys()
     store.subscribe(() => {
       if (!store.getState().challenge.displayInstructions) {
         this.cursors = {}
+        this.pause.setVisible(true)
       } else if (store.getState().challenge.displayInstructions) {
+        this.pause.setVisible(false)
         this.enableKeys()
       }
     })
@@ -170,5 +178,3 @@ export default class FgScene extends Phaser.Scene {
     this.player.update(this.cursors)
   }
 }
-
-//http://www.html5gamedevs.com/topic/37935-collider-in-group-does-not-work/
