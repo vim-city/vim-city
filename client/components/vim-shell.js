@@ -4,19 +4,15 @@ import {connect} from 'react-redux'
 import {getResult, clearResult} from '../store/result'
 import {getChallenge} from '../store/challenge'
 import {updateUserThunk} from '../store/user'
-import NavBar from './navbar'
-// import {VimConsole} from './vim-console'
-// import axios from 'axios'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
-import user from '../store/user'
+import Fab from '@material-ui/core/Fab'
 
 class VimShell extends Component {
   constructor() {
     super()
     this.onSubmit = this.onSubmit.bind(this)
-    this.onClick = this.onClick.bind(this)
   }
 
   // eslint-disable-next-line complexity
@@ -68,10 +64,7 @@ class VimShell extends Component {
       readOnly: true
     })
 
-    if (this.props.instructions && this.props.displayInstructions) {
-      editor.setValue(this.props.instructions, -1)
-      editor.navigateTo(1, 0)
-    } else if (this.props.code && !this.props.displayInstructions) {
+    if (this.props.code && !this.props.displayInstructions) {
       switch (this.props.challengeId) {
         case 1:
           console.log('Case 1 switch')
@@ -100,10 +93,7 @@ class VimShell extends Component {
 
   componentDidUpdate(prevProps) {
     let editor = this.refs.aceEditor.editor
-    if (this.props.displayInstructions) {
-      editor.setValue(this.props.instructions, -1)
-      editor.navigateTo(1, 0)
-    } else {
+    if (!this.props.displayInstructions) {
       switch (this.props.challengeId) {
         case 1:
           console.log('Case 1 switch')
@@ -142,36 +132,28 @@ class VimShell extends Component {
     )
   }
 
-  onClick() {
-    this.props.updateUser(this.props.challengePoints)
-    this.props.getChallenge(Number(this.props.challengeId) + 1)
-    this.props.clearResult()
-  }
-
   render() {
     return (
       <div>
-        <NavBar score={this.props.score} />
         <AceEditor
           mode="javascript"
-          theme="monokai"
+          theme="kuroir"
           keyboardHandler="vim"
           ref="aceEditor"
           wrapEnabled={true}
+          height="544px"
+          width="500px"
+          fontSize={15}
         />
-        <button type="submit" onClick={this.onSubmit}>
+        <Fab
+          variant="extended"
+          size="medium"
+          color="primary"
+          aria-label="Add"
+          onClick={this.onSubmit}
+        >
           Run Code
-        </button>
-        <div className="console">
-          <h1>This is result:</h1>
-          <p>{this.props.result.message}</p>
-          {this.props.result.passed ? (
-            <button type="button" onClick={this.onClick}>
-              {' '}
-              Collect your points and move onto the next challenge{' '}
-            </button>
-          ) : null}
-        </div>
+        </Fab>
       </div>
     )
   }

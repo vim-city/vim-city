@@ -3,12 +3,12 @@ import React from 'react'
 const Footer = () => {
   return (
     <div className="footer-parent">
-      <div>H: moves to left</div>
-      <div>L: moves to right</div>
-      <div>J: moves up</div>
-      <div>K: moves down</div>
+      <div>h: moves to left</div>
+      <div>l: moves to right</div>
+      <div>j: moves dowm</div>
+      <div>k: moves up</div>
       <div>esc: enables VIM commands</div>
-      <div>I: enables regular commands</div>
+      <div>i: enables regular typing</div>
     </div>
   )
 }
