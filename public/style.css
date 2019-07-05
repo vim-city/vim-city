@@ -200,15 +200,30 @@ form {
   margin-left: 30px;
 }
 
+/* Modal Style */
+
 .buttonContainer {
-  background-color: lightblue;
+  background-color: rgb(211, 233, 240);
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 25px;
   position: fixed;
-  right: 15%;
-  left: 15%;
-  top: 40%;
+  right: 35%;
+  left: 35%;
+  top: 35%;
 }
 
 .modal.modal--is-open {
   display: block;
-  border: 1px solid green;
+  /* border: 1px solid green; */
+}
+
+.welcome-text {
+  padding: 25px;
+}
+
+.welcome-button {
+  width: 70px;
+  height: 30px;
 }

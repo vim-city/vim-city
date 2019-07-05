@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {toggleClose} from '../store/modal'
+import Zoom from 'react-reveal/Zoom'
 
 class Modal extends React.Component {
   constructor(props) {
@@ -32,31 +33,47 @@ class Modal extends React.Component {
   }
   render() {
     return (
-      <div className="buttonContainer">
-        <div>
-          {this.state.isModalOpen === true ? (
-            <div>
-              <div
-                className={this.openModal ? 'modal modal--is-open' : 'modal'}
-              >
-                <button type="button" onClick={this.closeModal}>
-                  Start Playing!
-                </button>
+      <Zoom left>
+        <div className="buttonContainer">
+          <div>
+            {this.state.isModalOpen === true ? (
+              <div>
+                <div
+                  className={this.openModal ? 'modal modal--is-open' : 'modal'}
+                >
+                  <button
+                    className="welcome-button"
+                    type="button"
+                    onClick={this.closeModal}
+                  >
+                    Start Playing!
+                  </button>
 
-                <p>
-                  Vin is visiting for vacation and is having a very hard time
-                  getting around. Help Vin out by following these Vim
-                  commands.Vim has two mode . 1. Insert mode (Where you can just
-                  type like normal text editor. Press i for insert mode) 2.
-                  Command mode (Where you give commands to the editor to get
-                  things done . Press ESC for command mode) THESE INSTRUCTIONS
-                  CAN BE FOUND AT THE BOTTOM OF THE SCREEN
-                </p>
+                  <div className="welcome-text">
+                    <p>
+                      Vin is visiting for vacation and is having a very hard
+                      time getting around. Help Vin out by following these Vim
+                      commands.Vim has two modes:
+                    </p>
+                    <p>
+                      1. Insert mode: where you can just type like normal text
+                      editor. (Press i for insert mode)
+                    </p>
+                    <p>
+                      2. Command mode: where you give commands to the editor to
+                      get things done. (Press ESC for command mode)
+                    </p>
+                    <b>
+                      THESE INSTRUCTIONS CAN BE FOUND AT THE BOTTOM OF THE
+                      SCREEN
+                    </b>
+                  </div>
+                </div>
               </div>
-            </div>
-          ) : null}
+            ) : null}
+          </div>
         </div>
-      </div>
+      </Zoom>
     )
   }
 }
