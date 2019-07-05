@@ -77,3 +77,13 @@ form {
   align-items: center;
   background-color: rgb(205, 238, 155);
 }
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.modal.modal--is-open {
+  display: block;
+  border: 1px solid green;
+}
