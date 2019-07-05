@@ -79,8 +79,11 @@ form {
 }
 
 .buttonContainer {
-  display: flex;
-  justify-content: center;
+  background-color: lightblue;
+  position: fixed;
+  right: 15%;
+  left: 15%;
+  top: 40%;
 }
 
 .modal.modal--is-open {
