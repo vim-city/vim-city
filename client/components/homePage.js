@@ -8,7 +8,6 @@ import Dialogue from './dialogue'
 
 import Modal from './modal'
 
-
 export default class HomePage extends React.Component {
   constructor() {
     super()
@@ -19,15 +18,15 @@ export default class HomePage extends React.Component {
         <div className="vim-navbar">
           <NavBar />
         </div>
-        <div className="vim-bubble-text">
+        {/* <div className="vim-bubble-text">
           <Dialogue />
-        </div>
+        </div> */}
         <div className="container">
-          <div className="vimWindow">
-            <VimShell />
-          </div>
           <div className="gameWindow">
             <GameWindow />
+          </div>
+          <div className="vimWindow">
+            <VimShell />
           </div>
         </div>
         <div>

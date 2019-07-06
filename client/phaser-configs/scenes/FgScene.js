@@ -1,12 +1,12 @@
 import Phaser from 'phaser'
-import Player from '../phaser-configs/entities/player'
-import Border from '../phaser-configs/entities/border'
-import Building from '../phaser-configs/entities/building'
-import Pause from '../phaser-configs/entities/pause'
-import store from '../store'
-import {toggleDisplay} from '../store/challenge'
+import Player from '../entities/player'
+import Border from '../entities/border'
+import Building from '../entities/building'
+import Pause from '../entities/pause'
+import store from '../../store'
+import {toggleDisplay} from '../../store/challenge'
 import {yellow100} from 'material-ui/styles/colors'
-import {dummyBorders} from './level0vars'
+import {dummyBorders} from '../level0vars'
 
 export default class FgScene extends Phaser.Scene {
   constructor() {
@@ -161,11 +161,8 @@ export default class FgScene extends Phaser.Scene {
     this.enableKeys()
     store.subscribe(() => {
       if (!store.getState().challenge.displayInstructions) {
-        this.cursors = {}
-        this.pause.setVisible(true)
-      } else if (store.getState().challenge.displayInstructions) {
-        this.pause.setVisible(false)
-        this.enableKeys()
+        this.scene.sleep('MainScene')
+        this.scene.wake('DialogueScene')
       }
     })
   }
