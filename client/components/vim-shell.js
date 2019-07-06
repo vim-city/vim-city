@@ -8,21 +8,23 @@ import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
 import Fab from '@material-ui/core/Fab'
-// import { makeStyles } from '@material-ui/core';
+import red from '@material-ui/core/colors/red'
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 
-// const useStyles = makeStyles(theme => ({
-//  Fab: {
-//    margin: theme.spacing(1),
-//  },
-//  input: {
-//    display: 'none',
-//  },
-// }));
+const redTheme = createMuiTheme({
+  palette: {
+    primary: red,
+    secondary: {
+      main: '#ef5350'
+    }
+  }
+})
 
 class VimShell extends Component {
   constructor() {
     super()
     this.onSubmit = this.onSubmit.bind(this)
+    this.onReset = this.onReset.bind(this)
   }
 
   // eslint-disable-next-line complexity
@@ -142,10 +144,38 @@ class VimShell extends Component {
     )
   }
 
+  onReset() {
+    let editor = this.refs.aceEditor.editor
+    editor.setValue(this.props.code, -1)
+    editor.navigateTo(1, 0)
+  }
   render() {
-    // const classes = useStyles();
     return (
       <div>
+        <Fab
+          // className={classes.Fab}
+          variant="extended"
+          size="medium"
+          color="secondary"
+          //"#00ffff"
+          aria-label="Add"
+          onClick={this.onSubmit}
+        >
+          Run Code
+        </Fab>
+        <MuiThemeProvider theme={redTheme}>
+          <Fab
+            // className={classes.Fab}
+            variant="extended"
+            size="medium"
+            color="secondary"
+            //"#00ffff"
+            aria-label="Add"
+            onClick={this.onReset}
+          >
+            Reset
+          </Fab>
+        </MuiThemeProvider>
         <AceEditor
           mode="javascript"
           theme="kuroir"
@@ -156,17 +186,6 @@ class VimShell extends Component {
           width="500px"
           fontSize={15}
         />
-        <Fab
-          // className={classes.Fab}
-          variant="extended"
-          size="medium"
-          color="primary"
-          //"#00ffff"
-          aria-label="Add"
-          onClick={this.onSubmit}
-        >
-          Run Code
-        </Fab>
       </div>
     )
   }
