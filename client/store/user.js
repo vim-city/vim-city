@@ -11,7 +11,9 @@ const UPDATE_USER = 'UPDATE_USER'
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = {
+  loading: true
+}
 
 /**
  * ACTION CREATORS
@@ -73,7 +75,7 @@ export const updateUserThunk = points => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return {...state, ...action.user, loading: false}
     case UPDATE_USER:
       return action.user
     case REMOVE_USER:
