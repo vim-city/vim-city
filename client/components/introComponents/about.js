@@ -32,6 +32,12 @@ const About = () => {
         <a href="https://github.com/ssw2114">Stephanie Wu</a>
       </li>
       <p>Your mouseless journey through Vim City begins now...</p>
+
+      <div className="aboutProgress">
+        <h2>HIT THE "ESC" KEY</h2>
+        <h2>to move forward and go into</h2>
+        <h2>COMMAND MODE</h2>
+      </div>
     </div>
   )
 }

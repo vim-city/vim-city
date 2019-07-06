@@ -3,6 +3,8 @@ import NavBar from '../navbar'
 import ProgressBar from '../progressBar'
 import About from './about'
 import GameIntro from './gameIntro'
+import ConsoleIntro from './editorIntro'
+import {Redirect} from 'react-router-dom'
 
 export default class IntroPage extends React.Component {
   constructor() {
@@ -14,16 +16,16 @@ export default class IntroPage extends React.Component {
 
   componentDidMount() {
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' || e.key === 'i') {
         this.setState({
           currentStep: this.state.currentStep + 1
         })
       }
     })
   }
-  componentDidUnmount() {
+  componentWillUnmount() {
     document.removeEventListener('keydown', e => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' || e.key === 'i') {
         this.setState({
           currentStep: this.state.currentStep + 1
         })
@@ -37,16 +39,24 @@ export default class IntroPage extends React.Component {
         <div className="vim-navbar">
           <NavBar />
         </div>
-        <ProgressBar currentStep={this.currentStep} />
+        <ProgressBar currentStep={this.state.currentStep} />
         {this.state.currentStep === 0 && <About />}
         {this.state.currentStep === 1 && <GameIntro />}
-        {/* {this.state.currentStep === 2 && <X/>} */}
+        {this.state.currentStep === 2 && <ConsoleIntro />}
+        {this.state.currentStep === 3 && <Redirect to="/" />}
 
-        <div className="aboutProgress">
-          <h2>HIT THE "ESC" KEY</h2>
-          <h2>to move forward and go into</h2>
-          <h2>COMMAND MODE</h2>
-        </div>
+        {this.state.currentStep !== 0 && (
+          <button
+            type="button"
+            onClick={() => {
+              this.setState({
+                currentStep: this.state.currentStep - 1
+              })
+            }}
+          >
+            Wait! Take me a step back.
+          </button>
+        )}
       </div>
     )
   }
