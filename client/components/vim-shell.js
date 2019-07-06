@@ -8,6 +8,7 @@ import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
 import Fab from '@material-ui/core/Fab'
+import inputHelper from './vim-shell-input-helper'
 // import { makeStyles } from '@material-ui/core';
 
 // const useStyles = makeStyles(theme => ({
@@ -28,67 +29,24 @@ class VimShell extends Component {
   // eslint-disable-next-line complexity
   async componentDidMount() {
     let lastChallengeCompleted = this.props.lastChallengeCompleted || 0
-    await this.props.getChallenge(lastChallengeCompleted + 1)
+    if (lastChallengeCompleted <= 3) {
+      await this.props.getChallenge(lastChallengeCompleted + 1)
+    }
     let editor = this.refs.aceEditor.editor
-
-    //move to mouse click helper
-
-    editor.addEventListener('mousedown', e => {
-      e.stop()
-    })
-    editor.addEventListener('click', e => {
-      e.stop()
-    })
-    editor.addEventListener('mouseup', e => {
-      e.stop()
-    })
-    editor.addEventListener('dblclick', e => {
-      e.stop()
-    })
-    editor.addEventListener('tripleclick', e => {
-      e.stop()
-    })
-    editor.addEventListener('quadclick', e => {
-      e.stop()
-    })
-
-    editor.commands.addCommand({
-      name: 'remove right',
-      bindKey: {win: 'Right', mac: 'Right'},
-      exec: editor => 1
-    })
-    editor.commands.addCommand({
-      name: 'remove left',
-      bindKey: {win: 'Left', mac: 'Left'},
-      exec: editor => 1
-    })
-    editor.commands.addCommand({
-      name: 'remove up',
-      bindKey: {win: 'Up', mac: 'Up'},
-      exec: editor => 1
-    })
-    editor.commands.addCommand({
-      name: 'remove down',
-      bindKey: {win: 'Down', mac: 'Down'},
-      exec: editor => 1,
-      readOnly: true
-    })
-
+    inputHelper(editor)
     if (this.props.code && !this.props.displayInstructions) {
       switch (this.props.challengeId) {
         case 1:
-          console.log('Case 1 switch')
           editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
+          editor.navigateTo(2, 0)
           break
         case 2:
-          console.log('Case 2 switch')
           editor.setValue(this.props.code, -1)
           editor.navigateTo(16, 0)
           break
         case 3:
           editor.setValue(this.props.code, -1)
-          editor.navigateTo(3, 100)
+          editor.navigateTo(4, 100)
           break
         case 4:
           editor.setValue(this.props.code, -1)
@@ -106,18 +64,16 @@ class VimShell extends Component {
     if (!this.props.displayInstructions) {
       switch (this.props.challengeId) {
         case 1:
-          console.log('Case 1 switch')
           editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
+          editor.navigateTo(2, 0)
           break
         case 2:
-          console.log('Case 2 switch')
           editor.setValue(this.props.code, -1)
           editor.navigateTo(16, 0)
           break
         case 3:
           editor.setValue(this.props.code, -1)
-          editor.navigateTo(3, 100)
+          editor.navigateTo(4, 100)
           break
         case 4:
           editor.setValue(this.props.code, -1)
@@ -131,10 +87,6 @@ class VimShell extends Component {
   }
 
   onSubmit() {
-    console.log(
-      'ON SUBMIT IS CALLED, value:',
-      this.refs.aceEditor.editor.getValue()
-    )
     this.props.getResult(
       this.refs.aceEditor.editor.getValue(),
       this.props.challengeId,

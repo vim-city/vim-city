@@ -15,6 +15,9 @@ router.put('/', async (req, res, next) => {
     // console.log("user.score", user.score)
 
     user.score += +req.body.points
+    if (req.body.won) {
+      user.won = true
+    }
     user = await user.save()
     const challenge = await Challenge.findOne({
       where: {id: user.challengeId + 1}
@@ -24,8 +27,8 @@ router.put('/', async (req, res, next) => {
     result.id = user.id
     result.email = user.email
     result.score = user.score
+    result.won = user.won
     result.challengeId = user.challengeId
-    console.log(result)
     res.json(result)
   } catch (err) {
     next(err)

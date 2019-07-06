@@ -22,7 +22,7 @@ export const getChallenge = challengeId => async dispatch => {
   }
 }
 
-//initial state (will eventually have vimCommand, instructions, code, points, level properties)
+//initial state (has vimCommand, instructions, code, points, level properties)
 const defaultChallenge = {}
 
 export default function(state = defaultChallenge, action) {
