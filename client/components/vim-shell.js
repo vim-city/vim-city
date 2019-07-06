@@ -32,56 +32,60 @@ class VimShell extends Component {
     if (lastChallengeCompleted <= 3) {
       await this.props.getChallenge(lastChallengeCompleted + 1)
     }
-    let editor = this.refs.aceEditor.editor
-    inputHelper(editor)
-    if (this.props.code && !this.props.displayInstructions) {
-      switch (this.props.challengeId) {
-        case 1:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(2, 0)
-          break
-        case 2:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(16, 0)
-          break
-        case 3:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(4, 100)
-          break
-        case 4:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
-          break
-        default:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
+    if (this.refs.aceEditor) {
+      let editor = this.refs.aceEditor.editor
+      inputHelper(editor)
+      if (this.props.code && !this.props.displayInstructions) {
+        switch (this.props.challengeId) {
+          case 1:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(2, 0)
+            break
+          case 2:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(16, 0)
+            break
+          case 3:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(4, 100)
+            break
+          case 4:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+            break
+          default:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+        }
       }
     }
   }
 
   componentDidUpdate(prevProps) {
-    let editor = this.refs.aceEditor.editor
-    if (!this.props.displayInstructions) {
-      switch (this.props.challengeId) {
-        case 1:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(2, 0)
-          break
-        case 2:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(16, 0)
-          break
-        case 3:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(4, 100)
-          break
-        case 4:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
-          break
-        default:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
+    if (this.refs.aceEditor) {
+      let editor = this.refs.aceEditor.editor
+      if (!this.props.displayInstructions) {
+        switch (this.props.challengeId) {
+          case 1:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(2, 0)
+            break
+          case 2:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(16, 0)
+            break
+          case 3:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(4, 100)
+            break
+          case 4:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+            break
+          default:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+        }
       }
     }
   }
@@ -98,16 +102,29 @@ class VimShell extends Component {
     // const classes = useStyles();
     return (
       <div>
-        <AceEditor
-          mode="javascript"
-          theme="kuroir"
-          keyboardHandler="vim"
-          ref="aceEditor"
-          wrapEnabled={true}
-          height="544px"
-          width="500px"
-          fontSize={15}
-        />
+        {!this.props.displayInstructions && !this.props.result.passed ? (
+          <AceEditor
+            mode="javascript"
+            theme="kuroir"
+            keyboardHandler="vim"
+            ref="aceEditor"
+            wrapEnabled={true}
+            height="544px"
+            width="500px"
+            fontSize={15}
+          />
+        ) : (
+          <AceEditor
+            mode="javascript"
+            theme="kuroir"
+            ref="aceEditor"
+            wrapEnabled={true}
+            height="544px"
+            width="500px"
+            readOnly={true}
+            fontSize={15}
+          />
+        )}
         <Fab
           // className={classes.Fab}
           variant="extended"

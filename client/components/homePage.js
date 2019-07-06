@@ -2,10 +2,10 @@ import React from 'react'
 import GameWindow from './game-window'
 import VimShell from './vim-shell'
 import Footer from './footer'
-
+import {connect} from 'react-redux'
 import NavBar from './navbar'
 import Dialogue from './dialogue'
-
+import {getChallenge} from '../store/challenge'
 import Modal from './modal'
 
 export default class HomePage extends React.Component {
@@ -25,6 +25,7 @@ export default class HomePage extends React.Component {
           <div className="gameWindow">
             <GameWindow />
           </div>
+
           <div className="vimWindow">
             <VimShell />
           </div>
