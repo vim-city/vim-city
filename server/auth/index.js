@@ -19,6 +19,7 @@ router.post('/login', async (req, res, next) => {
       result.email = user.email
       result.score = user.score
       result.challengeId = user.challengeId
+      result.status = status
       req.login(user, err => (err ? next(err) : res.json(result)))
     }
   } catch (error) {

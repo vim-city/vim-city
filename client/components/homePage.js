@@ -6,8 +6,7 @@ import Footer from './footer'
 import NavBar from './navbar'
 import Dialogue from './dialogue'
 
-import Modal from './modal'
-
+// import Modal from './modal'
 
 export default class HomePage extends React.Component {
   constructor() {
@@ -30,9 +29,9 @@ export default class HomePage extends React.Component {
             <GameWindow />
           </div>
         </div>
-        <div>
+        {/* <div>
           <Modal />
-        </div>
+        </div> */}
         <div>
           <Footer />
         </div>

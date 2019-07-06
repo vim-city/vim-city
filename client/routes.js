@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {SignIn, UserHome, GameWindow, HomePage} from './components'
+import {SignIn, HomePage} from './components'
 import {me} from './store'
 import IntroPage from './components/introComponents/'
 
