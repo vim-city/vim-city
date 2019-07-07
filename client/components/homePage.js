@@ -2,13 +2,15 @@ import React from 'react'
 import GameWindow from './game-window'
 import VimShell from './vim-shell'
 import Footer from './footer'
+
 import {connect} from 'react-redux'
 import NavBar from './navbar'
 import Dialogue from './dialogue'
 
-// import Modal from './modal'
 
-class HomePage extends React.Component {
+
+export default class HomePage extends React.Component {
+
   constructor() {
     super()
   }
@@ -43,7 +45,9 @@ class HomePage extends React.Component {
           </div>
         </div>
         {/* <div>
-          <Modal />
+          <
+          
+          />
         </div> */}
         <div>
           <Footer />
