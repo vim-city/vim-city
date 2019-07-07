@@ -9,6 +9,7 @@ import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
 import Fab from '@material-ui/core/Fab'
 import inputHelper from './vim-shell-input-helper'
+import Popup from 'reactjs-popup'
 // import { makeStyles } from '@material-ui/core';
 
 // const useStyles = makeStyles(theme => ({
@@ -24,6 +25,7 @@ class VimShell extends Component {
   constructor() {
     super()
     this.onSubmit = this.onSubmit.bind(this)
+    this.onClickHint = this.onClickHint.bind(this)
   }
 
   // eslint-disable-next-line complexity
@@ -98,6 +100,10 @@ class VimShell extends Component {
     )
   }
 
+  onClickHint() {
+    console.log(this.props.hint)
+  }
+
   render() {
     // const classes = useStyles();
     return (
@@ -126,16 +132,35 @@ class VimShell extends Component {
           />
         )}
         <Fab
-          // className={classes.Fab}
           variant="extended"
           size="medium"
           color="primary"
-          //"#00ffff"
           aria-label="Add"
           onClick={this.onSubmit}
         >
           Run Code
         </Fab>
+        <Popup
+          trigger={
+            <Fab
+              variant="extended"
+              size="medium"
+              color="primary"
+              aria-label="Add"
+            >
+              Hint
+            </Fab>
+          }
+        >
+          {close => (
+            <div>
+              <div className="hint-text">{this.props.hint}</div>
+              <div className="close">
+                <a onClick={close}>X</a>
+              </div>
+            </div>
+          )}
+        </Popup>
       </div>
     )
   }
@@ -148,6 +173,7 @@ const mapState = state => {
     challengePoints: state.challenge.points,
     instructions: state.challenge.instructions,
     code: state.challenge.code,
+    hint: state.challenge.hint,
     maxAnswerLength: state.challenge.maxAnswerLength,
     displayInstructions: state.challenge.displayInstructions,
     score: state.user.score,

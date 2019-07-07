@@ -5,8 +5,8 @@ import Footer from './footer'
 import {connect} from 'react-redux'
 import NavBar from './navbar'
 import Dialogue from './dialogue'
-import {getChallenge} from '../store/challenge'
-import Modal from './modal'
+
+// import Modal from './modal'
 
 class HomePage extends React.Component {
   constructor() {
@@ -42,9 +42,9 @@ class HomePage extends React.Component {
             <VimShell />
           </div>
         </div>
-        <div>
+        {/* <div>
           <Modal />
-        </div>
+        </div> */}
         <div>
           <Footer />
         </div>

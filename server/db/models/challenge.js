@@ -15,6 +15,10 @@ const Challenge = db.define('challenge', {
   codePreface: {
     type: Sequelize.TEXT
   },
+
+  hint: {
+    type: Sequelize.TEXT
+  },
   points: {
     type: Sequelize.INTEGER
   },

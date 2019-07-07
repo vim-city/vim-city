@@ -11,6 +11,7 @@ router.get('/:challengeId', async (req, res, next) => {
         'vimCommand',
         'instructions',
         'code',
+        'hint',
         'points',
         'level',
         'startingCoordinates',
