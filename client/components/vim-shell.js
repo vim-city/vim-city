@@ -8,23 +8,31 @@ import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
 import Fab from '@material-ui/core/Fab'
-import Popup from 'reactjs-popup'
-// import { makeStyles } from '@material-ui/core';
 
-// const useStyles = makeStyles(theme => ({
-//  Fab: {
-//    margin: theme.spacing(1),
-//  },
-//  input: {
-//    display: 'none',
-//  },
-// }));
+import red from '@material-ui/core/colors/red'
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
+
+import Popup from 'reactjs-popup'
+
+
+const redTheme = createMuiTheme({
+  palette: {
+    primary: red,
+    secondary: {
+      main: '#ef5350'
+    }
+  }
+})
 
 class VimShell extends Component {
   constructor() {
     super()
     this.onSubmit = this.onSubmit.bind(this)
+
+    this.onReset = this.onReset.bind(this)
+
     this.onClickHint = this.onClickHint.bind(this)
+
   }
 
   // eslint-disable-next-line complexity
@@ -144,34 +152,34 @@ class VimShell extends Component {
     )
   }
 
+
+  onReset() {
+    let editor = this.refs.aceEditor.editor
+    editor.setValue(this.props.code, -1)
+    editor.navigateTo(1, 0)
+  }
+
   onClickHint() {
     console.log(this.props.hint)
   }
 
+
   render() {
-    // const classes = useStyles();
     return (
       <div>
-        <AceEditor
-          mode="javascript"
-          theme="kuroir"
-          keyboardHandler="vim"
-          ref="aceEditor"
-          wrapEnabled={true}
-          height="544px"
-          width="500px"
-          fontSize={15}
-        />
         <Fab
           variant="extended"
           size="medium"
-          color="primary"
+
+          color="secondary"
+       
+
           aria-label="Add"
           onClick={this.onSubmit}
         >
           Run Code
         </Fab>
-        <Popup
+              <Popup
           trigger={
             <Fab
               variant="extended"
@@ -192,6 +200,30 @@ class VimShell extends Component {
             </div>
           )}
         </Popup>
+
+        <MuiThemeProvider theme={redTheme}>
+          <Fab
+            // className={classes.Fab}
+            variant="extended"
+            size="medium"
+            color="secondary"
+            //"#00ffff"
+            aria-label="Add"
+            onClick={this.onReset}
+          >
+            Reset
+          </Fab>
+        </MuiThemeProvider>
+        <AceEditor
+          mode="javascript"
+          theme="kuroir"
+          keyboardHandler="vim"
+          ref="aceEditor"
+          wrapEnabled={true}
+          height="544px"
+          width="500px"
+          fontSize={15}
+        />
       </div>
     )
   }

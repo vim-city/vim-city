@@ -5,6 +5,16 @@ import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import amber from '@material-ui/core/colors/amber'
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
+const redTheme = createMuiTheme({
+  palette: {
+    primary: amber,
+    secondary: {
+      main: '#ef5350'
+    }
+  }
+})
 
 class SignIn extends React.Component {
   constructor() {
@@ -20,61 +30,64 @@ class SignIn extends React.Component {
   }
   render() {
     return (
-      <div className="login-container">
-        <div className="login-content">
-          <div className="vimcity-title">
-            <img src="logo-login.png" />
-          </div>
-          <div className="vim-form">
-            <form onSubmit={this.handleSubmit} name="login">
-              <Typography component="h1" variant="h5">
-                Sign in
-              </Typography>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              {this.props.error &&
-                this.props.error.response && (
-                  <div> {this.props.error.response.data} </div>
-                )}
-              <Button
-                type="submit"
-                fullWidth={false}
-                variant="contained"
-                color="primary"
-              >
-                Sign In
-              </Button>
-              <Button
-                type="submit"
-                fullWidth={false}
-                variant="contained"
-                color="primary"
-                href="auth/github"
-              >
-                Sign In with GitHub
-              </Button>
-            </form>
+      <MuiThemeProvider theme={redTheme}>
+        <div className="login-container">
+          <div className="login-content">
+            <div className="vimcity-title">
+              <img src="logo-login.png" />
+            </div>
+            <div className="vim-form">
+              <form onSubmit={this.handleSubmit} name="login">
+                <Typography component="h1" variant="h5">
+                  Sign in
+                </Typography>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+                {this.props.error &&
+                  this.props.error.response && (
+                    <div> {this.props.error.response.data} </div>
+                  )}
+                <Button
+                  type="submit"
+                  fullWidth={false}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Sign In
+                </Button>
+                <Button
+                  type="submit"
+                  fullWidth={false}
+                  variant="contained"
+                  color="secondary"
+                  href="auth/github"
+                  margin="20%"
+                >
+                  Sign In with GitHub
+                </Button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </MuiThemeProvider>
     )
   }
 }
