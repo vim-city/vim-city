@@ -7,10 +7,7 @@ import {connect} from 'react-redux'
 import NavBar from './navbar'
 import Dialogue from './dialogue'
 
-
-
-export default class HomePage extends React.Component {
-
+class HomePage extends React.Component {
   constructor() {
     super()
   }
@@ -46,7 +43,7 @@ export default class HomePage extends React.Component {
         </div>
         {/* <div>
           <
-          
+
           />
         </div> */}
         <div>
