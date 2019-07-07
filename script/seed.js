@@ -19,6 +19,7 @@ async function seed() {
     points: 500,
     code:
       '//YAY! Vin made it to Lex’s Lounge and is ready to order a drink. Vin is not the best at ordering drinks and has seemed to make an error in their order. Can you help Vin fix their bad code? This function should add ice and an umbrella to Vin’s drink order \n function drinksOrder(drink) {return `${drink} with ice and an umbrella`\n',
+    hint: 'Check for closing brackets',
     startingCoordinates: [20, 520],
     activeColliders: [true, true, true, true],
     level: 0,
@@ -31,6 +32,7 @@ async function seed() {
       'Now that Vin has had a few drinks their ready to do some sightseeing. The Kaleidoscope Observatory offers panoramic views of Vim City.  Help Vin walk to the Kaleidoscope by using the “k” key, which will move Vin up.',
     points: 500,
     code: `//Vin is overwhelmed by Vim City’s beauty, and wrote a poem to express their feelings.  Vin swaps "i" with "y" so often that Vin carries around a spellchecker function that takes a string, replaces all "y"s with "i"s and vice versa, and returns the string in lowercase.\n//But Vin's spellchecker is broken. Can you help Vin fix it? \n function spellChecker(poem) {\n   poem.toLowerCase() \n  let fixedPoem = ''\n  for (let i = 0; i < poem.length; i++) {    \nlet letter = poem[i] \n    if (letter === 'i') { \n      fixedPoem += 'y'\n    } else if (letter = 'y') {\n      fixedPoem = 'i' \n    } else {\n      fixedPoem = letter\n    }\n  }\n  return fixedPoem\n}\n`,
+    hint: 'Check for comparison and shorthands operators',
     level: 0,
     startingCoordinates: [280, 520],
     activeColliders: [false, true, true, true],
@@ -45,6 +47,7 @@ async function seed() {
     points: 500,
     code:
       "//What a terrific performance! Vin was lucky enough to get Hannah's handwritten setlist after the show.  Vin wants to tweet about the third song, but Vin forgot its name.  Can you help Vin finish their tweet?  The function below takes a setlist as an array and returns a tweet. \nfunction greatestHit(setList) {\n  let favoriteSong = setList[0]\n  let tweet = `siiiicckk performance by @HannahAndTheHacks in #vimcity. {favoriteSong} = my anthem`\n  return tweet}\n",
+    hint: 'Vin wants to tweet the "third" element!',
     level: 0,
     startingCoordinates: [460, 380],
     activeColliders: [false, false, true, true],
@@ -58,6 +61,7 @@ async function seed() {
     points: 500,
     code:
       '//Mmmm! Vin filled their stomach with jello and their heart with jackrabbits. Vin loved the carrot-flavored jello and wants to bring some home as a souvenir.  The jello costs 89 cents an ounce. Can you fix the function below so that it tells Vin how much their take-out box will cost in dollars, rounded to up to the nearest integer? \nfunction jelloCalculator(ouncesOfJello) {\n  let dollars = ath.ceil(ouncesOfJello * 89 / 100)\n return doll}\n',
+    hint: 'Check for the grammar! :-)',
     level: 0,
     startingCoordinates: [140, 160],
     activeColliders: [false, false, false, true],
