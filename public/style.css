@@ -123,7 +123,8 @@ form {
 
 /* Home Style */
 
-.home-page {
+.home-page,
+.intro {
   /* height: 100vh; */
   background-image: url('https://thumbs.gfycat.com/WidePowerfulBeauceron-size_restricted.gif');
   background-position: center;
@@ -143,6 +144,49 @@ form {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+
+/* Intro Style */
+
+.intro {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+}
+
+button,
+intro {
+  background-color: #f8c746;
+  width: 400px;
+  height: 80px;
+  font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
+  margin: 10px;
+}
+
+p,
+intro-subpage {
+  text-align: center;
+  font-size: 20px;
+  padding: 2px;
+}
+
+h2,
+intro-subpage {
+  text-align: center;
+  font-size: 30px;
+  padding: 2px;
+}
+
+.aboutProgress {
+  background-color: #f85c5d;
+  width: 500px;
+  padding: 10px;
+  position: relative;
+  left: calc(50% - 250px);
+}
+
+#github-icon {
+  width: 50px;
 }
 
 /* Bubble Text Style */
@@ -236,6 +280,25 @@ form {
   margin: 20px;
 }
 
+
 body {
   overflow: hidden;
+
+/* Hint Style */
+
+.hint-text {
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  text-align: center;
+  padding: 10px;
+}
+
+.close {
+  font-weight: 900;
+  text-align: center;
+}
+
+.close a:hover {
+  cursor: pointer;
+
 }

@@ -3,30 +3,47 @@ import {logout} from '../store/user'
 import {connect} from 'react-redux'
 
 const NavBar = props => {
-  return (
-    <div className="vim-header">
-      <img src="logo.png" />
-      <div className="vim-header-right">
-        <div className="vim-header-child">
-          <p>Score: {props.score}</p>
-        </div>
-        <div className="vim-header-child">
-          <a
-            onClick={() => {
-              props.handleClick()
-            }}
-          >
-            Logout
-          </a>
+  if (!props.isLoggedIn) {
+    return (
+      <div className="vim-header">
+        <img src="logo.png" />
+        <div className="vim-header-right">
+          <div className="vim-header-child">
+            <a href="/login">Login</a>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  } else {
+    return (
+      <div className="vim-header">
+        <img src="logo.png" />
+        <div className="vim-header-right">
+          <div className="vim-header-child">
+            <a href="/intro">How to Play</a>
+          </div>
+          <div className="vim-header-child">
+            <p>Score: {props.score}</p>
+          </div>
+          <div className="vim-header-child">
+            <a
+              onClick={() => {
+                props.handleClick()
+              }}
+            >
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 const mapState = state => {
   return {
-    score: state.user.score
+    score: state.user.score,
+    isLoggedIn: !!state.user.id
   }
 }
 
