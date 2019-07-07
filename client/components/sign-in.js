@@ -5,11 +5,11 @@ import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import amber from '@material-ui/core/colors/amber'
+import red from '@material-ui/core/colors/red'
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 const redTheme = createMuiTheme({
   palette: {
-    primary: amber,
+    primary: red,
     secondary: {
       main: '#ef5350'
     }
