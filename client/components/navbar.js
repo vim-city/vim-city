@@ -20,6 +20,9 @@ const NavBar = props => {
         <img src="logo.png" />
         <div className="vim-header-right">
           <div className="vim-header-child">
+            <a href="/intro">How to Play</a>
+          </div>
+          <div className="vim-header-child">
             <p>Score: {props.score}</p>
           </div>
           <div className="vim-header-child">
