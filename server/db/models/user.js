@@ -30,6 +30,10 @@ const User = db.define('user', {
   score: {
     type: Sequelize.INTEGER,
     defaultValue: 0
+  },
+  won: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 

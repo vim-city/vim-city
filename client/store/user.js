@@ -65,9 +65,9 @@ export const logout = () => async dispatch => {
   }
 }
 
-export const updateUserThunk = points => async dispatch => {
+export const updateUserThunk = (points, won = false) => async dispatch => {
   try {
-    const {data} = await axios.put(`/api/users`, {points})
+    const {data} = await axios.put(`/api/users`, {points, won})
     dispatch(updateUser(data))
   } catch (err) {
     console.error(err)

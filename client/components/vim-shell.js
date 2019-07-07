@@ -9,6 +9,8 @@ import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
 import Fab from '@material-ui/core/Fab'
 
+import inputHelper from './vim-shell-input-helper'
+
 import red from '@material-ui/core/colors/red'
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 
@@ -38,113 +40,68 @@ class VimShell extends Component {
   // eslint-disable-next-line complexity
   async componentDidMount() {
     let lastChallengeCompleted = this.props.lastChallengeCompleted || 0
-    await this.props.getChallenge(lastChallengeCompleted + 1)
-    let editor = this.refs.aceEditor.editor
-
-    //move to mouse click helper
-
-    editor.addEventListener('mousedown', e => {
-      e.stop()
-    })
-    editor.addEventListener('click', e => {
-      e.stop()
-    })
-    editor.addEventListener('mouseup', e => {
-      e.stop()
-    })
-    editor.addEventListener('dblclick', e => {
-      e.stop()
-    })
-    editor.addEventListener('tripleclick', e => {
-      e.stop()
-    })
-    editor.addEventListener('quadclick', e => {
-      e.stop()
-    })
-
-    editor.commands.addCommand({
-      name: 'remove right',
-      bindKey: {win: 'Right', mac: 'Right'},
-      exec: editor => 1
-    })
-    editor.commands.addCommand({
-      name: 'remove left',
-      bindKey: {win: 'Left', mac: 'Left'},
-      exec: editor => 1
-    })
-    editor.commands.addCommand({
-      name: 'remove up',
-      bindKey: {win: 'Up', mac: 'Up'},
-      exec: editor => 1
-    })
-    editor.commands.addCommand({
-      name: 'remove down',
-      bindKey: {win: 'Down', mac: 'Down'},
-      exec: editor => 1,
-      readOnly: true
-    })
-
-    if (this.props.code && !this.props.displayInstructions) {
-      switch (this.props.challengeId) {
-        case 1:
-          console.log('Case 1 switch')
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
-          break
-        case 2:
-          console.log('Case 2 switch')
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(16, 0)
-          break
-        case 3:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(3, 100)
-          break
-        case 4:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
-          break
-        default:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
+    if (lastChallengeCompleted <= 3) {
+      await this.props.getChallenge(lastChallengeCompleted + 1)
+    }
+    if (this.refs.aceEditor) {
+      let editor = this.refs.aceEditor.editor
+      inputHelper(editor)
+      if (this.props.code && !this.props.displayInstructions) {
+        switch (this.props.challengeId) {
+          case 1:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(2, 0)
+            break
+          case 2:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(16, 0)
+            break
+          case 3:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(4, 100)
+            break
+          case 4:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+            break
+          default:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+        }
       }
     }
   }
 
   componentDidUpdate(prevProps) {
-    let editor = this.refs.aceEditor.editor
-    if (!this.props.displayInstructions) {
-      switch (this.props.challengeId) {
-        case 1:
-          console.log('Case 1 switch')
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
-          break
-        case 2:
-          console.log('Case 2 switch')
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(16, 0)
-          break
-        case 3:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(3, 100)
-          break
-        case 4:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
-          break
-        default:
-          editor.setValue(this.props.code, -1)
-          editor.navigateTo(1, 0)
+    if (this.refs.aceEditor) {
+      let editor = this.refs.aceEditor.editor
+      if (!this.props.displayInstructions) {
+        switch (this.props.challengeId) {
+          case 1:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(2, 0)
+            break
+          case 2:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(16, 0)
+            break
+          case 3:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(4, 100)
+            break
+          case 4:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+            break
+          default:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+        }
       }
     }
   }
 
   onSubmit() {
-    console.log(
-      'ON SUBMIT IS CALLED, value:',
-      this.refs.aceEditor.editor.getValue()
-    )
     this.props.getResult(
       this.refs.aceEditor.editor.getValue(),
       this.props.challengeId,
@@ -167,6 +124,30 @@ class VimShell extends Component {
   render() {
     return (
       <div>
+
+        {!this.props.displayInstructions && !this.props.result.passed ? (
+          <AceEditor
+            mode="javascript"
+            theme="kuroir"
+            keyboardHandler="vim"
+            ref="aceEditor"
+            wrapEnabled={true}
+            height="544px"
+            width="500px"
+            fontSize={15}
+          />
+        ) : (
+          <AceEditor
+            mode="javascript"
+            theme="kuroir"
+            ref="aceEditor"
+            wrapEnabled={true}
+            height="544px"
+            width="500px"
+            readOnly={true}
+            fontSize={15}
+          />
+        )}
         <Fab
           variant="extended"
           size="medium"

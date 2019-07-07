@@ -60,7 +60,7 @@ const mapDispatch = dispatch => ({
     dispatch(getResult(codeStr, challengeId)),
   getChallenge: challengeId => dispatch(getChallenge(challengeId)),
   clearResult: () => dispatch(clearResult()),
-  updateUser: points => dispatch(updateUserThunk(points))
+  updateUser: (points, won) => dispatch(updateUserThunk(points, won))
 })
 
 export default connect(mapState, mapDispatch)(Dialogue)
