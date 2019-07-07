@@ -41,8 +41,13 @@ export const auth = (email, password, method) => async dispatch => {
   }
 
   try {
+    const status = res.data.status
     dispatch(getUser(res.data))
-    history.push('/')
+    if (status) {
+      history.push('/intro')
+    } else {
+      history.push('/')
+    }
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
