@@ -11,7 +11,7 @@ const redTheme = createMuiTheme({
   palette: {
     primary: amber,
     secondary: {
-      main: '#ff6f00'
+      main: '#ef5350'
     }
   }
 })
