@@ -107,7 +107,7 @@ export default class DialogueScene extends Phaser.Scene {
       }
     })
 
-    this.input.keyboard.on('keydown_ESC', () => {
+    this.input.keyboard.on('keydown_ESC', async () => {
       console.log('ESC')
       let {challenge, result} = store.getState()
       if (challenge.displayInstructions) {
@@ -116,7 +116,7 @@ export default class DialogueScene extends Phaser.Scene {
       }
       if (result.passed && challenge.id < 4) {
         store.dispatch(updateUserThunk(challenge.points))
-        store.dispatch(getChallenge(Number(challenge.id) + 1))
+        await store.dispatch(getChallenge(Number(challenge.id) + 1))
         store.dispatch(clearResult())
       }
     })
