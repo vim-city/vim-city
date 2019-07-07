@@ -115,9 +115,9 @@ export default class DialogueScene extends Phaser.Scene {
         this.scene.switch('MainScene')
       }
       if (result.passed && challenge.id < 4) {
-        store.dispatch(updateUserThunk(challenge.points))
+        await store.dispatch(clearResult())
         await store.dispatch(getChallenge(Number(challenge.id) + 1))
-        store.dispatch(clearResult())
+        store.dispatch(updateUserThunk(challenge.points))
       }
     })
   }
