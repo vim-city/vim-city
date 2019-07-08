@@ -24,9 +24,9 @@ class SignIn extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault()
     const formName = evt.target.name
-    const email = evt.target.email.value
+    const username = evt.target.username.value
     const password = evt.target.password.value
-    this.props.auth(email, password, formName)
+    this.props.auth(username, password, formName)
   }
   render() {
     return (
@@ -45,10 +45,10 @@ class SignIn extends React.Component {
                   variant="outlined"
                   margin="normal"
                   required
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
                   autoFocus
                 />
                 <TextField
@@ -101,7 +101,8 @@ const mapLogin = state => {
 }
 
 const mapDispatch = dispatch => ({
-  auth: (email, password, formName) => dispatch(auth(email, password, formName))
+  auth: (username, password, formName) =>
+    dispatch(auth(username, password, formName))
 })
 
 export default connect(mapLogin, mapDispatch)(SignIn)

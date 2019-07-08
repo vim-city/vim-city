@@ -25,7 +25,7 @@ router.put('/', async (req, res, next) => {
     await user.setChallenge(challenge)
     const result = {}
     result.id = user.id
-    result.email = user.email
+    result.username = user.username
     result.score = user.score
     result.won = user.won
     result.challengeId = user.challengeId
@@ -34,18 +34,3 @@ router.put('/', async (req, res, next) => {
     next(err)
   }
 })
-
-// router.get('/', async (req, res, next) => {
-//   try {
-//     const users = await User.findAll({
-//       // explicitly select only the id and email fields - even though
-//       // users' passwords are encrypted, it won't help if we just
-//       // send everything to anyone who asks!
-//       include: {model: Challenge},
-//       attributes: ['id', 'email', 'score', 'challenge']
-//     })
-//     res.json(users)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
