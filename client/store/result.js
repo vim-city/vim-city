@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+const getResultUrl =
+  process.env.NODE_ENV === 'production'
+    ? process.env.DOCKER_URL
+    : 'http://localhost:49160/eval'
+
 const DISPLAY_RESULT = 'DISPLAY_RESULT'
 const CLEAR_RESULT = 'CLEAR_RESULT'
 
@@ -25,7 +30,7 @@ export const getResult = (
         })
       )
     } else {
-      const {data} = await axios.put('http://localhost:49160/eval', {
+      const {data} = await axios.put(getResultUrl, {
         userInputStr: codeStr,
         challengeId: challengeId
       })
