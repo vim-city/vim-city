@@ -16,7 +16,6 @@ import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 
 import Popup from 'reactjs-popup'
 
-
 const redTheme = createMuiTheme({
   palette: {
     primary: red,
@@ -34,7 +33,6 @@ class VimShell extends Component {
     this.onReset = this.onReset.bind(this)
 
     this.onClickHint = this.onClickHint.bind(this)
-
   }
 
   // eslint-disable-next-line complexity
@@ -109,7 +107,6 @@ class VimShell extends Component {
     )
   }
 
-
   onReset() {
     let editor = this.refs.aceEditor.editor
     editor.setValue(this.props.code, -1)
@@ -120,47 +117,19 @@ class VimShell extends Component {
     console.log(this.props.hint)
   }
 
-
   render() {
     return (
       <div>
-
-        {!this.props.displayInstructions && !this.props.result.passed ? (
-          <AceEditor
-            mode="javascript"
-            theme="kuroir"
-            keyboardHandler="vim"
-            ref="aceEditor"
-            wrapEnabled={true}
-            height="544px"
-            width="500px"
-            fontSize={15}
-          />
-        ) : (
-          <AceEditor
-            mode="javascript"
-            theme="kuroir"
-            ref="aceEditor"
-            wrapEnabled={true}
-            height="544px"
-            width="500px"
-            readOnly={true}
-            fontSize={15}
-          />
-        )}
         <Fab
           variant="extended"
           size="medium"
-
           color="secondary"
-       
-
           aria-label="Add"
           onClick={this.onSubmit}
         >
           Run Code
         </Fab>
-              <Popup
+        <Popup
           trigger={
             <Fab
               variant="extended"
@@ -195,16 +164,29 @@ class VimShell extends Component {
             Reset
           </Fab>
         </MuiThemeProvider>
-        <AceEditor
-          mode="javascript"
-          theme="kuroir"
-          keyboardHandler="vim"
-          ref="aceEditor"
-          wrapEnabled={true}
-          height="544px"
-          width="500px"
-          fontSize={15}
-        />
+        {!this.props.displayInstructions && !this.props.result.passed ? (
+          <AceEditor
+            mode="javascript"
+            theme="kuroir"
+            keyboardHandler="vim"
+            ref="aceEditor"
+            wrapEnabled={true}
+            height="544px"
+            width="500px"
+            fontSize={15}
+          />
+        ) : (
+          <AceEditor
+            mode="javascript"
+            theme="kuroir"
+            ref="aceEditor"
+            wrapEnabled={true}
+            height="544px"
+            width="500px"
+            readOnly={true}
+            fontSize={15}
+          />
+        )}
       </div>
     )
   }

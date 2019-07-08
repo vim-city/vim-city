@@ -280,9 +280,9 @@ intro-subpage {
   margin: 20px;
 }
 
-
 body {
-  overflow: hidden;
+  overflow: scroll;
+}
 
 /* Hint Style */
 
@@ -300,5 +300,4 @@ body {
 
 .close a:hover {
   cursor: pointer;
-
 }
