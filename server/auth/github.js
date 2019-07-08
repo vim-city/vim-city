@@ -16,13 +16,12 @@ if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
   const strategy = new GitHubStrategy(
     githubConfig,
     (token, refreshToken, profile, done) => {
-      console.log('IN GITHUB INFO: ', profile)
       const gitHubId = profile.id
       const email = profile.emails[0].value
 
       User.findOrCreate({
         where: {gitHubId},
-        defaults: {email}
+        defaults: {username: email}
       })
         .then(([user]) => done(null, user))
         .catch(done)

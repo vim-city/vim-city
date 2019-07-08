@@ -28,16 +28,16 @@ const updateUser = user => ({type: UPDATE_USER, user})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    dispatch(getUser(res.data))
   } catch (err) {
     console.error(err)
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const auth = (username, password, method) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    res = await axios.post(`/auth/${method}`, {username, password})
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
@@ -84,7 +84,7 @@ export default function(state = defaultUser, action) {
     case UPDATE_USER:
       return action.user
     case REMOVE_USER:
-      return defaultUser
+      return {...defaultUser, loading: false}
     default:
       return state
   }
