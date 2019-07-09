@@ -70,7 +70,12 @@ class SignIn extends React.Component {
                   fullWidth={false}
                   variant="contained"
                   color="secondary"
-                  style={{marginLeft: 10, width: '300px', height: '36px'}}
+                  style={{
+                    marginTop: 20,
+                    marginLeft: 10,
+                    width: '300px',
+                    height: '36px'
+                  }}
                 >
                   Sign Up / Login
                 </Button>
