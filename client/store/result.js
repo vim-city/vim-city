@@ -30,7 +30,7 @@ export const getResult = (
         })
       )
     } else {
-      const {data} = await axios.put(getResultUrl, {
+      const {data} = await axios.put(String(getResultUrl), {
         userInputStr: codeStr,
         challengeId: challengeId
       })
