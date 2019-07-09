@@ -161,13 +161,32 @@ intro {
   font-size: 20px;
   font-family: 'Orbitron', sans-serif;
   margin: 10px;
+  cursor: pointer;
+  border-radius: 15px;
 }
 
 p,
 intro-subpage {
-  text-align: center;
   font-size: 20px;
-  padding: 2px;
+  max-width: 900px;
+  min-width: 300px;
+  text-align: center;
+  width: 70%;
+  margin-right: 15%;
+  margin-left: 15%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+a:link,
+intro-subpage {
+  color: #f85c5d;
+}
+a:visited,
+intro-subpage {
+  color: #f85c5d;
+}
+a:hover,
+intro-subpage {
+  color: #f8c746;
 }
 
 h2,
@@ -188,6 +207,7 @@ intro-subpage {
   padding: 10px;
   position: relative;
   left: calc(50% - 250px);
+  border-radius: 15px;
 }
 
 #github-icon {

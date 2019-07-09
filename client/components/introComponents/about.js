@@ -13,7 +13,9 @@ const About = () => {
         without using a mouse.
       </p>
       <p>
-        <a href="https://www.vim.org/about.php">Learn more about Vim HERE.</a>
+        <a href="https://www.vim.org/about.php" target="_blank">
+          Learn more about Vim HERE.
+        </a>
       </p>
 
       <br />
@@ -38,18 +40,29 @@ const About = () => {
       </p>
       <p>
         <img id="github-icon" src="./introAssets/gitHubIcon.svg" /> <br />
-        <a href="https://github.com/vim-city/">GitHub Repository</a>
+        <a href="https://github.com/vim-city/" target="_blank">
+          GitHub Repository
+        </a>
       </p>
       {/* listed alpha order */}
-      <p>Created by:</p>
       <p>
-        <a href="https://github.com/NikkiBeee">Nikki Bergamini</a>
-        <br />
-        <a href="https://github.com/dyane91">Dyane Ramos</a>
-        <br />
-        <a href="https://github.com/taythompson">Taylor Thompson</a>
-        <br />
-        <a href="https://github.com/ssw2114">Stephanie Wu</a>
+        Created by:
+        <a href="https://github.com/dyane91" target="_blank">
+          {' '}
+          Dyane Avalos
+        </a>,
+        <a href="https://github.com/NikkiBeee" target="_blank">
+          {' '}
+          Nikki Bergamini
+        </a>,
+        <a href="https://github.com/taythompson" target="_blank">
+          {' '}
+          Taylor Thompson
+        </a>,
+        <a href="https://github.com/ssw2114" target="_blank">
+          {' '}
+          Stephanie Wu
+        </a>
       </p>
     </div>
   )
