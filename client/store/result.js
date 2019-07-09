@@ -25,7 +25,7 @@ export const getResult = (
         })
       )
     } else {
-      const {data} = await axios.put('http://localhost:49160/eval', {
+      const {data} = await axios.put('http://35.225.117.219/eval', {
         userInputStr: codeStr,
         challengeId: challengeId
       })

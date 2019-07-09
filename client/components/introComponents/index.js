@@ -20,6 +20,7 @@ export default class IntroPage extends React.Component {
         this.setState({
           currentStep: this.state.currentStep + 1
         })
+        window.scrollTo(0, 0)
       }
     })
   }
@@ -53,6 +54,7 @@ export default class IntroPage extends React.Component {
                 this.setState({
                   currentStep: this.state.currentStep - 1
                 })
+                window.scrollTo(0, 0)
               }}
             >
               Wait! Take me a step back.

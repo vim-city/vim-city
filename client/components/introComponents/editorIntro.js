@@ -3,7 +3,7 @@ import React from 'react'
 const EditorIntro = () => {
   return (
     <div className="intro-subpage">
-      <h1>Editting the Console</h1>
+      <h1>Editing the Console</h1>
       <p>
         In the text editor, you'll use the Vim command to navigate the text.
       </p>
