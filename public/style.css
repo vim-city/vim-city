@@ -154,7 +154,6 @@ form {
   font-size: 20px;
 }
 
-
 .intro-subpage > h2 {
   text-align: center;
   font-size: 30px;
@@ -181,9 +180,6 @@ form {
   width: 50px;
 }
 
-
- 
-
 /* Hint Style */
 
 .hint-text {
@@ -207,14 +203,13 @@ form {
   padding: 30px !important;
 }
 
-
 form > div > label {
   padding-left: 15px;
 }
 
 form > h1 {
   height: 0px;
-
+}
 /* Header Style */
 
 .vim-header {
@@ -269,5 +264,4 @@ a {
 .vim-header-child a:hover {
   cursor: pointer;
   color: #f8c746;
-
 }
