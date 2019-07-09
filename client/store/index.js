@@ -8,10 +8,15 @@ import challenge from './challenge'
 import modalOpen from './modal'
 
 const reducer = combineReducers({user, result, challenge, modalOpen})
-const middleware = composeWithDevTools(
+const devMiddleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
-const store = createStore(reducer, middleware)
+const prodMiddleware = composeWithDevTools(applyMiddleware(thunkMiddleware))
+
+const store =
+  process.env.NODE_ENV === 'production'
+    ? createStore(reducer, prodMiddleware)
+    : createStore(reducer, devMiddleware)
 
 export default store
 export * from './user'

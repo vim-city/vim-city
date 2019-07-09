@@ -196,6 +196,11 @@ intro-subpage {
   padding: 2px;
 }
 
+.load-image {
+  position: fixed;
+  right: calc(50% - 400px);
+}
+
 .aboutProgress {
   background-color: #f85c5d;
   width: 500px;

@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+const getResultUrl =
+  process.env.NODE_ENV === 'production'
+    ? process.env.DOCKER_URL
+    : 'http://localhost:49160/eval'
+
 const DISPLAY_RESULT = 'DISPLAY_RESULT'
 const CLEAR_RESULT = 'CLEAR_RESULT'
 
@@ -25,13 +30,15 @@ export const getResult = (
         })
       )
     } else {
-      const {data} = await axios.put('http://35.225.117.219/eval', {
+
+      const {data} = await axios.put(getResultUrl, {
         userInputStr: codeStr,
         challengeId: challengeId
       })
       // const result = String(data.message)
       // console.log('this is result as string:', result)
-      dispatch(displayResult(data))
+      console.log('DATA', data)
+      dispatch(displayResult(JSON.parse(data)))
     }
   } catch (error) {
     console.log('error in vim-shell', error)

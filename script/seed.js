@@ -7,8 +7,11 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const user1 = await User.create({email: 'cody@email.com', password: '123'})
-  const user2 = await User.create({email: 'murphy@email.com', password: '123'})
+  const user1 = await User.create({username: 'cody@email.com', password: '123'})
+  const user2 = await User.create({
+    username: 'murphy@email.com',
+    password: '123'
+  })
 
   console.log(`seeded users`)
 
