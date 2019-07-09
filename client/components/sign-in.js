@@ -2,17 +2,19 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {auth} from '../store'
 import PropTypes from 'prop-types'
-import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import amber from '@material-ui/core/colors/amber'
+import Typography from '@material-ui/core/Typography'
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 
-const redTheme = createMuiTheme({
+const amberTheme = createMuiTheme({
   palette: {
     primary: amber,
+    contrastText: 'white',
     secondary: {
-      main: '#ffb300'
+      main: '#ffa000',
+      contrastText: 'white'
     }
   }
 })
@@ -31,7 +33,7 @@ class SignIn extends React.Component {
   }
   render() {
     return (
-      <MuiThemeProvider theme={redTheme}>
+      <MuiThemeProvider theme={amberTheme}>
         <div className="login-container">
           <div className="login-content">
             <div className="vimcity-title">
@@ -39,9 +41,6 @@ class SignIn extends React.Component {
             </div>
             <div className="vim-form">
               <form onSubmit={this.handleSubmit} name="login">
-                <Typography component="h1" variant="h5">
-                  Sign in
-                </Typography>
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -71,9 +70,9 @@ class SignIn extends React.Component {
                   fullWidth={false}
                   variant="contained"
                   color="secondary"
-                  style={{margin: 3, width: '300px', height: '36px'}}
+                  style={{marginLeft: 10, width: '300px', height: '36px'}}
                 >
-                  Sign In
+                  Sign Up / Login
                 </Button>
                 <Button
                   type="submit"
@@ -108,10 +107,6 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapLogin, mapDispatch)(SignIn)
-
-/**
- * PROP TYPES
- */
 
 SignIn.propTypes = {
   error: PropTypes.object

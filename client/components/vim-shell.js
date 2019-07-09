@@ -28,8 +28,6 @@ class VimShell extends Component {
     this.onSubmit = this.onSubmit.bind(this)
 
     this.onReset = this.onReset.bind(this)
-
-    this.onClickHint = this.onClickHint.bind(this)
   }
 
   // eslint-disable-next-line complexity
@@ -108,10 +106,6 @@ class VimShell extends Component {
     let editor = this.refs.aceEditor.editor
     editor.setValue(this.props.code, -1)
     editor.navigateTo(1, 0)
-  }
-
-  onClickHint() {
-    console.log(this.props.hint)
   }
 
   render() {

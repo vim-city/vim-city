@@ -11,7 +11,6 @@ router.post('/login', async (req, res, next) => {
       defaults: {password: req.body.password}
     })
     if (!status && !user.correctPassword(req.body.password)) {
-      console.log('Incorrect password for user:', req.body.username)
       res.status(401).send('Wrong username and/or password')
     } else {
       let result = {}

@@ -109,7 +109,6 @@ export default class FgScene extends Phaser.Scene {
       this.buildingGroup,
       this.player,
       () => {
-        console.log('collide!!')
         store.dispatch(toggleDisplay())
         this.colliderActivated1 = false
       },
@@ -122,7 +121,6 @@ export default class FgScene extends Phaser.Scene {
       this.secondBuilding,
       this.player,
       () => {
-        console.log('collide!!')
         store.dispatch(toggleDisplay())
         this.colliderActivated2 = false
       },
@@ -135,7 +133,6 @@ export default class FgScene extends Phaser.Scene {
       this.thirdBuilding,
       this.player,
       () => {
-        console.log('collide!!')
         store.dispatch(toggleDisplay())
         this.colliderActivated3 = false
       },
@@ -148,7 +145,6 @@ export default class FgScene extends Phaser.Scene {
       this.fourthBuilding,
       this.player,
       () => {
-        console.log('collide!!')
         store.dispatch(toggleDisplay())
         this.colliderActivated4 = false
       },

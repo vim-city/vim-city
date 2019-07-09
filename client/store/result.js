@@ -30,15 +30,10 @@ export const getResult = (
         })
       )
     } else {
-
       const {data} = await axios.put(getResultUrl, {
         userInputStr: codeStr,
         challengeId: challengeId
       })
-      console.log('timeout test in result.js', data)
-      // const result = String(data.message)
-      // console.log('this is result as string:', result)
-      console.log('DATA', data)
       dispatch(displayResult(JSON.parse(data)))
     }
   } catch (error) {

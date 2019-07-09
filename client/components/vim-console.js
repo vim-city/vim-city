@@ -9,8 +9,6 @@ export class VimConsole extends React.Component {
   }
 
   render() {
-    console.log('props in console', this.props)
-    console.log('the statze in console', this.state.result)
     return (
       <div>
         <h1>This is result:{this.state.result}</h1>
