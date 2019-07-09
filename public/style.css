@@ -77,11 +77,16 @@ form {
 .footer-parent {
   display: flex;
   flex-direction: row;
+  position: fixed;
+  justify-content: space-around;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
   align-items: center;
-  justify-content: space-between;
-  background-color: rgb(245, 203, 168);
-  padding: 20px;
-  margin-top: 40px;
+  background-color: #ef5350;
+  padding: 15px;
+  margin-right: 10px;
 }
 
 .footer-parent img {
