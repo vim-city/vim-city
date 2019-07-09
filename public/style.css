@@ -51,9 +51,12 @@ form {
   box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px,
     rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
 }
-
+.vim-form-label {
+  padding: 0em 2em 0em 2em;
+}
 .vim-form {
   display: flex;
+
   flex-direction: column;
   align-items: center;
 }
