@@ -29,6 +29,7 @@ export const getResult = (
         userInputStr: codeStr,
         challengeId: challengeId
       })
+      console.log('timeout test in result.js', data)
       // const result = String(data.message)
       // console.log('this is result as string:', result)
       dispatch(displayResult(data))
