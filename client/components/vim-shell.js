@@ -170,7 +170,7 @@ class VimShell extends Component {
             keyboardHandler="vim"
             ref="aceEditor"
             wrapEnabled={true}
-            height="544px"
+            height="520px"
             width="500px"
             fontSize={15}
           />
@@ -180,7 +180,7 @@ class VimShell extends Component {
             theme="kuroir"
             ref="aceEditor"
             wrapEnabled={true}
-            height="544px"
+            height="520px"
             width="500px"
             readOnly={true}
             fontSize={15}

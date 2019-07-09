@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from '../navbar'
-import ProgressBar from '../progressBar'
+import ProgressBar from './progressBar'
 import About from './about'
 import GameIntro from './gameIntro'
 import ConsoleIntro from './editorIntro'

@@ -18,11 +18,13 @@ const GameIntro = () => {
       </p>
       <img src="./introAssets/PhaserGame.gif" />
       <p>You'll need the "ESC" key in the editor...</p>
+      <br />
       <div className="aboutProgress">
         <h2>HIT THE "ESC" KEY</h2>
         <h2>for COMMAND MODE in the editor</h2>
         <h2>and to move forward</h2>
       </div>
+      <br />
     </div>
   )
 }

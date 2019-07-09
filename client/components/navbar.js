@@ -18,13 +18,11 @@ const NavBar = props => {
     return (
       <div className="vim-header">
         <img src="logo.png" />
+        <div className="vim-header-center">
+          <div className="vim-header-child">Welcome, {props.username}</div>
+          <div className="vim-header-child">Score: {props.score}</div>
+        </div>
         <div className="vim-header-right">
-          <div className="vim-header-child">
-            <p>Welcome, {props.username}</p>
-          </div>
-          <div className="vim-header-child">
-            <p>Score: {props.score}</p>
-          </div>
           <div className="vim-header-child">
             <a href="/intro">How to Play</a>
           </div>
