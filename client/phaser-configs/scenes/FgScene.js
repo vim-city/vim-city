@@ -45,28 +45,28 @@ export default class FgScene extends Phaser.Scene {
 
     //building1
     this.buildingGroup = this.physics.add.staticGroup({classType: Building})
-    this.buildingGroup.create(280, 520, 'building1')
+    this.buildingGroup.create(300, 520, 'building1')
     this.buildingGroup.immovable = true
     this.buildingGroup.moves = false
     this.buildingGroup.enable = true
 
     //building2
     this.secondBuilding = this.physics.add.staticGroup({classType: Building})
-    this.secondBuilding.create(460, 380, 'donut_shop')
+    this.secondBuilding.create(480, 390, 'donut_shop')
     this.secondBuilding.immovable = true
     this.secondBuilding.moves = false
     this.secondBuilding.enable = true
 
     //building3
     this.thirdBuilding = this.physics.add.staticGroup({classType: Building})
-    this.thirdBuilding.create(140, 160, 'music_store')
+    this.thirdBuilding.create(150, 140, 'music_store')
     this.thirdBuilding.immovable = true
     this.thirdBuilding.moves = false
     this.thirdBuilding.enable = true
 
     //building4
     this.fourthBuilding = this.physics.add.staticGroup({classType: Building})
-    this.fourthBuilding.create(700, 220, 'pet_store')
+    this.fourthBuilding.create(710, 260, 'pet_store')
     this.fourthBuilding.immovable = true
     this.fourthBuilding.moves = false
     this.fourthBuilding.enable = true
