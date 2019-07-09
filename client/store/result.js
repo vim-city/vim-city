@@ -36,7 +36,8 @@ export const getResult = (
       })
       // const result = String(data.message)
       // console.log('this is result as string:', result)
-      dispatch(displayResult(data))
+      console.log('DATA', data)
+      dispatch(displayResult(JSON.parse(data)))
     }
   } catch (error) {
     console.log('error in vim-shell', error)
