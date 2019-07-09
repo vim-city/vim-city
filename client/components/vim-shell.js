@@ -4,130 +4,186 @@ import {connect} from 'react-redux'
 import {getResult, clearResult} from '../store/result'
 import {getChallenge} from '../store/challenge'
 import {updateUserThunk} from '../store/user'
-import NavBar from './navbar'
-// import {VimConsole} from './vim-console'
-// import axios from 'axios'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
-import user from '../store/user'
+import Fab from '@material-ui/core/Fab'
+import inputHelper from './vim-shell-input-helper'
+import red from '@material-ui/core/colors/red'
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
+import Popup from 'reactjs-popup'
+
+const redTheme = createMuiTheme({
+  palette: {
+    primary: red,
+    secondary: {
+      main: '#ef5350'
+    }
+  }
+})
 
 class VimShell extends Component {
   constructor() {
     super()
     this.onSubmit = this.onSubmit.bind(this)
-    this.onClick = this.onClick.bind(this)
+
+    this.onReset = this.onReset.bind(this)
   }
 
+  // eslint-disable-next-line complexity
   async componentDidMount() {
     let lastChallengeCompleted = this.props.lastChallengeCompleted || 0
-    await this.props.getChallenge(lastChallengeCompleted + 1)
-    let editor = this.refs.aceEditor.editor
-    editor.addEventListener('click', () => {
-      editor.navigateFileStart()
-    })
-
-    editor.commands.addCommand({
-      name: 'remove right',
-      bindKey: {win: 'Right', mac: 'Right'},
-      exec: function(editor) {
-        console.log('Right')
-      },
-      readOnly: true
-    })
-
-    document.addEventListener('keydown', e => {
-      console.log(e.code)
-    })
-
-    if (this.props.instructions && this.props.displayInstructions) {
-      editor.setValue(this.props.instructions, -1)
-      editor.navigateFileStart()
-    } else if (this.props.code && !this.props.displayInstructions) {
-      editor.setValue(this.props.code, -1)
-      editor.navigateFileStart()
+    if (lastChallengeCompleted <= 3) {
+      await this.props.getChallenge(lastChallengeCompleted + 1)
+    }
+    if (this.refs.aceEditor) {
+      let editor = this.refs.aceEditor.editor
+      inputHelper(editor)
+      if (this.props.code && !this.props.displayInstructions) {
+        switch (this.props.challengeId) {
+          case 1:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(2, 0)
+            break
+          case 2:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(16, 0)
+            break
+          case 3:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(4, 100)
+            break
+          case 4:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+            break
+          default:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+        }
+      }
     }
   }
 
   componentDidUpdate(prevProps) {
-    let editor = this.refs.aceEditor.editor
-    if (this.props.displayInstructions) {
-      if (prevProps.instructions !== this.props.instructions) {
-        // editor.addEventListener('click', () => {
-        //   editor.navigateFileStart()
-        // })
-        editor.setValue(this.props.instructions, -1)
-        editor.navigateFileStart()
+    if (this.refs.aceEditor) {
+      let editor = this.refs.aceEditor.editor
+      if (!this.props.displayInstructions) {
+        switch (this.props.challengeId) {
+          case 1:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(2, 0)
+            break
+          case 2:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(16, 0)
+            break
+          case 3:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(4, 100)
+            break
+          case 4:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+            break
+          default:
+            editor.setValue(this.props.code, -1)
+            editor.navigateTo(1, 0)
+        }
       }
-    } else {
-      editor.setValue(this.props.code, -1)
-      editor.navigateFileStart()
     }
-    // if(this.props.result !== prevProps.result){
-    //   console.log("result!")
-    //   if(this.props.result === "You win!"){
-    //     console.log("getting challenge!",this.props.challengeId, typeof this.props.challengeId, Number(this.props.challengeId) + 1 )
-
-    //     this.props.getChallenge(Number(this.props.challengeId) + 1)
-    //   }
-    // }
-
-    //if (prevProps.displayInstructions !== this.props.displayInstructions)
   }
 
   onSubmit() {
-    console.log(
-      'ON SUBMIT IS CALLED, value:',
-      this.refs.aceEditor.editor.getValue()
+    this.props.getResult(
+      this.refs.aceEditor.editor.getValue(),
+      this.props.challengeId,
+      this.props.maxAnswerLength
     )
-    this.props.getResult(this.refs.aceEditor.editor.getValue())
   }
 
-  onClick() {
-    this.props.updateUser(this.props.userId, this.props.challengePoints)
-    this.props.getChallenge(Number(this.props.challengeId) + 1)
-    this.props.clearResult()
+  onReset() {
+    let editor = this.refs.aceEditor.editor
+    editor.setValue(this.props.code, -1)
+    editor.navigateTo(1, 0)
   }
 
   render() {
-    console.log(
-      're-rendering',
-      'results',
-      this.props.result,
-      'props',
-      this.props
-    )
     return (
       <div>
-        <NavBar score={this.props.score} />
-        <AceEditor
-          mode="javascript"
-          theme="monokai"
-          keyboardHandler="vim"
-          ref="aceEditor"
-          // value={!this.props.instructions ? 'LOADING' : this.props.instructions}
-        />
-        <button type="submit" onClick={this.onSubmit}>
+        <Fab
+          style={{margin: 10}}
+          variant="extended"
+          size="medium"
+          color="secondary"
+          aria-label="Add"
+          onClick={this.onSubmit}
+        >
           Run Code
-        </button>
+        </Fab>
+        <Popup
+          className="popup-content"
+          trigger={
+            <Fab
+              style={{margin: 10}}
+              variant="extended"
+              size="medium"
+              color="primary"
+              aria-label="Add"
+            >
+              Hint
+            </Fab>
+          }
+        >
+          {close => (
+            <div>
+              <div className="hint-text">{this.props.hint}</div>
+              <div className="close">
+                <a onClick={close}>X</a>
+              </div>
+            </div>
+          )}
+        </Popup>
 
-        {/* {this.state.result.length ? <VimConsole result={this.state.result}/> : null} */}
-        <div className="console">
-          <h1>This is result:</h1>
-          <p>{this.props.result}</p>
-          {this.props.result === 'You win!' ? (
-            <button type="button" onClick={this.onClick}>
-              {' '}
-              Collect your points and move onto the next challenge{' '}
-            </button>
-          ) : null}
-        </div>
+        <MuiThemeProvider theme={redTheme}>
+          <Fab
+            style={{margin: 10}}
+            variant="extended"
+            size="medium"
+            color="secondary"
+            aria-label="Add"
+            onClick={this.onReset}
+          >
+            Reset
+          </Fab>
+        </MuiThemeProvider>
+        {!this.props.displayInstructions && !this.props.result.passed ? (
+          <AceEditor
+            mode="javascript"
+            theme="kuroir"
+            keyboardHandler="vim"
+            ref="aceEditor"
+            wrapEnabled={true}
+            height="400px"
+            width="400px"
+            fontSize={15}
+          />
+        ) : (
+          <AceEditor
+            mode="javascript"
+            theme="kuroir"
+            ref="aceEditor"
+            wrapEnabled={true}
+            height="400px"
+            width="400px"
+            readOnly={true}
+            fontSize={15}
+          />
+        )}
       </div>
     )
   }
 }
-
-//integrate Vim Console with thunk
 
 const mapState = state => {
   return {
@@ -136,6 +192,8 @@ const mapState = state => {
     challengePoints: state.challenge.points,
     instructions: state.challenge.instructions,
     code: state.challenge.code,
+    hint: state.challenge.hint,
+    maxAnswerLength: state.challenge.maxAnswerLength,
     displayInstructions: state.challenge.displayInstructions,
     score: state.user.score,
     lastChallengeCompleted: state.user.challengeId,
@@ -144,10 +202,11 @@ const mapState = state => {
 }
 
 const mapDispatch = dispatch => ({
-  getResult: codeStr => dispatch(getResult(codeStr)),
+  getResult: (codeStr, challengeId, maxAnswerLength) =>
+    dispatch(getResult(codeStr, challengeId, maxAnswerLength)),
   getChallenge: challengeId => dispatch(getChallenge(challengeId)),
   clearResult: () => dispatch(clearResult()),
-  updateUser: (userId, points) => dispatch(updateUserThunk(userId, points))
+  updateUser: points => dispatch(updateUserThunk(points))
 })
 
 export default connect(mapState, mapDispatch)(VimShell)

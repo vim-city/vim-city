@@ -3,23 +3,54 @@ import {logout} from '../store/user'
 import {connect} from 'react-redux'
 
 const NavBar = props => {
-  return (
-    <div>
-      <p>Money on your Metrocard: ${props.score}</p>
-      <button
-        type="button"
-        onClick={() => {
-          props.handleClick()
-        }}
-      >
-        Logout
-      </button>
-    </div>
-  )
+  if (!props.isLoggedIn) {
+    return (
+      <div className="vim-header">
+        <img src="logo.png" />
+        <div className="vim-header-right">
+          <div className="vim-header-child">
+            <a href="/login">Login</a>
+          </div>
+        </div>
+      </div>
+    )
+  } else {
+    return (
+      <div className="vim-header">
+        <img src="logo.png" />
+        <div className="vim-header-center">
+          <div className="vim-header-child">Welcome, {props.username}</div>
+          <div className="vim-header-child">Score: {props.score}</div>
+        </div>
+        <div className="vim-header-right">
+          <div className="vim-header-child">
+            <a href="/intro">How to Play</a>
+          </div>
+          <div className="vim-header-child">
+            <a
+              onClick={() => {
+                props.handleClick()
+              }}
+            >
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+const mapState = state => {
+  return {
+    score: state.user.score,
+    isLoggedIn: !!state.user.id,
+    username: state.user.username
+  }
 }
 
 const mapDispatch = dispatch => ({
   handleClick: () => dispatch(logout())
 })
 
-export default connect(null, mapDispatch)(NavBar)
+export default connect(mapState, mapDispatch)(NavBar)

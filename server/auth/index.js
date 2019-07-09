@@ -4,23 +4,23 @@ module.exports = router
 
 router.post('/login', async (req, res, next) => {
   try {
-    const user = await User.findOne({
+    const [user, status] = await User.findOrCreate({
       where: {
-        email: req.body.email
-      }
+        username: req.body.username
+      },
+      defaults: {password: req.body.password}
     })
-    if (!user) {
-      const newUser = await User.create({
-        email: req.body.email,
-        password: req.body.password
-      })
-      res.status(200).json(newUser)
+    if (!status && !user.correctPassword(req.body.password)) {
+      res.status(401).send('Wrong username and/or password')
     } else {
-      if (!user.correctPassword(req.body.password)) {
-        console.log('Incorrect password for user:', req.body.email)
-        res.status(401).send('Wrong username and/or password')
-      }
-      res.json(user)
+      let result = {}
+      result.id = user.id
+      result.username = user.username
+      result.score = user.score
+      result.challengeId = user.challengeId
+      result.won = user.won
+      result.status = status
+      req.login(user, err => (err ? next(err) : res.json(result)))
     }
   } catch (error) {
     if (error.name === 'SequelizeUniqueConstraintError') {
@@ -38,7 +38,15 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-  res.json(req.user)
+  let result = {}
+  if (req.user) {
+    result.id = req.user.id
+    result.username = req.user.username
+    result.score = req.user.score
+    result.challengeId = req.user.challengeId
+    result.won = req.user.won
+  }
+  res.json(result)
 })
 
 router.use('/github', require('./github'))

@@ -11,7 +11,9 @@ const UPDATE_USER = 'UPDATE_USER'
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = {
+  loading: true
+}
 
 /**
  * ACTION CREATORS
@@ -26,23 +28,28 @@ const updateUser = user => ({type: UPDATE_USER, user})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    dispatch(getUser(res.data))
   } catch (err) {
     console.error(err)
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const auth = (username, password, method) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    res = await axios.post(`/auth/${method}`, {username, password})
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
 
   try {
+    const status = res.data.status
     dispatch(getUser(res.data))
-    history.push('/home')
+    if (status) {
+      history.push('/intro')
+    } else {
+      history.push('/')
+    }
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
@@ -58,9 +65,9 @@ export const logout = () => async dispatch => {
   }
 }
 
-export const updateUserThunk = (id, points) => async dispatch => {
+export const updateUserThunk = (points, won = false) => async dispatch => {
   try {
-    const {data} = await axios.put(`/api/users/${id}`, {points})
+    const {data} = await axios.put(`/api/users`, {points, won})
     dispatch(updateUser(data))
   } catch (err) {
     console.error(err)
@@ -73,11 +80,11 @@ export const updateUserThunk = (id, points) => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return {...state, ...action.user, loading: false}
     case UPDATE_USER:
       return action.user
     case REMOVE_USER:
-      return defaultUser
+      return {...defaultUser, loading: false}
     default:
       return state
   }

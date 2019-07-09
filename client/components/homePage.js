@@ -2,20 +2,22 @@ import React from 'react'
 import GameWindow from './game-window'
 import VimShell from './vim-shell'
 import Footer from './footer'
+import NavBar from './navbar'
 
-export default class HomePage extends React.Component {
-  constructor() {
-    super()
-  }
+class HomePage extends React.Component {
   render() {
     return (
-      <div>
+      <div className="home-page">
+        <div className="vim-navbar">
+          <NavBar />
+        </div>
         <div className="container">
-          <div className="vimWindow">
-            <VimShell />
-          </div>
           <div className="gameWindow">
             <GameWindow />
+          </div>
+
+          <div className="vimWindow">
+            <VimShell />
           </div>
         </div>
         <div>
@@ -25,3 +27,5 @@ export default class HomePage extends React.Component {
     )
   }
 }
+
+export default HomePage

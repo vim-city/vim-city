@@ -7,10 +7,15 @@ import result from './result'
 import challenge from './challenge'
 
 const reducer = combineReducers({user, result, challenge})
-const middleware = composeWithDevTools(
+const devMiddleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
-const store = createStore(reducer, middleware)
+const prodMiddleware = composeWithDevTools(applyMiddleware(thunkMiddleware))
+
+const store =
+  process.env.NODE_ENV === 'production'
+    ? createStore(reducer, prodMiddleware)
+    : createStore(reducer, devMiddleware)
 
 export default store
 export * from './user'
