@@ -16,14 +16,16 @@ nav a {
   margin: 1em;
 }
 
-form div {
+/* form div {
   margin: 1em;
   display: inline-block;
-}
+} */
 
 /* Login Component */
 
 .login-container {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   background-image: url(https://backgrounddownload.com/wp-content/uploads/2018/09/background-animasi-png-5.png);
   background-position: center;
@@ -43,7 +45,7 @@ form {
   display: flex;
   flex-direction: column;
   width: 320px;
-  padding: 3em 2em 2em 2em;
+  padding: 2em 2em 2em 2em;
   background-color: rgba(250, 250, 250, 0.884);
   border: 1px solid #ebebeb;
   box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px,
@@ -54,7 +56,6 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 80px;
 }
 
 /* Footer Style */
@@ -135,6 +136,7 @@ form {
   padding: 8px;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 .intro-subpage > img {
   padding: 15px;
 }
@@ -151,6 +153,7 @@ form {
   color: #f8c746;
   font-size: 20px;
 }
+
 
 .intro-subpage > h2 {
   text-align: center;
@@ -178,96 +181,8 @@ form {
   width: 50px;
 }
 
-/* Bubble Text Style */
 
-.dialogue-parent {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.dialogue-box {
-  width: 60%;
-  margin-bottom: 60px;
-  background: #fff;
-  opacity: 0.8;
-  border: 1px solid #eee;
-  padding: 20px;
-  border-radius: 15px;
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.25);
-  -moz-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.25);
-  box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.25);
-  position: relative;
-  font-family: 'Raleway', sans-serif;
-  font-size: 15px;
-}
-
-.triangle-dialogue {
-  width: 100px;
-  height: 100px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 16px 10px -17px rgba(0, 0, 0, 0.25);
-  transform: rotate(45deg);
-  position: absolute;
-  right: -40px;
-  bottom: -39px;
-}
-
-.triangle-dialogue:after {
-  content: '';
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background: #fff;
-  transform: rotate(45deg);
-  top: 75px;
-  left: 25px;
-  -webkit-box-shadow: 10px 1px 10px 0px rgba(50, 50, 50, 0.25);
-  -moz-box-shadow: 10px 1px 10px 0px rgba(50, 50, 50, 0.25);
-  box-shadow: 10px 1px 10px 0px rgba(50, 50, 50, 0.25);
-}
-
-.vim-brandon {
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-  margin-left: 30px;
-}
-
-/* Modal Style */
-
-.buttonContainer {
-  background-color: rgb(211, 233, 240);
-  font-family: 'Raleway', sans-serif;
-  font-size: 20px;
-  text-align: center;
-  border-radius: 25px;
-  position: fixed;
-  right: 35%;
-  left: 35%;
-  top: 35%;
-}
-
-.modal.modal--is-open {
-  display: block;
-  /* border: 1px solid green; */
-}
-
-.welcome-text {
-  padding: 25px;
-}
-
-.welcome-button {
-  width: 70px;
-  height: 30px;
-}
-
-.vimcity-title {
-  position: absolute;
-  top: 20px;
-  left: calc(50% - 300px);
-  margin: 20px;
-}
+ 
 
 /* Hint Style */
 
@@ -291,6 +206,14 @@ form {
   margin-left: 10px !important;
   padding: 30px !important;
 }
+
+
+form > div > label {
+  padding-left: 15px;
+}
+
+form > h1 {
+  height: 0px;
 
 /* Header Style */
 
@@ -346,4 +269,5 @@ a {
 .vim-header-child a:hover {
   cursor: pointer;
   color: #f8c746;
+
 }

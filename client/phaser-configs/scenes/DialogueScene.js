@@ -116,7 +116,6 @@ export default class DialogueScene extends Phaser.Scene {
     })
 
     this.input.keyboard.on('keydown_ESC', async () => {
-      console.log('ESC')
       let {challenge, result} = store.getState()
       if (challenge.displayInstructions) {
         this.scene.sleep('DialogueScene')

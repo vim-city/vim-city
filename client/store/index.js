@@ -5,9 +5,8 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import result from './result'
 import challenge from './challenge'
-import modalOpen from './modal'
 
-const reducer = combineReducers({user, result, challenge, modalOpen})
+const reducer = combineReducers({user, result, challenge})
 const devMiddleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -21,4 +20,3 @@ const store =
 export default store
 export * from './user'
 export * from './challenge'
-export * from './modal'

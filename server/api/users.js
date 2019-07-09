@@ -4,15 +4,9 @@ module.exports = router
 
 router.put('/', async (req, res, next) => {
   try {
-    // console.log("PUT ROUTER !!!!")
-    // console.log("req.params.id", req.params.id)
-    // console.log("this.score", this.score)
-    // console.log("req.body.points", req.body.points)
     let user = await User.findOne({
       where: {id: req.user.id}
     })
-
-    // console.log("user.score", user.score)
 
     user.score += +req.body.points
     if (req.body.won) {

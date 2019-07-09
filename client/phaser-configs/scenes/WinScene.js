@@ -6,9 +6,6 @@ export default class WinScene extends Phaser.Scene {
   }
 
   preload() {
-    // Preload Sprites
-    // << LOAD SPRITE HERE >>
-
     this.load.image('win', '/assets/backgrounds/YouWon-balloons.png')
   }
 

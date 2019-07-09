@@ -8,9 +8,4 @@ export default class Ground extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.world.enable(this)
     this.scene.add.existing(this)
   }
-
-  // Check which controller button is being pushed and execute movement & animation
-  update() {
-    // << INSERT CODE HERE >>
-  }
 }
