@@ -8,12 +8,9 @@ import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import 'brace/keybinding/vim'
 import Fab from '@material-ui/core/Fab'
-
 import inputHelper from './vim-shell-input-helper'
-
 import red from '@material-ui/core/colors/red'
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
-
 import Popup from 'reactjs-popup'
 
 const redTheme = createMuiTheme({
@@ -121,6 +118,7 @@ class VimShell extends Component {
     return (
       <div>
         <Fab
+          style={{margin: 10}}
           variant="extended"
           size="medium"
           color="secondary"
@@ -130,8 +128,10 @@ class VimShell extends Component {
           Run Code
         </Fab>
         <Popup
+          className="popup-content"
           trigger={
             <Fab
+              style={{margin: 10}}
               variant="extended"
               size="medium"
               color="primary"
@@ -153,11 +153,10 @@ class VimShell extends Component {
 
         <MuiThemeProvider theme={redTheme}>
           <Fab
-            // className={classes.Fab}
+            style={{margin: 10}}
             variant="extended"
             size="medium"
             color="secondary"
-            //"#00ffff"
             aria-label="Add"
             onClick={this.onReset}
           >

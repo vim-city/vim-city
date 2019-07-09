@@ -22,7 +22,7 @@ async function seed() {
     codePreface: `YAY! Vin made it to Lex’s Lounge and is ready to order a drink. However,Vin is not the best at ordering drinks.\n\nCan you fix Vin's bad code in the text editor?\n\nThe function should add ice and an umbrella to Vin's order.`,
     code:
       '//There is one error in this function: \n\nfunction drinksOrder(drink) {return `${drink} with ice and an umbrella` \n',
-    hint: 'Check for closing brackets',
+    hint: 'Check for closing brackets (Line 3)',
     startingCoordinates: [20, 520],
     activeColliders: [true, true, true, true],
     level: 0,
@@ -37,7 +37,7 @@ async function seed() {
     codePreface: `Vin is overwhelmed by the city's beauty, and wrote a poem to express their feelings.  But Vin always swaps "i" with "y".\n\nCan you help Vin fix their spellchecker function so that it takes a string, replaces all "i"s with "y"s and vice versa, and returns the swapped string?`,
     code: `//There are three errors in this function:\n\n function spellChecker(poem) {\n   poem.toLowerCase() \n  let fixedPoem = ''\n  for (let i = 0; i < poem.length; i++) {\n    let letter = poem[i] \n    if (letter === 'i') { \n      fixedPoem += 'y'\n    } else if (letter = 'y') {\n      fixedPoem = 'i' \n    } else {\n      fixedPoem = letter\n    }\n  }\n  return fixedPoem\n}\n`,
 
-    hint: 'Check for comparison and shorthands operators',
+    hint: 'Check for comparison and shorthands operators (Lines 10, 11, 13)',
 
     level: 0,
     startingCoordinates: [280, 520],
@@ -54,7 +54,7 @@ async function seed() {
     codePreface: `What a terrific performance! Vin was lucky enough to get Hannah's handwritten setlist.  Vin wants to tweet about the third song, but forgot its name.\n\nCan you help Vin finish their tweet?  The function in the text editor takes a setlist as an array and returns a tweet. `,
     code:
       '//There are two errors in this function: \n\nfunction greatestHit(setList) {\n  let favoriteSong = setList[0]\n  let tweet = `siiiicckk performance by @HannahAndTheHacks in #vimcity. {favoriteSong} = my anthem`\n  return tweet}\n',
-    hint: 'Vin wants to tweet the "third" element!',
+    hint: 'Vin wants to tweet the "third" element! (Lines 4 & 5)',
     level: 0,
     startingCoordinates: [460, 380],
     activeColliders: [false, false, true, true],
@@ -70,7 +70,7 @@ async function seed() {
     code:
       '//There are two errors in this function: \n\nfunction jelloCalculator(ouncesOfJello) {\n  let dollars = ath.ceil(ouncesOfJello * 89 / 100)\n return doll}\n',
 
-    hint: 'Check for the grammar! :-)',
+    hint: 'Check for the grammar! :-) (Lines 4, 5)',
     level: 0,
     startingCoordinates: [140, 160],
     activeColliders: [false, false, false, true],
