@@ -10,15 +10,13 @@ const About = () => {
       </p>
       <p>
         Vim is a text editor designed for efficiently moving through text
-        without using a mouse.
+        <br />without using a mouse.
       </p>
       <p>
         <a href="https://www.vim.org/about.php" target="_blank">
           Learn more about Vim HERE.
         </a>
       </p>
-
-      <br />
 
       <p>Your mouseless journey through Vim City begins now...</p>
       <br />
@@ -30,13 +28,11 @@ const About = () => {
       </div>
 
       <br />
-      <br />
-      <br />
 
       <p>
-        Vim City was created using Node.js, Express, Sequelize, React, Redux,
-        Phaser 3, Docker, Ace Shell Editor with Vim Binding, Material UI, HTML,
-        and CSS.
+        Vim City was created using Node.js, Express, Sequelize, React, Redux,<br />
+        Phaser 3,Docker, Ace Shell Editor with Vim Binding,<br />Material UI,
+        HTML, and CSS.
       </p>
       <p>
         <img id="github-icon" src="./introAssets/gitHubIcon.svg" /> <br />

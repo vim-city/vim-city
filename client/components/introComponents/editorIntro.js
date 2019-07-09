@@ -14,14 +14,15 @@ const EditorIntro = () => {
       </p>
       <img src="./introAssets/functionVideo.gif" />
       <p>
-        If you forget any of these keys... we'll keep them at the bottom of the
-        screen for you.
+        If you forget any of these keys... they are at the bottom of the screen.
       </p>
+      <br />
       <div className="aboutProgress">
         <h2>HIT THE "i" KEY</h2>
         <h2>for INSERT MODE in the editor</h2>
         <h2>and to start the game!</h2>
       </div>
+      <br />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0px;
 }
 
 a {
@@ -20,10 +21,6 @@ form div {
   display: inline-block;
 }
 
-.container {
-  display: flex;
-}
-
 /* Login Component */
 
 .login-container {
@@ -41,18 +38,6 @@ form div {
   justify-content: center;
   align-content: center;
 }
-/*
-.vimcity-title h1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  font-size: 90px;
-  letter-spacing: 0.1em;
-  margin-top: 20px;
-  margin-bottom: 20px;
-} */
 
 form {
   display: flex;
@@ -93,50 +78,6 @@ form {
   height: 30px;
 }
 
-/* Header Style */
-
-.vim-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  border-bottom: #36b4bd solid;
-  font-family: 'Raleway', sans-serif;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.5);
-  height: 60px;
-}
-
-.vim-header img {
-  margin-top: 20px;
-  height: 200px;
-}
-
-.vim-header-right {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 15px;
-}
-
-.vim-header-child {
-  margin: 0px 20px 0px 20px;
-}
-
-.vim-header-child p,
-a {
-  font-size: 20px;
-}
-
-.vim-header a {
-  color: inherit;
-}
-
-.vim-header-child a:hover {
-  cursor: pointer;
-}
-
 /* Home Style */
 
 .home-page,
@@ -146,6 +87,7 @@ a {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
 }
 
 .container {
@@ -153,6 +95,9 @@ a {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  align-self: center;
+  position: relative;
+  top: calc((100vh - 710px) / 2);
 }
 
 .vimWindow {
@@ -169,8 +114,7 @@ a {
   font-family: 'Orbitron', sans-serif;
 }
 
-button,
-intro {
+.intro > div > button {
   background-color: #f8c746;
   width: 400px;
   height: 80px;
@@ -181,32 +125,34 @@ intro {
   border-radius: 15px;
 }
 
-p,
-intro-subpage {
+.intro-subpage > p {
   font-size: 20px;
-  max-width: 900px;
+  max-width: 700px;
   min-width: 300px;
   text-align: center;
   width: 70%;
-  margin-right: 15%;
-  margin-left: 15%;
+  margin: auto;
+  padding: 8px;
   font-family: Arial, Helvetica, sans-serif;
 }
-a:link,
-intro-subpage {
-  color: #f85c5d;
-}
-a:visited,
-intro-subpage {
-  color: #f85c5d;
-}
-a:hover,
-intro-subpage {
-  color: #f8c746;
+.intro-subpage > img {
+  padding: 15px;
 }
 
-h2,
-intro-subpage {
+.intro-subpage > p > a:link {
+  color: #f85c5d;
+  font-size: 20px;
+}
+.intro-subpage > p > a:visited {
+  color: #f85c5d;
+  font-size: 20px;
+}
+.intro-subpage > p > a:hover {
+  color: #f8c746;
+  font-size: 20px;
+}
+
+.intro-subpage > h2 {
   text-align: center;
   font-size: 30px;
   padding: 2px;
@@ -220,9 +166,11 @@ intro-subpage {
 .aboutProgress {
   background-color: #f85c5d;
   width: 500px;
-  padding: 10px;
+  padding: 20px;
   position: relative;
-  left: calc(50% - 250px);
+  margin-top: 30px;
+  margin-bottom: 30px;
+  left: calc(50% - 270px);
   border-radius: 15px;
 }
 
@@ -321,10 +269,6 @@ intro-subpage {
   margin: 20px;
 }
 
-body {
-  overflow: scroll;
-}
-
 /* Hint Style */
 
 .hint-text {
@@ -346,4 +290,60 @@ body {
 .popup-content {
   margin-left: 10px !important;
   padding: 30px !important;
+}
+
+/* Header Style */
+
+.vim-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: #36b4bd solid;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.5);
+  height: 60px;
+}
+
+.vim-header img {
+  margin-top: 20px;
+  height: 200px;
+}
+
+.vim-header-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 15px;
+}
+
+.vim-header-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 15px;
+  justify-content: center;
+}
+
+.vim-header-child {
+  margin: 0px 20px 0px 20px;
+  font-size: 20px;
+}
+
+.vim-header-child p,
+a {
+  font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.vim-header a {
+  color: black;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.vim-header-child a:hover {
+  cursor: pointer;
+  color: #f8c746;
 }
