@@ -97,8 +97,11 @@ form {
   justify-content: space-around;
   align-items: center;
   align-self: center;
-  position: relative;
-  top: calc((100vh - 710px) / 2);
+}
+
+.vimcity-title {
+  text-align: center;
+  padding-bottom: 40px;
 }
 
 .vimWindow {
@@ -154,7 +157,6 @@ form {
   font-size: 20px;
 }
 
-
 .intro-subpage > h2 {
   text-align: center;
   font-size: 30px;
@@ -181,9 +183,6 @@ form {
   width: 50px;
 }
 
-
- 
-
 /* Hint Style */
 
 .hint-text {
@@ -207,13 +206,13 @@ form {
   padding: 30px !important;
 }
 
-
 form > div > label {
   padding-left: 15px;
 }
 
 form > h1 {
   height: 0px;
+}
 
 /* Header Style */
 
@@ -269,5 +268,4 @@ a {
 .vim-header-child a:hover {
   cursor: pointer;
   color: #f8c746;
-
 }
