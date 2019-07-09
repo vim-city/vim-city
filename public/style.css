@@ -97,7 +97,8 @@ form {
   align-items: center;
   margin-bottom: 20px;
   border-bottom: #36b4bd solid;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
   background: rgba(255, 255, 255, 0.5);
   height: 60px;
 }
@@ -111,10 +112,20 @@ form {
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-size: 15px;
 }
 
 .vim-header-child {
   margin: 0px 20px 0px 20px;
+}
+
+.vim-header-child p,
+a {
+  font-size: 20px;
+}
+
+.vim-header a {
+  color: inherit;
 }
 
 .vim-header-child a:hover {
@@ -313,7 +324,7 @@ body {
 
 .hint-text {
   font-family: 'Raleway', sans-serif;
-  font-size: 15px;
+  font-size: 20px;
   text-align: center;
   padding: 10px;
 }
@@ -325,4 +336,9 @@ body {
 
 .close a:hover {
   cursor: pointer;
+}
+
+.popup-content {
+  margin-left: 10px !important;
+  padding: 30px !important;
 }

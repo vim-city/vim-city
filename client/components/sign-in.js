@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import red from '@material-ui/core/colors/red'
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
+
 const redTheme = createMuiTheme({
   palette: {
     primary: red,
@@ -70,6 +71,7 @@ class SignIn extends React.Component {
                   fullWidth={false}
                   variant="contained"
                   color="secondary"
+                  style={{margin: 3, width: '300px', height: '36px'}}
                 >
                   Sign In
                 </Button>
@@ -79,7 +81,7 @@ class SignIn extends React.Component {
                   variant="contained"
                   color="secondary"
                   href="auth/github"
-                  margin="20%"
+                  style={{margin: 10}}
                 >
                   Sign In with GitHub
                 </Button>
