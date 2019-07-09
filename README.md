@@ -24,18 +24,18 @@ VIM City runs in a Node environment and requires a postgreSQL database named 'vi
 
 Fork and/or clone this repository to get started!
 
-#Installation
+# Installation
 
 Install dependencies for the project with
 `npm run start dev`
 
 Use `npm run seed` to run the seed file
 
-#Deployment
+# Deployment
 
 VIM City is deployed on Heroku at https://vim-city.herokuapp.com/.
 
-#Built With
+# Built With
 
 VIM City was built using Node.js, Express, PostgreSQL, Sequelize, React, Redux, Docker, Ace Editor, Kubernetes, Material-UI, Phaser.js
 
