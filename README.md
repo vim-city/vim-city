@@ -1,10 +1,10 @@
 # VIM City
 
-_Welcome to VIM City! Vim City is an interactive top down game designed to teach beginners how to use VIM commands while solving Javascript coding challenges. VIM commands are keyboard shortcuts for navigating a cursor_
+_Welcome to VIM City! Vim City is an interactive top down game designed to teach beginners how to use VIM commands while solving Javascript coding challenges. VIM commands are keyboard shortcuts for navigating a cursor._
 
 ## How It Works
 
-To start playing, you have the option of signing/signing up with your username or password, or signing up with GitHub or you can also play the game as a guest.
+To start playing, you have the option of signing in/signing up with your username and password, or signing up with GitHub.
 
 We highly suggest that beginners read through our How To Play instructions to get a detailed overview of how VIM commands work in this game.
 
