@@ -61,7 +61,7 @@ export default class DialogueScene extends Phaser.Scene {
       this.dialogue.setVisible(false)
       this.win.setVisible(true)
       this.displayText = this.add.text(
-        95,
+        120,
         200,
         'Hey, you won!\n\nThanks for navigating Vin.',
         {
@@ -90,8 +90,8 @@ export default class DialogueScene extends Phaser.Scene {
           this.dialogue.setVisible(false)
           this.win.setVisible(true)
           this.displayText = this.add.text(
-            95,
-            300,
+            120,
+            200,
             'Hey, you won! \n Thanks for navigating Vin.',
             {
               fontSize: '20px',

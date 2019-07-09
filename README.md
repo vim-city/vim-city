@@ -1,10 +1,10 @@
 # VIM City
 
-_Welcome to VIM City! Vim City is an interactive top down game designed to teach beginners how to use VIM commands while solving Javascript coding challenges. VIM commands are keyboard shortcuts for navigating a cursor_
+_Welcome to VIM City! Vim City is an interactive top down game designed to teach beginners how to use VIM commands while solving Javascript coding challenges. VIM commands are keyboard shortcuts for navigating a cursor._
 
 ## How It Works
 
-To start playing, you have the option of signing/signing up with your username or password, or signing up with GitHub or you can also play the game as a guest.
+To start playing, you have the option of signing in/signing up with your username and password, or signing up with GitHub.
 
 We highly suggest that beginners read through our How To Play instructions to get a detailed overview of how VIM commands work in this game.
 
@@ -24,18 +24,18 @@ VIM City runs in a Node environment and requires a postgreSQL database named 'vi
 
 Fork and/or clone this repository to get started!
 
-#Installation
+# Installation
 
 Install dependencies for the project with
 `npm run start dev`
 
 Use `npm run seed` to run the seed file
 
-#Deployment
+# Deployment
 
 VIM City is deployed on Heroku at https://vim-city.herokuapp.com/.
 
-#Built With
+# Built With
 
 VIM City was built using Node.js, Express, PostgreSQL, Sequelize, React, Redux, Docker, Ace Editor, Kubernetes, Material-UI, Phaser.js
 
