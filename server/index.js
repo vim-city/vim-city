@@ -67,7 +67,7 @@ const createApp = () => {
 
   app.use('*', function(req, res) {
     if (req.protocol === 'https') {
-      res.redirect('http://' + req.headers.host + req.url)
+      req.protocol = 'http'
     }
   })
 
