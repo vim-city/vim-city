@@ -63,6 +63,14 @@ const createApp = () => {
   app.use(passport.initialize())
   app.use(passport.session())
 
+  //https to http redirect
+
+  app.use('*', function(req, res) {
+    if (req.protocol === 'https') {
+      res.redirect('http://' + req.headers.host + req.url)
+    }
+  })
+
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
