@@ -65,6 +65,8 @@ const createApp = () => {
 
   //https to http redirect
 
+  app.enable('trust proxy')
+
   app.use('*', function(req, res, next) {
     if (req.protocol === 'https') {
       res.redirect('http://' + req.headers.host + req.url)
