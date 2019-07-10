@@ -10,7 +10,9 @@ router.post('/login', async (req, res, next) => {
       },
       defaults: {password: req.body.password}
     })
-    if (!status && !user.correctPassword(req.body.password)) {
+    if (!status && user.gitHubId) {
+      res.status(401).send('Sorry, that username is taken.')
+    } else if (!status && !user.correctPassword(req.body.password)) {
       res.status(401).send('Wrong username and/or password')
     } else {
       let result = {}
