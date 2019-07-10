@@ -65,10 +65,11 @@ const createApp = () => {
 
   //https to http redirect
 
-  app.use('*', function(req, res) {
+  app.use('*', function(req, res, next) {
     if (req.protocol === 'https') {
-      req.protocol = 'http'
+      res.redirect('http://' + req.headers.host + req.url)
     }
+    next()
   })
 
   // auth and api routes
