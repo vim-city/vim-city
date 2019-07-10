@@ -17,6 +17,7 @@ if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
     githubConfig,
     (token, refreshToken, profile, done) => {
       const gitHubId = profile.id
+      console.log('GITHUB PROFILE:', profile)
       const email = profile.emails[0].value
 
       User.findOrCreate({
