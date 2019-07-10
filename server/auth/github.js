@@ -17,11 +17,10 @@ if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
     githubConfig,
     (token, refreshToken, profile, done) => {
       const gitHubId = profile.id
-      const email = profile.emails[0].value
-
+      const username = profile.username
       User.findOrCreate({
         where: {gitHubId},
-        defaults: {username: email}
+        defaults: {username: username}
       })
         .then(([user]) => done(null, user))
         .catch(done)
