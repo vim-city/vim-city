@@ -41,6 +41,11 @@ class SignIn extends React.Component {
             </div>
             <div className="vim-form">
               <form onSubmit={this.handleSubmit} name="login">
+                <div className="vim-form-label">
+                  <Typography component="h1" variant="h5">
+                    SIGN UP OR LOG IN
+                  </Typography>
+                </div>
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -77,7 +82,7 @@ class SignIn extends React.Component {
                     height: '36px'
                   }}
                 >
-                  Sign Up / Login
+                  Sign Up / Log In
                 </Button>
                 <Button
                   type="submit"
